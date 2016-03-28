@@ -1,0 +1,9 @@
+{% extends 'SitepackageGeneratorBundle:Layout.html.twig' %}
+
+{% block body %}
+
+    <h1>New</h1>
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+    {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}    
+    
+{% endblock %}

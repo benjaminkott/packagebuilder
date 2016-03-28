@@ -1,0 +1,3 @@
+generator:
+    resource: "@SitepackageGeneratorBundle/Controller/"
+    type:     annotation

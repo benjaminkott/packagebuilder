@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}Sitepackage Generator{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" href="{{ asset('bundles/sitepackagegenerator/icons/favicon.ico') }}" />
+    {% block stylesheets %}{% endblock %}
+    <link rel="stylesheet" href="{{ asset('bundles/sitepackagegenerator/css/theme.min.css') }}" />
+</head>
+<body>
+
+    <header class="navbar navbar-dark navbar-static-top bg-inverse" role="banner">
+        <div class="clearfix">
+            <button class="navbar-toggler pull-xs-right hidden-sm-up" type="button" data-toggle="collapse" data-target="#bd-main-nav">
+                &#9776;
+            </button>
+            <a class="navbar-brand hidden-sm-up" href="/">
+                Sitepackage Generator
+            </a>
+        </div>
+        <div class="collapse navbar-toggleable-xs" id="bd-main-nav">
+            <nav>
+                <a class="navbar-brand" href="/">
+                    Sitepackage Generator
+                </a>
+                {{ 
+                    knp_menu_render(
+                        'SitepackageGeneratorBundle:MenuBuilder:mainMenu', 
+                        {
+                            'currentClass': 'active',
+                            'listClass': 'nav navbar-nav',
+                            'listItemClass': 'nav-item',
+                            'template':'SitepackageGeneratorBundle:Menu:Navbar.html.twig'
+                        }
+                    ) 
+                }} 
+            </nav>
+        </div>
+    </header>    
+    
+    <main class="content">
+        <div class="container-fluid">
+            {% block body %}{% endblock %}   
+        </div>    
+    </main>
+    
+    {% block javascripts %}{% endblock %}
+    
+    <script src="{{ asset('bundles/sitepackagegenerator/javascript/libs/jquery.min.js') }}"></script>
+    <script src="{{ asset('bundles/sitepackagegenerator/javascript/libs/tether.min.js') }}"></script>
+    <script src="{{ asset('bundles/sitepackagegenerator/javascript/libs/bootstrap.min.js') }}"></script>
+
+</body>
+</html>

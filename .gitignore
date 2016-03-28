@@ -1,0 +1,17 @@
+# Node Modules and Bower Components
+node_modules
+bower_components
+
+# Var
+/var/cache/*
+/var/logs/*
+/var/sessions/*
+/var/bootstrap.php.cache
+/var/SymfonyRequirements.php
+
+# Managed by Composer
+/vendor/
+
+# Web
+/web/bundles/*
+/nbproject/*

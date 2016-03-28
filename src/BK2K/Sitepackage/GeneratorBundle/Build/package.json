@@ -1,0 +1,24 @@
+{
+  "name": "bk2k-sitepackage-generator",
+  "description": "Sitepackage Generator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benjaminkott/sitepackage_generator.git"
+  },
+  "readme": "../README.rst",
+  "homepage": "http://www.bk2k.info",
+  "author": "Benjamin Kott",
+  "version": "1.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "bootstrap": "4.0.0-alpha.2",
+    "grunt": "^0.4.5",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-sass": "^1.1.0",
+    "jquery": "^2.2.2",
+    "tether": "^1.2.0"
+  }
+}

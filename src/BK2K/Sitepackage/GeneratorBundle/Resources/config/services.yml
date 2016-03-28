@@ -1,0 +1,3 @@
+services:
+    sitepackage_generator.generator:
+        class: BK2K\Sitepackage\GeneratorBundle\Service\Generator\SitepackageGenerator
