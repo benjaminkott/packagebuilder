@@ -35,7 +35,7 @@ SET
     title         = "404",
     doktype       = 1,
     is_siteroot   = 0,
-    nav_hide      => 1;
+    nav_hide      = 1;
 
 INSERT INTO
     tt_content
@@ -67,21 +67,6 @@ SET
     root                = 1,
     clear               = 3,
     include_static_file = "EXT:{{ package.applicationName }}/Configuration/TypoScript";
-
-
-
-## Adding the second language
-INSERT INTO
-    sys_template
-SET
-    uid                 = 1,
-    pid                 = 0,
-    tstamp              = "{{ timestamp }}",
-    hidden              = 0,
-    title               = "Englisch",
-    flag                = "us",
-    language_isocode    = "en";
-
 
 
 ## Adding the cli users

@@ -1,0 +1,60 @@
+<header
+    class="navbar navbar-{settings.navigation.style}{f:if(condition:settings.logo.file,then:' navbar-has-image')}{f:if(condition:settings.navigation.type, else:' navbar-top', then:' navbar-{settings.navigation.type} navbar-fixed-{settings.navigation.type}')}">
+    <div class="container">
+        <div class="navbar-header navbar-header-main">
+            <f:if condition="{settings.logo.file}">
+                <f:then>
+                    <f:link.page pageUid="{rootPage}" class="navbar-brand navbar-brand-image" title="{settings.logo.linktitle}">
+                        <img src="{f:uri.image(src: settings.logo.file)}" alt="{logoAlt}" height="{settings.logo.height}" width="{settings.logo.width}">
+                    </f:link.page>
+                </f:then>
+                <f:else>
+                    <f:link.page pageUid="{rootPage}" class="navbar-brand" title="{settings.logo.linktitle}">{siteTitle}</f:link.page>
+                </f:else>
+            </f:if>
+            <f:if condition="{mainnavigation}">
+                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </f:if>
+            <span class="navbar-header-border-bottom"></span>
+        </div>
+        <f:if condition="{mainnavigation}">
+            <nav class="navbar-collapse collapse" role="navigation">
+                <ul class="nav navbar-nav navbar-main">
+                    <f:for each="{mainnavigation}" as="mainnavigationItem">
+                        <li class="{f:if(condition: mainnavigationItem.active, then:'active')} {f:if(condition: mainnavigationItem.children, then:'dropdown')}">
+                            <f:if condition="{mainnavigationItem.children}">
+                                <f:then>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        {mainnavigationItem.title}
+                                        <b class="caret"></b>
+                                        <span class="bar"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <f:for each="{mainnavigationItem.children}" as="child">
+                                            <li class="{f:if(condition: child.active, then:'active')}">
+                                                <f:link.page pageUid="{child.data.uid}" title="{child.title}">
+                                                    {child.title}
+                                                </f:link.page>
+                                            </li>
+                                        </f:for>
+                                    </ul>
+                                </f:then>
+                                <f:else>
+                                    <f:link.page pageUid="{mainnavigationItem.data.uid}" title="{mainnavigationItem.title}">
+                                        {mainnavigationItem.title}
+                                        <span class="bar"></span>
+                                    </f:link.page>
+                                </f:else>
+                            </f:if>
+                        </li>
+                    </f:for>
+                </ul>
+            </nav>
+        </f:if>
+    </div>
+</header>

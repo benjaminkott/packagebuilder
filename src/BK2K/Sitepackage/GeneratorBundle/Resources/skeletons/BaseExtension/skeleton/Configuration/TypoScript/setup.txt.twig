@@ -1,9 +1,217 @@
+################
+#### HELPER ####
+################
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{{ package.applicationName }}/Configuration/TypoScript/Helper/ParseFunc.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{{ package.applicationName }}/Configuration/TypoScript/Helper/DynamicContent.txt">
+
+
+####################
+#### PAGE CLASS ####
+####################
+lib.page.class = COA
+lib.page.class {
+    // Page alias or id as fallback
+    10 = TEXT
+    10 {
+        field = alias // uid
+        noTrimWrap = |page-||
+    }
+    // Current level of the page within the tree structure
+    20 = TEXT
+    20 {
+        data = level:1
+        noTrimWrap = | pagelevel-||
+    }
+    // Language
+    30 = TEXT
+    30 {
+        data = TSFE:sys_language_uid
+        noTrimWrap = | language-||
+    }
+    // Backend layout
+    40 = TEXT
+    40 {
+        data = levelfield:-1, backend_layout_next_level, slide
+        override.field = backend_layout
+        ifEmpty = default
+        noTrimWrap = | backendlayout-||
+    }
+    // Layout
+    50 = TEXT
+    50 {
+        field = layout
+        noTrimWrap = | layout-||
+    }
+}
+
+
 ##############
 #### PAGE ####
 ##############
+page = PAGE
 page {
+    typeNum = 0
+    shortcutIcon = {$page.includePath.icons}favicon.ico
+
+    headerData {
+        // Flip ahead browsing for IE10/11
+        // http://msdn.microsoft.com/en-us/library/ie/jj883726(v=vs.85).aspx
+        10 = HMENU
+        10 {
+            special = browse
+            special {
+                items = prev|next
+            }
+            1 = TMENU
+            1.NO {
+                allWrap = <link rel="prev" href="|"> |*| <link rel="next" href="|">
+                doNotLinkIt = 1
+                stdWrap {
+                    typolink {
+                        parameter.data = field:uid
+                        useCacheHash = 1
+                        returnLast = url
+                    }
+                }
+            }
+        }
+    }
+
+    5 < styles.content.editPanelPage
+    5 {
+        stdWrap.wrap = <div class="typo3-feedit-page">|</div>
+        stdWrap.required = 1
+    }
+
+    10 = FLUIDTEMPLATE
+    10 {
+        templateName = TEXT
+        templateName.stdWrap.cObject = CASE
+        templateName.stdWrap.cObject {
+            key.data = levelfield:-1, backend_layout_next_level, slide
+            key.override.field = backend_layout
+
+            pagets__default_2_columns = TEXT
+            pagets__default_2_columns.value = Default2Columns
+
+            default = TEXT
+            default.value = Default
+        }
+
+        templateRootPaths {
+            0 = EXT:{{ package.applicationName }}/Resources/Private/Templates/Page/
+            1 = {$page.fluidtemplate.templateRootPath}
+        }
+        partialRootPaths {
+            0 = EXT:{{ package.applicationName }}/Resources/Private/Partials/Page/
+            1 = {$page.fluidtemplate.partialRootPath}
+        }
+        layoutRootPaths {
+            0 = EXT:{{ package.applicationName }}/Resources/Private/Layouts/Page/
+            1 = {$page.fluidtemplate.layoutRootPath}
+        }
+
+        #################
+        ### VARIABLES ###
+        #################
+        variables {
+            pageTitle = TEXT
+            pageTitle.data = page:title
+            siteTitle = TEXT
+            siteTitle.data = TSFE:tmpl|setup|sitetitle
+            rootPage = TEXT
+            rootPage.data = leveluid:0
+            logoAlt = COA
+            logoAlt {
+                10 = TEXT
+                10 {
+                    data = TSFE:tmpl|setup|sitetitle
+                    noTrimWrap = || logo|
+                    if.isFalse = {$page.logo.alt}
+                }
+                20 = TEXT
+                20 {
+                    value = {$page.logo.alt}
+                    if.isTrue = {$page.logo.alt}
+                }
+            }
+            pageClass < lib.page.class
+        }
+    }
+
+    meta {
+        viewport = {$page.meta.viewport}
+        robots = {$page.meta.robots}
+        google = {$page.meta.google}
+        apple-mobile-web-app-capable = {$page.meta.apple-mobile-web-app-capable}
+        description = {$page.meta.description}
+        description {
+            override.field = description
+        }
+        author = {$page.meta.author}
+        author {
+            override.field = author
+        }
+        keywords = {$page.meta.keywords}
+        keywords {
+            override.field = keywords
+        }
+        X-UA-Compatible = {$page.meta.compatible}
+        X-UA-Compatible {
+            attribute = http-equiv
+        }
+
+        # OpenGraph Tags
+        og:title {
+            attribute = property
+            field = title
+        }
+        og:site_name {
+            attribute = property
+            data = TSFE:tmpl|setup|sitetitle
+        }
+        og:description = {$page.meta.description}
+        og:description {
+            attribute = property
+            field = description
+        }
+        og:image {
+            attribute = property
+            stdWrap.cObject = FILES
+            stdWrap.cObject {
+                references {
+                    data = levelfield:-1, media, slide
+                }
+                maxItems = 1
+                renderObj = COA
+                renderObj {
+                    10 = IMG_RESOURCE
+                    10 {
+                        file {
+                            import.data = file:current:uid
+                            treatIdAsReference = 1
+                            width = 1280c
+                            height = 720c
+                        }
+                        stdWrap {
+                            typolink {
+                                parameter.data = TSFE:lastImgResourceInfo|3
+                                returnLast = url
+                                forceAbsoluteUrl = 1
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     includeCSS {
         {{ package.applicationName }}_layout = EXT:{{ package.applicationName }}/Resources/Public/Css/layout.css
+    }
+
+    includeJSLibs {
+
     }
 
     includeJSFooter {
@@ -16,6 +224,35 @@ page {
 #### CONFIG ####
 ################
 config {
-    admPanel = 0
-    spamProtectEmailAddresses = 1
+    absRefPrefix = auto
+    no_cache = {$config.no_cache}
+    uniqueLinkVars = 1
+    pageTitleFirst = 1
+    linkVars = L
+    prefixLocalAnchors = {$config.prefixLocalAnchors}
+    renderCharset = utf-8
+    metaCharset = utf-8
+    doctype = html5
+    removeDefaultJS = {$config.removeDefaultJS}
+    inlineStyle2TempFile = 1
+    admPanel = {$config.admPanel}
+    debug = 0
+    cache_period = 86400
+    sendCacheHeaders = {$config.sendCacheHeaders}
+    intTarget =
+    extTarget =
+    disablePrefixComment = 1
+    index_enable = 1
+    index_externals = 1
+    index_metatags = 1
+    headerComment = {$config.headerComment}
+
+    // Disable Image Upscaling
+    noScaleUp = 1
+
+    // Compression and Concatenation of CSS and JS Files
+    compressJs = {$config.compressJs}
+    compressCss = {$config.compressCss}
+    concatenateJs = {$config.concatenateJs}
+    concatenateCss = {$config.concatenateCss}
 }

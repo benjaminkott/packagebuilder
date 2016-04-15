@@ -1,3 +1,44 @@
-######################
-#### DEPENDENCIES ####
-######################
+############
+### PAGE ###
+############
+page {
+     fluidtemplate {
+        layoutRootPath = EXT:{{ package.applicationName }}/Resources/Private/Layouts/Page/
+        partialRootPath = EXT:{{ package.applicationName }}/Resources/Private/Partials/Page/
+        templateRootPath = EXT:{{ package.applicationName }}/Resources/Private/Templates/Page/
+    }
+
+    meta {
+        description =
+        author =
+        keywords =
+        viewport = width=device-width, initial-scale=1
+        robots = index,follow
+        apple-mobile-web-app-capable = no
+        compatible = IE=edge
+    }
+
+    tracking {
+        google {
+            trackingID =
+            anonymizeIp = 1
+        }
+    }
+}
+
+##############
+### CONFIG ###
+##############
+config {
+    no_cache = 0
+    removeDefaultJS = 0
+    compressJs = 0
+    compressCss = 0
+    concatenateJs = 0
+    concatenateCss = 0
+    admPanel = 1
+    prefixLocalAnchors = all
+    headerComment = Build by Bob - Site Builder for TYPO3
+    preloadImages = 0
+    sendCacheHeaders = 1
+}

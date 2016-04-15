@@ -1,0 +1,13 @@
+<div class="body-bg">
+    <f:render partial="Navigation/Main" arguments="{_all}"/>
+    <f:render partial="Navigation/Breadcrumb" arguments="{_all}"/>
+
+    <div id="content" class="main-section">
+        <section id="p{data.uid}" class="{pageClass}">
+            <f:render section="Main"/>
+        </section>
+    </div>
+
+    <f:render partial="Structure/Footer" arguments="{_all}"/>
+
+</div>

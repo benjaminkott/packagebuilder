@@ -1,0 +1,42 @@
+#################
+#### TCEFORM ####
+#################
+TCEFORM {
+    pages {
+        layout {
+            removeItems = 1,2,3
+        }
+    }
+    tt_content {
+        linkToTop.disabled = 1
+        header_layout {
+            removeItems = 0,
+            altLabels {
+                1 = H1
+                2 = H2
+                3 = H3
+                4 = H4
+                5 = H5
+            }
+        }
+
+        // Disable imageheight and imagewidth for textpic and image
+        // to avoid incorrect rendering in frontend
+        imageheight.disabled = 1
+        imagewidth.disabled = 1
+
+        // NOBODY wants or should edit this - really, let them disappear
+        table_bgColor.disabled = 1
+        table_border.disabled = 1
+        table_cellspacing.disabled = 1
+        table_cellpadding.disabled = 1
+        pi_flexform {
+            table {
+                sDEF {
+                    acctables_nostyles.disabled = 1
+                    acctables_tableclass.disabled = 1
+                }
+            }
+        }
+    }
+}

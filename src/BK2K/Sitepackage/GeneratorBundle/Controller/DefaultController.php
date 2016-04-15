@@ -30,6 +30,7 @@ use BK2K\Sitepackage\GeneratorBundle\Entity\Package;
 use BK2K\Sitepackage\GeneratorBundle\Type\PackageType;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -48,7 +49,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/new/", name="new")
+     * @Route("/new/", name="sp_new")
      */
     public function newAction(Request $request)
     {
@@ -63,7 +64,6 @@ class DefaultController extends Controller
         );
     }
 
-
     /**
      * @Route("/create/", name="sp_create")
      */
@@ -77,11 +77,15 @@ class DefaultController extends Controller
             $generator = $this->get('sitepackage_generator.generator');
             $generator->create($sitePackage);
             $filename = $generator->getFilename();
-
-            $response = new BinaryFileResponse($filename);
-            $response->prepare(Request::createFromGlobals());
+            $response = new BinaryFileResponse($generator->getZipPath());
+            $response->trustXSendfileTypeHeader();
+            $response->setContentDisposition(
+                ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+                $filename,
+                iconv('UTF-8', 'ASCII//TRANSLIT', $filename)
+            );
             $response->deleteFileAfterSend(true);
-            $response->send();
+            return $response;
         } else {
             return $this->render(
                 'SitepackageGeneratorBundle:Default:New.html.twig',
@@ -94,13 +98,24 @@ class DefaultController extends Controller
 
 
     /**
+     * @Route("/success/", name="sp_success")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function successAction()
+    {
+        return $this->render('SitepackageGeneratorBundle:Default:Success.html.twig');
+    }
+
+
+    /**
      * @param $sitepackage
      * @return \Symfony\Component\Form\Form
      */
     protected function createSitePackageForm(Package $sitepackage)
     {
-        $form = $this->createForm(PackageType::class, $sitepackage, ['action' => $this->generateUrl('sp_create')])
-            ->add('save', SubmitType::class, array('label' => 'Download Sitepackage'));
-        return $form;
+        return $this->createForm(
+                PackageType::class, $sitepackage, 
+                ['action' => $this->generateUrl('sp_create')]
+            )->add('save', SubmitType::class, array('label' => 'Download Sitepackage'));
     }
 }

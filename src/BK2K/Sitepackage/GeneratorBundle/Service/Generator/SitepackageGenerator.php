@@ -34,36 +34,44 @@ use BK2K\Sitepackage\GeneratorBundle\Utility\FileUtility;
  */
 class SitepackageGenerator
 {
-    protected $zip;
-    
+    protected $zipPath;
+
     protected $filename;
 
-    public function create(Package $sitepackage = null)
-    {
-        $this->filename = __DIR__ . '/Documents-'.time().".zip";
-        $source_dir = __DIR__ . '/../../Resources/skeletons/BaseExtension/';
-        $zip_file = $this->filename;
-        $file_list = FileUtility::listDirectory($source_dir);
+    const SKELETON_NAME = 'skeleton';
 
-        $this->zip = new \ZipArchive();
-        $opened = $this->zip->open($zip_file, \ZipArchive::CREATE);
+    public function create(Package $package = null)
+    {
+        $applicationName = $package->getApplicationName();
+        $this->filename = $applicationName . '.zip';
+        $source_dir = __DIR__ . '/../../Resources/skeletons/BaseExtension/';
+        $this->zipPath = __DIR__ . '/ ' . $this->filename;
+        $fileList = FileUtility::listDirectory($source_dir);
+
+        $zipFile = new \ZipArchive();
+        $opened = $zipFile->open($this->zipPath, \ZipArchive::CREATE);
         if ($opened === true) {
-            foreach ($file_list as $file) {
-                if ($file !== $zip_file && file_exists($file)) {
-                    $nameInZip = substr($file, strlen($source_dir), -5);
-                    $content = $this->getFileContent($file, $sitepackage);
-                    $this->zip->addFromString($nameInZip, $content);
+            foreach ($fileList as $file) {
+                if ($file !== $this->zipPath && file_exists($file)) {
+                    $baseFileName = $this->replaceSkeletonNameInPath($file, $source_dir);
+                    if (!$this->isTwigFile($file)) {
+                        $zipFile->addFile($file, $baseFileName);
+                    } else {
+                        $content = $this->getFileContent($file, $package);
+                        $nameInZip = $this->removeTwigExtension($baseFileName);
+                        $zipFile->addFromString($nameInZip, $content);
+                    }
                 }
             }
-            $this->zip->close();
+            $zipFile->close();
         }
     }
-    
-    public function getZip()
+
+    public function getZipPath()
     {
-        return $this->zip;
+        return $this->zipPath;
     }
-    
+
     public function getFilename()
     {
         return $this->filename;
@@ -82,5 +90,41 @@ class SitepackageGenerator
             ]
         );
         return $rendered;
+    }
+
+    private function isTwigFile($file)
+    {
+        $pathinfo = pathinfo($file);
+        return $pathinfo['extension'] == 'twig';
+    }
+
+    /**
+     * @param $file
+     * @param $source_dir
+     * @return mixed
+     */
+    protected function createRelativeFilePath($file, $source_dir)
+    {
+        return substr($file, strlen($source_dir));
+    }
+
+    /**
+     * @param $file
+     * @param $source_dir
+     * @return mixed
+     */
+    protected function replaceSkeletonNameInPath($file, $source_dir)
+    {
+        return str_replace(self::SKELETON_NAME . '/', '',
+            $this->createRelativeFilePath($file, $source_dir));
+    }
+
+    /**
+     * @param $baseFileName
+     * @return mixed
+     */
+    protected function removeTwigExtension($baseFileName)
+    {
+        return substr($baseFileName, 0, -5);
     }
 }

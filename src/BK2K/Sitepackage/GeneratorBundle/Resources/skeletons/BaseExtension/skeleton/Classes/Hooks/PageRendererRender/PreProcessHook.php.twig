@@ -1,10 +1,10 @@
 <?php
-namespace BK2K\Sitepackage\GeneratorBundle\Menu;
-
+namespace BK2K\BootstrapPackage\Hooks\PageRendererRender;
+// @todo I just needed a file here
 /*
  *  The MIT License (MIT)
  *
- *  Copyright (c) 2016 Benjamin Kott, http://www.bk2k.info
+ *  Copyright (c) 2014 Benjamin Kott, http://www.bk2k.info
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -25,23 +25,33 @@ namespace BK2K\Sitepackage\GeneratorBundle\Menu;
  *  THE SOFTWARE.
  */
 
-use Knp\Menu\FactoryInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use {{ package.vendorName }}\{{ package.applicationName }}\Service\CompileService;
 
 /**
- * MenuBuilder.
+ * @author Benjamin Kott <info@bk2k.info>
  */
-class MenuBuilder implements ContainerAwareInterface
+class PreProcessHook
 {
-    use ContainerAwareTrait;
 
-    public function mainMenu(FactoryInterface $factory, array $options)
+    /**
+     * @param array $params
+     * @param \TYPO3\CMS\Core\Page\PageRenderer $pagerenderer
+     */
+    public function execute(&$params, &$pagerenderer)
     {
-        $menu = $factory->createItem('root');
-        $menu->addChild('Home', array('route' => 'homepage'));
-        $menu->addChild('New', array('route' => 'sp_new'));
-
-        return $menu;
+        if (TYPO3_MODE !== 'FE' || !is_array($params['cssFiles'])) {
+            return;
+        }
+        $files = array();
+        foreach ($params['cssFiles'] as $file => $settings) {
+            $compiledFile = CompileService::getCompiledFile($file);
+            if ($compiledFile !== false) {
+                $settings['file'] = $compiledFile;
+                $files[$compiledFile] = $settings;
+            } else {
+                $files[$file] = $settings;
+            }
+        }
+        $params['cssFiles'] = $files;
     }
 }

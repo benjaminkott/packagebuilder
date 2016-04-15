@@ -1,0 +1,38 @@
+<?php
+
+/***************
+ * Temporary variables
+ */
+$extensionKey = '{{ package.applicationName }}';
+
+/***************
+ * Register PageTS
+ */
+
+// BackendLayouts
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
+    $extensionKey,
+    'Configuration/PageTS/Mod/WebLayout/BackendLayouts.txt',
+    '{{ package.applicationName }}: Backend Layouts'
+);
+
+// TCEMAIN
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
+    $extensionKey,
+    'Configuration/PageTS/TCEMAIN.txt',
+    '{{ package.applicationName }}: TCEMAIN'
+);
+
+// TCEFORM
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
+    $extensionKey,
+    'Configuration/PageTS/TCEFORM.txt',
+    '{{ package.applicationName }}: TCEFORM'
+);
+
+// RTE
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
+    $extensionKey,
+    'Configuration/PageTS/RTE.txt',
+    '{{ package.applicationName }}: RTE'
+);
