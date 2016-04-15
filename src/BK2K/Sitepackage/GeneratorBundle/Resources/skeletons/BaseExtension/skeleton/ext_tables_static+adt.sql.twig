@@ -1,0 +1,111 @@
+## Adding the root page
+INSERT INTO
+    pages
+SET
+    uid           = 1,
+    pid           = 0,
+    tstamp        = "{{ timestamp }}",
+    sorting       = 256,
+    perms_userid  = 1,
+    perms_groupid = 1,
+    perms_user    = 31,
+    perms_group   = 31,
+    crdate        = "{{ timestamp }}",
+    cruser_id     = 1,
+    title         = "{{ package.applicationName }}",
+    doktype       = 1,
+    is_siteroot   = 1;
+
+
+
+## Adding the 404 page
+INSERT INTO
+    pages
+SET
+    uid           = 2,
+    pid           = 1,
+    tstamp        = "{{ timestamp }}",
+    sorting       = 256,
+    perms_userid  = 1,
+    perms_groupid = 1,
+    perms_user    = 31,
+    perms_group   = 31,
+    crdate        = "{{ timestamp }}",
+    cruser_id     = 1,
+    title         = "404",
+    doktype       = 1,
+    is_siteroot   = 0,
+    nav_hide      => 1;
+
+INSERT INTO
+    tt_content
+SET
+    uid           = 1,
+    pid           = 2,
+    tstamp        = "{{ timestamp }}",
+    crdate        = "{{ timestamp }}",
+    cruser_id     = 1,
+    sorting       = 256,
+    CType         = "text",
+    header        = "Die gewünschte Seite ist nicht erreichbar.",
+    bodytext      = "<p>Möglicherweise wurde die gesuchte Seite gelöscht oder ist unter der angegebenen Adresse nicht erreichbar.</p><p>Bitte prüfen Sie die Schreibweise der eingegebenen Internetadresse.</p>",
+    header_layout = 1;
+
+
+
+## Adding the base typoscript template
+INSERT INTO
+    sys_template
+SET
+    uid                 = 1,
+    pid                 = 1,
+    tstamp              = "{{ timestamp }}",
+    sorting             = 256,
+    crdate              = "{{ timestamp }}",
+    cruser_id           = 1,
+    title               = "{{ package.applicationName }}",
+    root                = 1,
+    clear               = 3,
+    include_static_file = "EXT:{{ package.applicationName }}/Configuration/TypoScript";
+
+
+
+## Adding the second language
+INSERT INTO
+    sys_template
+SET
+    uid                 = 1,
+    pid                 = 0,
+    tstamp              = "{{ timestamp }}",
+    hidden              = 0,
+    title               = "Englisch",
+    flag                = "us",
+    language_isocode    = "en";
+
+
+
+## Adding the cli users
+INSERT INTO
+    be_users
+SET
+    uid                 = 2,
+    pid                 = 0,
+    tstamp              = "{{ timestamp }}",
+    username            = "_cli_lowlevel",
+    description         = "_cli_lowlevel user",
+    password            = "{{ password }}",
+    admin               = 0,
+    options             = 3;
+
+INSERT INTO
+    be_users
+SET
+    uid                 = 3,
+    pid                 = 0,
+    tstamp              = "{{ timestamp }}",
+    username            = "_cli_scheduler",
+    description         = "_cli_scheduler user",
+    password            = "{{ password }}",
+    admin               = 0,
+    options             = 3;
+

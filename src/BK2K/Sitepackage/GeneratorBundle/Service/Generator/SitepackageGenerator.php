@@ -26,8 +26,8 @@ namespace BK2K\Sitepackage\GeneratorBundle\Service\Generator;
  *  THE SOFTWARE.
  */
 
-use BK2K\Sitepackage\GeneratorBundle\Entity\Sitepackage;
-use Symfony\Component\HttpFoundation\RequestStack;
+use BK2K\Sitepackage\GeneratorBundle\Entity\Package;
+use BK2K\Sitepackage\GeneratorBundle\Utility\FileUtility;
 
 /**
  * SitepackageGenerator.
@@ -38,16 +38,25 @@ class SitepackageGenerator
     
     protected $filename;
 
-    public function create(Sitepackage $sitepackage = null)
+    public function create(Package $sitepackage = null)
     {
-        // @TODO GENERATE RANDOM FILENAME IN TEMP
-        $this->filename = 'Documents-'.time().".zip";
+        $this->filename = __DIR__ . '/Documents-'.time().".zip";
+        $source_dir = __DIR__ . '/../../Resources/skeletons/BaseExtension/';
+        $zip_file = $this->filename;
+        $file_list = FileUtility::listDirectory($source_dir);
+
         $this->zip = new \ZipArchive();
-        $this->zip->open($this->filename,  \ZipArchive::CREATE);
-        // @TODO DO STUFF
-        $this->zip->addFromString('file_name_within_archive.ext', 'TEST');
-        // @TODO DO STUFF
-        $this->zip->close();
+        $opened = $this->zip->open($zip_file, \ZipArchive::CREATE);
+        if ($opened === true) {
+            foreach ($file_list as $file) {
+                if ($file !== $zip_file && file_exists($file)) {
+                    $nameInZip = substr($file, strlen($source_dir), -5);
+                    $content = $this->getFileContent($file, $sitepackage);
+                    $this->zip->addFromString($nameInZip, $content);
+                }
+            }
+            $this->zip->close();
+        }
     }
     
     public function getZip()
@@ -58,5 +67,20 @@ class SitepackageGenerator
     public function getFilename()
     {
         return $this->filename;
+    }
+
+    private function getFileContent($file, Package $package)
+    {
+        $content = file_get_contents($file);
+        $fileUniqueId = uniqid('file');
+        $twig = new \Twig_Environment(new \Twig_Loader_Array([$fileUniqueId => $content]));
+        $rendered = $twig->render(
+            $fileUniqueId,
+            [
+                'package' => $package,
+                'timestamp' => time()
+            ]
+        );
+        return $rendered;
     }
 }

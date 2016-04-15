@@ -1,0 +1,41 @@
+##############
+#### PAGE ####
+##############
+page {
+    includeCSS {
+        {{ package.applicationName }}_layout = EXT:{{ package.applicationName }}/Resources/Public/Css/layout.css
+    }
+
+    includeJSFooter {
+        {{ package.applicationName }}_main = EXT:{{ package.applicationName }}/Resources/Public/JavaScript/Dist/{{ package.applicationName }}.js
+    }
+}
+
+
+################
+#### CONFIG ####
+################
+config {
+    admPanel = 0
+    spamProtectEmailAddresses = 1
+
+    // Language Settings
+    defaultGetVars {
+        L = 0
+    }
+    language = de
+    locale_all = de_DE.UTF-8
+    htmlTag_setParams = lang="de" dir="ltr" class="no-js"
+}
+
+#############################
+#### LANGUAGE CONDITIONS ####
+#############################
+[globalVar = GP:L = 1]
+config {
+    sys_language_uid = 1
+    language = en
+    locale_all = en_GB.UTF-8
+    htmlTag_setParams = lang="en" dir="ltr" class="no-js"
+}
+[global]

@@ -26,11 +26,11 @@ namespace BK2K\Sitepackage\GeneratorBundle\Controller;
  *  THE SOFTWARE.
  */
 
-use BK2K\Sitepackage\GeneratorBundle\Entity\Sitepackage;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use BK2K\Sitepackage\GeneratorBundle\Entity\Package;
+use BK2K\Sitepackage\GeneratorBundle\Type\PackageType;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -52,24 +52,8 @@ class DefaultController extends Controller
      */
     public function newAction(Request $request)
     {
-        $sitepackage = new Sitepackage();
-        $form = $this->createFormBuilder($sitepackage)
-            ->add('vendorName', TextType::class)
-            ->add('extensionKey', TextType::class)
-            ->add('save', SubmitType::class, array('label' => 'Download Sitepackage'))
-            ->getForm();
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $generator = $this->get('sitepackage_generator.generator');
-            $generator->create($sitepackage);
-            $filename = $generator->getFilename();
-
-            $response = new BinaryFileResponse($filename);
-            $response->prepare(Request::createFromGlobals());
-            $response->deleteFileAfterSend(true);
-            $response->send();
-        }
+        $sitepackage = new Package();
+        $form = $this->createSitePackageForm($sitepackage);
 
         return $this->render(
             'SitepackageGeneratorBundle:Default:New.html.twig',
@@ -77,5 +61,46 @@ class DefaultController extends Controller
                 'form' => $form->createView(),
             )
         );
+    }
+
+
+    /**
+     * @Route("/create/", name="sp_create")
+     */
+    public function createAction(Request $request)
+    {
+        $sitePackage = new Package();
+        $form = $this->createSitePackageForm($sitePackage);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $generator = $this->get('sitepackage_generator.generator');
+            $generator->create($sitePackage);
+            $filename = $generator->getFilename();
+
+            $response = new BinaryFileResponse($filename);
+            $response->prepare(Request::createFromGlobals());
+            $response->deleteFileAfterSend(true);
+            $response->send();
+        } else {
+            return $this->render(
+                'SitepackageGeneratorBundle:Default:New.html.twig',
+                array(
+                    'form' => $form->createView(),
+                )
+            );
+        }
+    }
+
+
+    /**
+     * @param $sitepackage
+     * @return \Symfony\Component\Form\Form
+     */
+    protected function createSitePackageForm(Package $sitepackage)
+    {
+        $form = $this->createForm(PackageType::class, $sitepackage, ['action' => $this->generateUrl('sp_create')])
+            ->add('save', SubmitType::class, array('label' => 'Download Sitepackage'));
+        return $form;
     }
 }

@@ -15,3 +15,5 @@ bower_components
 # Web
 /web/bundles/*
 /nbproject/*
+
+.idea/

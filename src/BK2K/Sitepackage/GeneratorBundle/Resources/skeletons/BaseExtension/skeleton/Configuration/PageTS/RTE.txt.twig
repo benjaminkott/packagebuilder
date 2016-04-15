@@ -1,0 +1,35 @@
+################################################
+#### RTE BASICS                             ####
+################################################
+RTE.default {
+
+    // Use rte css file that includes the default theme css file.
+    // This css file is only for backend purposes and not used in frontend anyways!
+    contentCSS = typo3conf/ext/{{ package.applicationName }}/Resources/Public/Css/RTE/rte.css
+
+}
+
+################################################
+#### RTE BUTTON CONFIG                      ####
+################################################
+RTE.default.buttons {
+
+    // Remove html tags that are not suitable for an editor to maintain
+    formatblock {
+        removeItems = h6, pre, address, article, aside, blockquote, div, footer, header, nav, section
+    }
+
+}
+
+################################################
+#### RTE APPEARANCE                         ####
+################################################
+RTE.default {
+
+    // Allow only buttons which are listed in property "toolbarOrder"
+    showButtons (
+        bold, italic, underline, subscript, superscript, strikethrough, formatblock, line, orderedlist, unorderedlist, link, unlink,
+        removeformat, undo, redo
+    )
+
+}

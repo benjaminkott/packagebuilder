@@ -1,6 +1,5 @@
 <?php
-
-namespace BK2K\Sitepackage\GeneratorBundle\Entity;
+namespace BK2K\Sitepackage\GeneratorBundle\Type;
 
 /*
  *  The MIT License (MIT)
@@ -26,40 +25,40 @@ namespace BK2K\Sitepackage\GeneratorBundle\Entity;
  *  THE SOFTWARE.
  */
 
-use Symfony\Component\Validator\Constraints as Assert;
+use BK2K\Sitepackage\GeneratorBundle\Entity\Package;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * Sitepackage.
- */
-class Sitepackage
+class PackageType extends AbstractType
 {
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->setAction($options['action'])
+            ->add('vendor_name', TextType::class)
+            ->add('application_name', TextType::class)
+            ->add('repository_url', TextType::class)
+            ->add('author', AuthorType::class);
+    }
+
     /**
-     * @Assert\NotBlank()
+     * @param OptionsResolver $resolver
      */
-    protected $vendorName;
+    public function setDefaultOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => Package::class
+        ));
+    }
 
     /**
-     * @Assert\NotBlank()
+     * @return string
      */
-    protected $extensionKey;
-
-    public function getVendorName()
+    public function getName()
     {
-        return $this->vendorName;
-    }
-
-    public function setVendorName($vendorName)
-    {
-        $this->vendorName = $vendorName;
-    }
-
-    public function getExtensionKey()
-    {
-        return $this->extensionKey;
-    }
-
-    public function setExtensionKey($extensionKey)
-    {
-        $this->extensionKey = $extensionKey;
+        return 'packageForm';
     }
 }
