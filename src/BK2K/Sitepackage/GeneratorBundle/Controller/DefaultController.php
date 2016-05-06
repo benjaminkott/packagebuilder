@@ -45,7 +45,19 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('SitepackageGeneratorBundle:Default:Index.html.twig');
+        return $this->render(
+            'SitepackageGeneratorBundle:Default:Index.html.twig',
+            [
+                'author' => [
+                    'name' => 'Benjamin Kott',
+                    'email' => 'benjamin.kott@outlook.com',
+                    'hash' => md5('benjamin.kott@outlook.com'),
+                    'twitter' => 'benjaminkott',
+                    'github' => 'benjaminkott',
+                    'description' => 'Benjamin is Lead-Frontend-Developer at <a class="font-weight-bold" href="https://www.teamwfp.de" target="_blank">TeamWFP</a> and working projects based on TYPO3 CMS from mid- to enterprise size. Since 2014 his <a class="font-weight-bold" href="https://github.com/benjaminkott/bootstrap_package" target="_blank">Bootstrap Package</a> is used as codebase for the official TYPO3 CMS Introduction Package with the goal to provide an extensive best practice example on how to create websites efficiently with TYPO3 CMS.'
+                ]
+            ]
+        );
     }
 
     /**
@@ -53,27 +65,10 @@ class DefaultController extends Controller
      */
     public function newAction(Request $request)
     {
-        $sitepackage = new Package();
-        $form = $this->createSitePackageForm($sitepackage);
-
-        return $this->render(
-            'SitepackageGeneratorBundle:Default:New.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
-    }
-
-    /**
-     * @Route("/create/", name="sp_create")
-     */
-    public function createAction(Request $request)
-    {
         $sitePackage = new Package();
         $form = $this->createSitePackageForm($sitePackage);
         $form->handleRequest($request);
-
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $generator = $this->get('sitepackage_generator.generator');
             $generator->create($sitePackage);
             $filename = $generator->getFilename();
@@ -96,7 +91,6 @@ class DefaultController extends Controller
         }
     }
 
-
     /**
      * @Route("/success/", name="sp_success")
      * @return \Symfony\Component\HttpFoundation\Response
@@ -106,6 +100,23 @@ class DefaultController extends Controller
         return $this->render('SitepackageGeneratorBundle:Default:Success.html.twig');
     }
 
+    /**
+     * @Route("/imprint/", name="imprint")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function imprintAction()
+    {
+        return $this->render('SitepackageGeneratorBundle:Default:Imprint.html.twig');
+    }
+
+    /**
+     * @Route("/privacy/", name="privacy")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function privacyAction()
+    {
+        return $this->render('SitepackageGeneratorBundle:Default:Privacy.html.twig');
+    }
 
     /**
      * @param $sitepackage
@@ -114,8 +125,20 @@ class DefaultController extends Controller
     protected function createSitePackageForm(Package $sitepackage)
     {
         return $this->createForm(
-                PackageType::class, $sitepackage, 
-                ['action' => $this->generateUrl('sp_create')]
-            )->add('save', SubmitType::class, array('label' => 'Download Sitepackage'));
+                PackageType::class,
+                $sitepackage,
+                [
+                    'action' => $this->generateUrl('sp_new')
+                ]
+            )->add(
+                'save',
+                SubmitType::class,
+                [
+                    'label' => 'Download Sitepackage',
+                    'attr' => [
+                        'class' => 'btn-primary'
+                    ]
+                ]
+            );
     }
 }

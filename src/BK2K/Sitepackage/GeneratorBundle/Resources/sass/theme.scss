@@ -6,6 +6,18 @@
 
 
 //
+// Mixin
+//
+@import "Mixin/Content";
+
+
+//
 // Modules
 //
-@import "Modules/Content";
+@import "Module/Content";
+
+
+//
+// Utility
+//
+@import "Utility/Text";

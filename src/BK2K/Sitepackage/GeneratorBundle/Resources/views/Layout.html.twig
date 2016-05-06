@@ -7,8 +7,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" type="image/x-icon" href="{{ asset('bundles/sitepackagegenerator/icons/favicon.ico') }}" />
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,700,200italic,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ asset('bundles/sitepackagegenerator/css/theme.css') }}" />
     {% block stylesheets %}{% endblock %}
-    <link rel="stylesheet" href="{{ asset('bundles/sitepackagegenerator/css/theme.min.css') }}" />
 </head>
 <body>
 
@@ -18,40 +19,52 @@
                 &#9776;
             </button>
             <a class="navbar-brand hidden-sm-up" href="/">
-                Sitepackage Generator
+                S/PKG/BLD
             </a>
         </div>
         <div class="collapse navbar-toggleable-xs" id="bd-main-nav">
             <nav>
-                <a class="navbar-brand" href="/">
-                    Sitepackage Generator
+                <a class="navbar-brand hidden-xs-down" href="/">
+                    S/PKG/BLD
                 </a>
-                {{ 
+                {{
                     knp_menu_render(
-                        'SitepackageGeneratorBundle:MenuBuilder:mainMenu', 
+                        'SitepackageGeneratorBundle:MenuBuilder:mainMenu',
                         {
                             'currentClass': 'active',
                             'listClass': 'nav navbar-nav',
                             'listItemClass': 'nav-item',
                             'template':'SitepackageGeneratorBundle:Menu:Navbar.html.twig'
                         }
-                    ) 
-                }} 
+                    )
+                }}
             </nav>
         </div>
-    </header>    
-    
-    <main class="content">
-        <div class="container-fluid">
-            {% block body %}{% endblock %}   
-        </div>    
+    </header>
+
+    <main class="main">
+        {% block body %}{% endblock %}
     </main>
-    
-    {% block javascripts %}{% endblock %}
-    
+
+    <footer class="footer">
+        <div class="content-section content-section-small content-layout-secondary">
+            <div class="container-fluid  text-xs-center">
+                <p class="m-b-1">
+                    &copy; Benjamin Kott 2016
+                </p>
+                <nav class="nav nav-inline">
+                    <a class="nav-link" href="/imprint/">Imprint</a>
+                    <a class="nav-link" href="/privacy/">Privacy</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
     <script src="{{ asset('bundles/sitepackagegenerator/javascript/libs/jquery.min.js') }}"></script>
     <script src="{{ asset('bundles/sitepackagegenerator/javascript/libs/tether.min.js') }}"></script>
     <script src="{{ asset('bundles/sitepackagegenerator/javascript/libs/bootstrap.min.js') }}"></script>
+
+    {% block javascripts %}{% endblock %}
 
 </body>
 </html>

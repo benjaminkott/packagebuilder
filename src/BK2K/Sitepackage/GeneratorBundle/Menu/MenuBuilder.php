@@ -39,8 +39,9 @@ class MenuBuilder implements ContainerAwareInterface
     public function mainMenu(FactoryInterface $factory, array $options)
     {
         $menu = $factory->createItem('root');
+
         $menu->addChild('Home', array('route' => 'homepage'));
-        $menu->addChild('New', array('route' => 'sp_new'));
+        //$menu->addChild('New', array('route' => 'sp_new'));
 
         return $menu;
     }

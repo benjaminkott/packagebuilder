@@ -26,22 +26,34 @@ namespace BK2K\Sitepackage\GeneratorBundle\Type;
  */
 
 use BK2K\Sitepackage\GeneratorBundle\Entity\Package;
+use BK2K\Sitepackage\GeneratorBundle\Entity\Package\Author;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PackageType extends AbstractType
 {
-
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->setAction($options['action'])
-            ->add('vendor_name', TextType::class)
-            ->add('application_name', TextType::class)
-            ->add('repository_url', TextType::class)
-            ->add('author', AuthorType::class);
+            ->add('vendorName', TextType::class)
+            ->add('applicationName', TextType::class)
+            ->add('repositoryUrl', TextType::class, ['required' => false])
+            ->add(
+                $builder->create('author', FormType::class, ['data_class' => Author::class])
+                    ->add('name', TextType::class)
+                    ->add('email', EmailType::class)
+                    ->add('company', TextType::class)
+                    ->add('homepage', TextType::class)
+            );
     }
 
     /**
@@ -50,7 +62,9 @@ class PackageType extends AbstractType
     public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Package::class
+            'data_class' => Package::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token'
         ));
     }
 

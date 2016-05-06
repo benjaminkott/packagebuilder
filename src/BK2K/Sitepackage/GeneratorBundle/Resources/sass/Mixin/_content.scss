@@ -1,0 +1,21 @@
+//
+// Content
+//
+@mixin content-variant($affix, $background, $color) {
+    .content-layout-#{$affix} {
+        background-color: $background;
+        color: $color;
+        .btn-secondary-outline {
+            color: $color;
+            border-color: $color;
+            &:hover {
+                color: $background;
+                background-color: $color;
+                border-color: $color;
+            }
+        }
+    }
+    .content-layout-#{$affix} + .content-layout-#{$affix} {
+        border-top: 1px solid lighten($color, 75%);
+    }
+}

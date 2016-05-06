@@ -1,0 +1,65 @@
+//
+// HTML
+//
+@include media-breakpoint-up(md) {
+    html {
+        font-size: 20px;
+    }
+}
+
+
+//
+// Font
+//
+.font-weight-lighter {
+    font-weight: lighter;
+}
+p {
+    margin-bottom: ($spacer * 1.5);
+}
+
+
+//
+// Text
+//
+.text-columns-2 {
+    @include media-breakpoint-up(sm) {
+        column-count: 2;
+        column-gap: $grid-gutter-width;
+        > *:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+
+//
+// Table
+//
+.table {
+    thead {
+        th {
+            border-top: none;
+        }
+    }
+}
+
+
+label {
+    &.required:after {
+        content: ' *';
+        opacity: 0.5;
+    }
+}
+
+.form-group.has-danger {
+    .list-unstyled {
+        border: 1px solid $alert-danger-border;
+        border-top: 0;
+        background-color: $alert-danger-bg;
+        color: $alert-danger-text;
+        li {
+            padding: 0.375rem 0.75rem;
+        }
+    }
+}

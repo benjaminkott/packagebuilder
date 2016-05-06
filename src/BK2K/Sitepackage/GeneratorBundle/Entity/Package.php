@@ -27,6 +27,7 @@ namespace BK2K\Sitepackage\GeneratorBundle\Entity;
  */
 
 use BK2K\Sitepackage\GeneratorBundle\Entity\Package\Author;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Package
@@ -34,45 +35,79 @@ use BK2K\Sitepackage\GeneratorBundle\Entity\Package\Author;
 class Package
 {
     /**
-     * @var int
-     *
-     */
-    private $id;
-
-    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 3
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^[A-Za-z0-9]+$/",
+     *     message = "Only letters, numbers are allowed"
+     * )
      * @var string
      */
     private $vendorName;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 3
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^[A-Za-z0-9_]+$/",
+     *     message = "Only letters, numbers and '_' are allowed"
+     * )
      * @var string
-     *
      */
     private $applicationName;
+
     /**
-     * @var Author
-     */
-    private $author;
-    /**
+     * @Assert\Url()
      * @var string
      */
     private $repositoryUrl = '';
 
     /**
-     * @return Author
+     * @Assert\Valid
+     * @var Author
      */
-    public function getAuthor()
+    private $author;
+
+    /**
+     * @return string
+     */
+    public function getVendorName()
     {
-        return $this->author;
+        return $this->vendorName;
     }
 
     /**
-     * @param Author $author
+     * @param string $vendorName
+     * @return Package
      */
-    public function setAuthor($author)
+    public function setVendorName($vendorName)
     {
-        $this->author = $author;
+        $this->vendorName = $vendorName;
+        return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getApplicationName()
+    {
+        return $this->applicationName;
+    }
+
+    /**
+     * @param string $applicationName
+     * @return Package
+     */
+    public function setApplicationName($applicationName)
+    {
+        $this->applicationName = $applicationName;
+        return $this;
+    }
+
 
     /**
      * @return string
@@ -84,70 +119,30 @@ class Package
 
     /**
      * @param string $repositoryUrl
+     * @return Package
      */
     public function setRepositoryUrl($repositoryUrl)
     {
         $this->repositoryUrl = $repositoryUrl;
-    }
-
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Get vendorName
-     *
-     * @return string
-     */
-    public function getVendorName()
-    {
-        return $this->vendorName;
-    }
-
-    /**
-     * Set vendorName
-     *
-     * @param string $vendorName
-     *
-     * @return Package
-     */
-    public function setVendorName($vendorName)
-    {
-        $this->vendorName = $vendorName;
-
         return $this;
     }
 
     /**
-     * Get extensionKey
-     *
-     * @return string
+     * @return Author
      */
-    public function getApplicationName()
+    public function getAuthor()
     {
-        return $this->applicationName;
+        return $this->author;
     }
 
     /**
-     * Set extensionKey
-     *
-     * @param string $applicationName
-     *
+     * @param Author $author
      * @return Package
      */
-    public function setApplicationName($applicationName)
+    public function setAuthor($author)
     {
-        $this->applicationName = $applicationName;
-
+        $this->author = $author;
         return $this;
     }
-
 }
 

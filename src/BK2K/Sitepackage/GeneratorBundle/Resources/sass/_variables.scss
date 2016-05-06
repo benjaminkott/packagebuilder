@@ -26,17 +26,43 @@
 //
 // Grayscale and brand colors for use across Bootstrap.
 
-$gray-dark:                 #373a3c !default;
-$gray:                      #55595c !default;
+$gray-dark:                 #212121 !default;
+$gray:                      #313131 !default;
 $gray-light:                #818a91 !default;
 $gray-lighter:              #eceeef !default;
 $gray-lightest:             #f7f7f9 !default;
 
-$brand-primary:             #0275d8 !default;
+$brand-primary:             #69bba8 !default;
 $brand-success:             #5cb85c !default;
 $brand-info:                #5bc0de !default;
 $brand-warning:             #f0ad4e !default;
 $brand-danger:              #d9534f !default;
+
+
+// Content
+//
+$content-sections: (
+    default: (
+        bg:     #fff,
+        color:  $gray-dark
+    ),
+    primary: (
+        bg:     $brand-primary,
+        color:  #fff
+    ),
+    secondary: (
+        bg:     $gray-dark,
+        color:  #fff
+    ),
+    dark: (
+        bg:     $gray,
+        color:  #fff
+    ),
+    light: (
+        bg:     $gray-lighter,
+        color:  $gray-dark
+    )
+);
 
 
 // Options
@@ -44,7 +70,7 @@ $brand-danger:              #d9534f !default;
 // Quickly modify global styling by enabling or disabling optional features.
 
 $enable-flex:               false !default;
-$enable-rounded:            true !default;
+$enable-rounded:            false !default;
 $enable-shadows:            false !default;
 $enable-gradients:          false !default;
 $enable-transitions:        false !default;
@@ -142,8 +168,8 @@ $grid-gutter-width:          1.875rem !default; // 30px
 //
 // Font, line-height, and color for body text, headings, and more.
 
-$font-family-sans-serif:     "Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$font-family-serif:          Georgia, "Times New Roman", Times, serif !default;
+$font-family-sans-serif:     'Source Sans Pro', sans-serif !default;
+$font-family-serif:          'Source Serif Pro', serif !default;
 $font-family-monospace:      Menlo, Monaco, Consolas, "Courier New", monospace !default;
 $font-family-base:           $font-family-sans-serif !default;
 
@@ -174,14 +200,14 @@ $display4-weight:             300 !default;
 
 $line-height:                1.5 !default;
 
-$headings-margin-bottom:     ($spacer / 2) !default;
+$headings-margin-bottom:     ($spacer * 1.5) !default;
 $headings-font-family:       inherit !default;
-$headings-font-weight:       500 !default;
+$headings-font-weight:       200 !default;
 $headings-line-height:       1.1 !default;
 $headings-color:             inherit !default;
 
-$lead-font-size:             1.25rem !default;
-$lead-font-weight:           300 !default;
+$lead-font-size:             1.5rem !default;
+$lead-font-weight:           200 !default;
 
 $text-muted:                  $gray-light !default;
 
@@ -208,9 +234,9 @@ $list-inline-padding:         5px !default;
 $line-height-lg:         (4 / 3) !default;
 $line-height-sm:         1.5 !default;
 
-$border-radius:          .25rem !default;
-$border-radius-lg:       .3rem !default;
-$border-radius-sm:       .2rem !default;
+$border-radius:          0 !default;
+$border-radius-lg:       0 !default;
+$border-radius-sm:       0 !default;
 
 $component-active-color: #fff !default;
 $component-active-bg:    $brand-primary !default;
@@ -290,7 +316,7 @@ $input-bg:                       #fff !default;
 $input-bg-disabled:              $gray-lighter !default;
 
 $input-color:                    $gray !default;
-$input-border-color:             #ccc !default;
+$input-border-color:             #ddd !default;
 $input-btn-border-width:         $border-width !default; // For form controls and buttons
 $input-box-shadow:               inset 0 1px 1px rgba(0,0,0,.075) !default;
 
