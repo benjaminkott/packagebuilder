@@ -27,7 +27,7 @@ namespace BK2K\Sitepackage\GeneratorBundle\Utility;
 
 class FileUtility
 {
-    public static function listDirectory($dir, $filesOnly = true)
+    public static function listDirectory($dir, $filesOnly = false)
     {
         $result = array();
         $root = scandir($dir);

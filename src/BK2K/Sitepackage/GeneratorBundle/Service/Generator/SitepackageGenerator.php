@@ -54,7 +54,9 @@ class SitepackageGenerator
             foreach ($fileList as $file) {
                 if ($file !== $this->zipPath && file_exists($file)) {
                     $baseFileName = $this->replaceSkeletonNameInPath($file, $source_dir);
-                    if (!$this->isTwigFile($file)) {
+                    if (is_dir($file)) {
+                        $zipFile->addEmptyDir($baseFileName);
+                    } else if (!$this->isTwigFile($file)) {
                         $zipFile->addFile($file, $baseFileName);
                     } else {
                         $content = $this->getFileContent($file, $package);

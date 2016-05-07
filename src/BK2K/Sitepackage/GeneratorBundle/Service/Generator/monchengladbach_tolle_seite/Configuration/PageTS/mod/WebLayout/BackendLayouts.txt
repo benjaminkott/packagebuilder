@@ -1,4 +1,0 @@
-########################
-#### BACKENDLAYOUTS ####
-########################
-<INCLUDE_TYPOSCRIPT: source="DIR:EXT:monchengladbach_tolle_seite/Configuration/PageTS/Mod/WebLayout/BackendLayouts" extensions="txt">
