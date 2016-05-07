@@ -9,7 +9,6 @@ module.exports = function(grunt) {
             root: '../',
             bower: 'bower_components/',
             resources: '<%= paths.root %>Resources/',
-            contrib: '<%= paths.resources %>Public/Contrib/',
             less: '<%= paths.resources %>Public/Less/',
             css: '<%= paths.resources %>Public/Css/',
             fonts: '<%= paths.resources %>Public/Fonts/',
@@ -30,7 +29,7 @@ module.exports = function(grunt) {
                     beautify: false
                 },
                 files: {
-                    "<%= paths.js %>/Dist/{{ package.packageName }}.js": [
+                    "<%= paths.js %>/Dist/scripts.js": [
                         "<%= paths.js %>Src/main.js"
                     ]
                 }
@@ -38,13 +37,7 @@ module.exports = function(grunt) {
         },
         less: {
             layout: {
-                options: {
-                    sourceMap: true,
-                    outputSourceFiles: true,
-                    sourceMapURL: 'layout.css.map',
-                    sourceMapFilename: '<%= paths.css %>layout.css.map'
-                },
-                src: '<%= paths.less %>theme.less',
+                src: '<%= paths.less %>layout.less',
                 dest: '<%= paths.css %>layout.css'
             }
         },
@@ -61,7 +54,7 @@ module.exports = function(grunt) {
                     })
                 ]
             },
-            theme: {
+            layout: {
                 src: '<%= paths.css %>layout.css'
             }
         },
@@ -73,15 +66,6 @@ module.exports = function(grunt) {
             layout: {
                 src: '<%= paths.css %>layout.css',
                 dest: '<%= paths.css %>layout.min.css'
-            }
-        },
-        bowercopy: {
-            options: {
-                clean: false,
-                report: false,
-                runBower: false,
-                srcPrefix: '<%= paths.bower %>',
-                destPrefix: '<%= paths.contrib %>'
             }
         },
         watch: {
