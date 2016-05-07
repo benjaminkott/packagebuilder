@@ -44,14 +44,39 @@ class PackageType extends AbstractType
     {
         $builder
             ->setAction($options['action'])
-            ->add('title', TextType::class)
-            ->add('repositoryUrl', TextType::class, ['required' => false])
+            ->add('title', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'My Sitepackage'
+                ]
+            ])
+            ->add('repositoryUrl', TextType::class, [
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'https://github.com/username/my_sitepackage'
+                ]
+            ])
             ->add(
                 $builder->create('author', FormType::class, ['data_class' => Author::class])
-                    ->add('name', TextType::class)
-                    ->add('email', EmailType::class)
-                    ->add('company', TextType::class)
-                    ->add('homepage', TextType::class)
+                    ->add('name', TextType::class, [
+                        'attr' => [
+                            'placeholder' => 'John Doe'
+                        ]
+                    ])
+                    ->add('email', EmailType::class, [
+                        'attr' => [
+                            'placeholder' => 'john.doe@example.com'
+                        ]
+                    ])
+                    ->add('company', TextType::class, [
+                        'attr' => [
+                            'placeholder' => 'Company Inc.'
+                        ]
+                    ])
+                    ->add('homepage', TextType::class, [
+                        'attr' => [
+                            'placeholder' => 'https://www.example.com'
+                        ]
+                    ])
             );
     }
 
