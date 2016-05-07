@@ -1,18 +1,15 @@
 {
-  "name": "{{ package.applicationName }}",
+  "name": "{{ package.packageNameAlternative }}",
   "repository": "{{ package.repositoryUrl }}",
-  "homepage": "",
-  "author": "typo3-base-package",
+  "homepage": "{{ package.author.homepage }}",
+  "author": "{{ package.author.name }}",
   "version": "1.0.0",
   "devDependencies": {
     "grunt": "~0.4.5",
-    "grunt-bowercopy": "^1.2.0",
     "grunt-contrib-cssmin": "~0.12.3",
     "grunt-contrib-less": "~1.0.0",
     "grunt-contrib-uglify": "~0.9.1",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-npm-install": "^0.2.0",
-    "grunt-bower-just-install": "0.0.3"
+    "grunt-contrib-watch": "~0.6.1"
   },
   "dependencies": {
     "autoprefixer": "^6.1.1",

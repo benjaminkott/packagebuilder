@@ -1,10 +1,10 @@
 <?php
 /************************************************************************
- * Extension Manager/Repository config file for ext "{{ package.applicationName }}".
+ * Extension Manager/Repository config file for ext "{{ package.extensionKey }}".
  ************************************************************************/
 $EM_CONF[$_EXTKEY] = array(
-    'title' => '{{ package.applicationName }}',
-    'description' => 'Base extension for project "{{ package.applicationName }}"',
+    'title' => '{{ package.title }}',
+    'description' => 'Base extension for project "{{ package.extensionKey }}"',
     'category' => 'extension',
     'constraints' => array(
         'depends' => array(
@@ -15,7 +15,7 @@ $EM_CONF[$_EXTKEY] = array(
     ),
     'autoload' => array(
         'psr-4' => array(
-            '{{ package.vendorName }}\\{{ package.namespace }}\\' => 'Classes'
+            '{{ package.vendorName }}\\{{ package.packageName }}\\' => 'Classes'
         ),
     ),
     'state' => 'stable',

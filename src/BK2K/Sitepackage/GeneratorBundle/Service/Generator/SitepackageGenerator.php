@@ -42,8 +42,8 @@ class SitepackageGenerator
 
     public function create(Package $package = null)
     {
-        $applicationName = $package->getApplicationName();
-        $this->filename = $applicationName . '.zip';
+        $extensionKey = $package->getExtensionKey();
+        $this->filename = $extensionKey . '.zip';
         $source_dir = __DIR__ . '/../../Resources/skeletons/BaseExtension/';
         $this->zipPath = __DIR__ . '/ ' . $this->filename;
         $fileList = FileUtility::listDirectory($source_dir);

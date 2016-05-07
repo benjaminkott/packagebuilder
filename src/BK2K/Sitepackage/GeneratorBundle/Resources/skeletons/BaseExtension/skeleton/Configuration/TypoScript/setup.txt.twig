@@ -1,48 +1,7 @@
 ################
 #### HELPER ####
 ################
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{{ package.applicationName }}/Configuration/TypoScript/Helper/ParseFunc.txt">
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{{ package.applicationName }}/Configuration/TypoScript/Helper/DynamicContent.txt">
-
-
-####################
-#### PAGE CLASS ####
-####################
-lib.page.class = COA
-lib.page.class {
-    // Page alias or id as fallback
-    10 = TEXT
-    10 {
-        field = alias // uid
-        noTrimWrap = |page-||
-    }
-    // Current level of the page within the tree structure
-    20 = TEXT
-    20 {
-        data = level:1
-        noTrimWrap = | pagelevel-||
-    }
-    // Language
-    30 = TEXT
-    30 {
-        data = TSFE:sys_language_uid
-        noTrimWrap = | language-||
-    }
-    // Backend layout
-    40 = TEXT
-    40 {
-        data = levelfield:-1, backend_layout_next_level, slide
-        override.field = backend_layout
-        ifEmpty = default
-        noTrimWrap = | backendlayout-||
-    }
-    // Layout
-    50 = TEXT
-    50 {
-        field = layout
-        noTrimWrap = | layout-||
-    }
-}
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:{{ package.extensionKey }}/Configuration/TypoScript/Helper/DynamicContent.txt">
 
 
 ##############
@@ -52,30 +11,6 @@ page = PAGE
 page {
     typeNum = 0
     shortcutIcon = {$page.includePath.icons}favicon.ico
-
-    headerData {
-        // Flip ahead browsing for IE10/11
-        // http://msdn.microsoft.com/en-us/library/ie/jj883726(v=vs.85).aspx
-        10 = HMENU
-        10 {
-            special = browse
-            special {
-                items = prev|next
-            }
-            1 = TMENU
-            1.NO {
-                allWrap = <link rel="prev" href="|"> |*| <link rel="next" href="|">
-                doNotLinkIt = 1
-                stdWrap {
-                    typolink {
-                        parameter.data = field:uid
-                        useCacheHash = 1
-                        returnLast = url
-                    }
-                }
-            }
-        }
-    }
 
     5 < styles.content.editPanelPage
     5 {
@@ -99,43 +34,16 @@ page {
         }
 
         templateRootPaths {
-            0 = EXT:{{ package.applicationName }}/Resources/Private/Templates/Page/
+            0 = EXT:{{ package.extensionKey }}/Resources/Private/Templates/Page/
             1 = {$page.fluidtemplate.templateRootPath}
         }
         partialRootPaths {
-            0 = EXT:{{ package.applicationName }}/Resources/Private/Partials/Page/
+            0 = EXT:{{ package.extensionKey }}/Resources/Private/Partials/Page/
             1 = {$page.fluidtemplate.partialRootPath}
         }
         layoutRootPaths {
-            0 = EXT:{{ package.applicationName }}/Resources/Private/Layouts/Page/
+            0 = EXT:{{ package.extensionKey }}/Resources/Private/Layouts/Page/
             1 = {$page.fluidtemplate.layoutRootPath}
-        }
-
-        #################
-        ### VARIABLES ###
-        #################
-        variables {
-            pageTitle = TEXT
-            pageTitle.data = page:title
-            siteTitle = TEXT
-            siteTitle.data = TSFE:tmpl|setup|sitetitle
-            rootPage = TEXT
-            rootPage.data = leveluid:0
-            logoAlt = COA
-            logoAlt {
-                10 = TEXT
-                10 {
-                    data = TSFE:tmpl|setup|sitetitle
-                    noTrimWrap = || logo|
-                    if.isFalse = {$page.logo.alt}
-                }
-                20 = TEXT
-                20 {
-                    value = {$page.logo.alt}
-                    if.isTrue = {$page.logo.alt}
-                }
-            }
-            pageClass < lib.page.class
         }
     }
 
@@ -207,7 +115,7 @@ page {
     }
 
     includeCSS {
-        {{ package.applicationName }}_layout = EXT:{{ package.applicationName }}/Resources/Public/Css/layout.css
+        {{ package.extensionKey }}_layout = EXT:{{ package.extensionKey }}/Resources/Public/Css/layout.css
     }
 
     includeJSLibs {
@@ -215,7 +123,7 @@ page {
     }
 
     includeJSFooter {
-        {{ package.applicationName }}_main = EXT:{{ package.applicationName }}/Resources/Public/JavaScript/Dist/{{ package.applicationName }}.js
+        {{ package.extensionKey }}_main = EXT:{{ package.extensionKey }}/Resources/Public/JavaScript/Dist/{{ package.packageName }}.js
     }
 }
 
@@ -251,8 +159,8 @@ config {
     noScaleUp = 1
 
     // Compression and Concatenation of CSS and JS Files
-    compressJs = {$config.compressJs}
-    compressCss = {$config.compressCss}
-    concatenateJs = {$config.concatenateJs}
-    concatenateCss = {$config.concatenateCss}
+    compressJs = 0
+    compressCss = 0
+    concatenateJs = 0
+    concatenateCss = 0
 }

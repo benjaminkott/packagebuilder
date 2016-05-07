@@ -4,35 +4,25 @@
 mod {
     web_layout {
         BackendLayouts {
-            default {
-                title = LLL:EXT:{{ package.applicationName }}/Resources/Private/Language/Backend.xlf:backend_layout.default
+            {{ package.extensionName }}_default {
+                title = LLL:EXT:{{ package.extensionName }}/Resources/Private/Language/locallang.xlf:backend_layout.default
                 config {
                     backend_layout {
-                        colCount = 6
-                        rowCount = 3
+                        colCount = 1
+                        rowCount = 1
                         rows {
                             1 {
                                 columns {
                                     1 {
-                                        name = LLL:EXT:{{ package.applicationName }}/Resources/Private/Language/Backend.xlf:backend_layout.column.border
-                                        colPos = 3
-                                        colspan = 6
-                                    }
-                                }
-                            }
-                            2 {
-                                columns {
-                                    1 {
-                                        name = LLL:EXT:{{ package.applicationName }}/Resources/Private/Language/Backend.xlf:backend_layout.column.normal
+                                        name = LLL:EXT:{{ package.extensionName }}/Resources/Private/Language/locallang.xlf:backend_layout.column.normal
                                         colPos = 0
-                                        colspan = 6
                                     }
                                 }
                             }
                         }
                     }
                 }
-                icon = EXT:{{ package.applicationName }}/Resources/Public/Images/BackendLayouts/default.gif
+                icon = EXT:{{ package.extensionName }}/Resources/Public/Images/BackendLayouts/default.png
             }
         }
     }

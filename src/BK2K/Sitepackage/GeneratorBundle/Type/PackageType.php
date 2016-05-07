@@ -44,8 +44,7 @@ class PackageType extends AbstractType
     {
         $builder
             ->setAction($options['action'])
-            ->add('vendorName', TextType::class)
-            ->add('applicationName', TextType::class)
+            ->add('title', TextType::class)
             ->add('repositoryUrl', TextType::class, ['required' => false])
             ->add(
                 $builder->create('author', FormType::class, ['data_class' => Author::class])

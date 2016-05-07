@@ -17,7 +17,7 @@ module.exports = function(grunt) {
             js: '<%= paths.resources %>Public/JavaScript/'
         },
         banner: '/*!\n' +
-            ' * {{ package.applicationName }} v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
+            ' * {{ package.packageName }} v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
             ' * Copyright 2015-<%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
             ' * Licensed under the <%= pkg.license %> license\n' +
             ' */\n',
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
                     beautify: false
                 },
                 files: {
-                    "<%= paths.js %>/Dist/{{ package.applicationName }}.js": [
+                    "<%= paths.js %>/Dist/{{ package.packageName }}.js": [
                         "<%= paths.js %>Src/main.js"
                     ]
                 }
@@ -99,22 +99,18 @@ module.exports = function(grunt) {
     /**
      * Register tasks
      */
-    grunt.loadNpmTasks('grunt-bowercopy');
-    grunt.loadNpmTasks('grunt-bower-just-install');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-postcss');
-    grunt.loadNpmTasks('grunt-npm-install');
 
     /**
      * Grunt update task
      */
-    grunt.registerTask('update', ['npm-install', 'bower_install', 'bowercopy']);
     grunt.registerTask('css', ['less', 'postcss', 'cssmin']);
     grunt.registerTask('js', ['uglify']);
-    grunt.registerTask('build', ['update', 'js', 'css']);
+    grunt.registerTask('build', ['js', 'css']);
     grunt.registerTask('default', ['build']);
 
 };

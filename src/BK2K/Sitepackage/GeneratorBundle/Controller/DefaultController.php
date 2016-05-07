@@ -28,6 +28,7 @@ namespace BK2K\Sitepackage\GeneratorBundle\Controller;
 
 use BK2K\Sitepackage\GeneratorBundle\Entity\Package;
 use BK2K\Sitepackage\GeneratorBundle\Type\PackageType;
+use BK2K\Sitepackage\GeneratorBundle\Utility\StringUtility;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -69,6 +70,21 @@ class DefaultController extends Controller
         $form = $this->createSitePackageForm($sitePackage);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            // VendorName
+            $sitePackage->setVendorName(StringUtility::stringToUpperCamelCase($sitePackage->getAuthor()->getCompany()));
+            $sitePackage->setVendorNameAlternative(StringUtility::camelCaseToLowerCaseDashed($sitePackage->getVendorName()));
+            // PackageName
+            $sitePackage->setPackageName(StringUtility::stringToUpperCamelCase($sitePackage->getTitle()));
+            $sitePackage->setPackageNameAlternative(StringUtility::camelCaseToLowerCaseDashed($sitePackage->getPackageName()));
+            // ExtensionKey
+            $sitePackage->setExtensionKey(StringUtility::camelCaseToLowerCaseUnderscored($sitePackage->getPackageName()));
+
+            echo "<pre>";
+            var_dump($sitePackage);
+            echo "</pre>";
+            die();
+
+            // Generator
             $generator = $this->get('sitepackage_generator.generator');
             $generator->create($sitePackage);
             $filename = $generator->getFilename();

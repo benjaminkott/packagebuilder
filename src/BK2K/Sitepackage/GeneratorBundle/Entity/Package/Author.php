@@ -46,7 +46,6 @@ class Author
      * @Assert\NotBlank()
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
-     *     checkMX = true
      * )
      * @var string
      */
@@ -56,6 +55,10 @@ class Author
      * @Assert\NotBlank()
      * @Assert\Length(
      *     min = 3
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^[A-Za-z0-9\x7f-\xff .:&-]+$/",
+     *     message = "Only letters, numbers and spaces are allowed"
      * )
      * @var string
      */

@@ -3,11 +3,10 @@
 ############
 page {
      fluidtemplate {
-        layoutRootPath = EXT:{{ package.applicationName }}/Resources/Private/Layouts/Page/
-        partialRootPath = EXT:{{ package.applicationName }}/Resources/Private/Partials/Page/
-        templateRootPath = EXT:{{ package.applicationName }}/Resources/Private/Templates/Page/
+        layoutRootPath = EXT:{{ package.extensionKey }}/Resources/Private/Layouts/Page/
+        partialRootPath = EXT:{{ package.extensionKey }}/Resources/Private/Partials/Page/
+        templateRootPath = EXT:{{ package.extensionKey }}/Resources/Private/Templates/Page/
     }
-
     meta {
         description =
         author =
@@ -17,7 +16,6 @@ page {
         apple-mobile-web-app-capable = no
         compatible = IE=edge
     }
-
     tracking {
         google {
             trackingID =
@@ -32,13 +30,9 @@ page {
 config {
     no_cache = 0
     removeDefaultJS = 0
-    compressJs = 0
-    compressCss = 0
-    concatenateJs = 0
-    concatenateCss = 0
     admPanel = 1
     prefixLocalAnchors = all
-    headerComment = Build by Bob - Site Builder for TYPO3
+    headerComment = Build by sitepackagebuilder.com
     preloadImages = 0
     sendCacheHeaders = 1
 }
