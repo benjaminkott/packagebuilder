@@ -45,7 +45,7 @@ class SitepackageGenerator
         $extensionKey = $package->getExtensionKey();
         $this->filename = $extensionKey . '.zip';
         $source_dir = __DIR__ . '/../../Resources/skeletons/BaseExtension/';
-        $this->zipPath = __DIR__ . '/ ' . $this->filename;
+        $this->zipPath = __DIR__ . '/' . $this->filename;
         $fileList = FileUtility::listDirectory($source_dir);
 
         $zipFile = new \ZipArchive();

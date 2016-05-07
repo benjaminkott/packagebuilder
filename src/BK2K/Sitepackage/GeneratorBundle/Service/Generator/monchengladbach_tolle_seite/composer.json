@@ -1,0 +1,9 @@
+{
+    "name": "wfp2-gmb-h-co-k-g/monchengladbach-tolle-seite",
+    "type": "typo3-cms-extension",
+    "description": "Base extension for project monchengladbach_tolle_seite",
+    "homepage": "http://www.teamwfp.de",
+    "license": ["GPL-2.0+"],
+    "keywords": ["TYPO3 CMS"],
+    "version": "1.0.0"
+}

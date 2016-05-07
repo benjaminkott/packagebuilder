@@ -2,5 +2,5 @@
 #### RTE BASICS                             ####
 ################################################
 RTE.default {
-    contentCSS = typo3conf/ext/{{ package.extensionKey }}/Resources/Public/Css/rte.css
+    contentCSS = typo3conf/ext/monchengladbach_tolle_seite/Resources/Public/Css/rte.css
 }

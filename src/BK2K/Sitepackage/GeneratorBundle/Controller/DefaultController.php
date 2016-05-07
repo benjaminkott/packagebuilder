@@ -79,11 +79,6 @@ class DefaultController extends Controller
             // ExtensionKey
             $sitePackage->setExtensionKey(StringUtility::camelCaseToLowerCaseUnderscored($sitePackage->getPackageName()));
 
-            echo "<pre>";
-            var_dump($sitePackage);
-            echo "</pre>";
-            die();
-
             // Generator
             $generator = $this->get('sitepackage_generator.generator');
             $generator->create($sitePackage);
@@ -93,7 +88,7 @@ class DefaultController extends Controller
             $response->setContentDisposition(
                 ResponseHeaderBag::DISPOSITION_ATTACHMENT,
                 $filename,
-                iconv('UTF-8', 'ASCII//TRANSLIT', $filename)
+                StringUtility::toASCII($filename)
             );
             $response->deleteFileAfterSend(true);
             return $response;
