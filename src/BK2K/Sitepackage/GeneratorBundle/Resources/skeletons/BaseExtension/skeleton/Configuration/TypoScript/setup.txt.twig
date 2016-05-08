@@ -10,13 +10,7 @@
 page = PAGE
 page {
     typeNum = 0
-    shortcutIcon = {$page.includePath.icons}favicon.ico
-
-    5 < styles.content.editPanelPage
-    5 {
-        stdWrap.wrap = <div class="typo3-feedit-page">|</div>
-        stdWrap.required = 1
-    }
+    shortcutIcon = EXT:{{ package.extensionKey }}/Resources/Public/Icons/favicon.ico
 
     10 = FLUIDTEMPLATE
     10 {
@@ -26,11 +20,8 @@ page {
             key.data = levelfield:-1, backend_layout_next_level, slide
             key.override.field = backend_layout
 
-            pagets__default_2_columns = TEXT
-            pagets__default_2_columns.value = Default2Columns
-
-            default = TEXT
-            default.value = Default
+            pagets__{{ package.extensionKey }}_default = TEXT
+            pagets__{{ package.extensionKey }}_default.value = Default
         }
 
         templateRootPaths {
@@ -115,7 +106,7 @@ page {
     }
 
     includeCSS {
-        {{ package.extensionKey }}_layout = EXT:{{ package.extensionKey }}/Resources/Public/Css/layout.css
+        {{ package.extensionKey }}_layout = EXT:{{ package.extensionKey }}/Resources/Public/Css/layout.min.css
     }
 
     includeJSLibs {
@@ -123,7 +114,7 @@ page {
     }
 
     includeJSFooter {
-        {{ package.extensionKey }}_main = EXT:{{ package.extensionKey }}/Resources/Public/JavaScript/Dist/{{ package.packageName }}.js
+        {{ package.extensionKey }}_scripts = EXT:{{ package.extensionKey }}/Resources/Public/JavaScript/Dist/scripts.js
     }
 }
 
