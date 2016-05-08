@@ -7,7 +7,6 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         paths: {
             root: '../',
-            bower: 'bower_components/',
             resources: '<%= paths.root %>Resources/',
             less: '<%= paths.resources %>Public/Less/',
             css: '<%= paths.resources %>Public/Css/',
@@ -68,7 +67,22 @@ module.exports = function(grunt) {
                 dest: '<%= paths.css %>layout.min.css'
             }
         },
+        image: {
+            extension: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= paths.resources %>',
+                    src: [
+                        '**/*.{png,jpg,gif,svg}'
+                    ],
+                    dest: '<%= paths.resources %>'
+                }]
+            }
+        },
         watch: {
+            options: {
+                livereload: true
+            },
             less: {
                 files: '<%= paths.less %>**/*.less',
                 tasks: ['css']
@@ -88,13 +102,14 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-postcss');
+    grunt.loadNpmTasks('grunt-image');
 
     /**
      * Grunt update task
      */
     grunt.registerTask('css', ['less', 'postcss', 'cssmin']);
     grunt.registerTask('js', ['uglify']);
-    grunt.registerTask('build', ['js', 'css']);
+    grunt.registerTask('build', ['js', 'css', 'image']);
     grunt.registerTask('default', ['build']);
 
 };
