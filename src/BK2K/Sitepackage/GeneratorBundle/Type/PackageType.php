@@ -46,12 +46,14 @@ class PackageType extends AbstractType
             ->setAction($options['action'])
             ->add('title', TextType::class, [
                 'attr' => [
+                    'autocomplete' => 'off',
                     'placeholder' => 'My Sitepackage'
                 ]
             ])
             ->add('repositoryUrl', TextType::class, [
                 'required' => false,
                 'attr' => [
+                    'autocomplete' => 'off',
                     'placeholder' => 'https://github.com/username/my_sitepackage'
                 ]
             ])
@@ -59,21 +61,25 @@ class PackageType extends AbstractType
                 $builder->create('author', FormType::class, ['data_class' => Author::class])
                     ->add('name', TextType::class, [
                         'attr' => [
+                            'autocomplete' => 'off',
                             'placeholder' => 'John Doe'
                         ]
                     ])
                     ->add('email', EmailType::class, [
                         'attr' => [
+                            'autocomplete' => 'off',
                             'placeholder' => 'john.doe@example.com'
                         ]
                     ])
                     ->add('company', TextType::class, [
                         'attr' => [
+                            'autocomplete' => 'off',
                             'placeholder' => 'Company Inc.'
                         ]
                     ])
                     ->add('homepage', TextType::class, [
                         'attr' => [
+                            'autocomplete' => 'off',
                             'placeholder' => 'https://www.example.com'
                         ]
                     ])
