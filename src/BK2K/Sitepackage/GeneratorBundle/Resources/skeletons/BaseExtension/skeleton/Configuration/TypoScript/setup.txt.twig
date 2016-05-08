@@ -11,6 +11,31 @@
 
 
 ##############
+#### MENU ####
+##############
+lib.navigation = HMENU
+lib.navigation {
+    1 = TMENU
+    1 {
+        wrap = <ul>|</ul>
+        expAll = 1
+        NO = 1
+        NO {
+            wrapItemAndSub = <li>|</li>
+        }
+        ACT < .NO
+        ACT {
+            wrapItemAndSub = <li class="active">|</li>
+        }
+        CUR < .ACT
+        CUR {
+            wrapItemAndSub = <li class="current">|</li>
+        }
+    }
+}
+
+
+##############
 #### PAGE ####
 ##############
 page = PAGE
