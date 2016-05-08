@@ -4,6 +4,18 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:fluid_styled_content/Configuration/TypoScript/Static/setup.txt">
 
 
+##############################
+#### FLUID STYLED CONTENT ####
+##############################
+styles {
+    templates {
+        layoutRootPath = EXT:{{ package.extensionKey }}/Resources/Private/Layouts/ContentElements/
+        partialRootPath = EXT:{{ package.extensionKey }}/Resources/Private/Partials/ContentElements/
+        templateRootPath = EXT:{{ package.extensionKey }}/Resources/Private/Templates/ContentElements/
+    }
+}
+
+
 ############
 ### PAGE ###
 ############
