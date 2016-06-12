@@ -117,8 +117,11 @@ class SitepackageGenerator
      */
     protected function replaceSkeletonNameInPath($file, $source_dir)
     {
-        return str_replace(self::SKELETON_NAME . '/', '',
-            $this->createRelativeFilePath($file, $source_dir));
+        return str_replace(
+            self::SKELETON_NAME . '/',
+            '',
+            $this->createRelativeFilePath($file, $source_dir)
+        );
     }
 
     /**
