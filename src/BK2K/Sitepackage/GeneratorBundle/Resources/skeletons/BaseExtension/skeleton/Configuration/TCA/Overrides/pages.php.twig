@@ -8,6 +8,11 @@ $extensionKey = '{{ package.extensionKey }}';
 /***************
  * Register PageTS
  */
+ \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
+    $extensionKey,
+    'Configuration/PageTS/Sitepackage.txt',
+    '{{ package.title }}: All'
+);
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
     $extensionKey,
     'Configuration/PageTS/Mod/WebLayout/BackendLayouts.txt',
