@@ -1,0 +1,8 @@
+<?php
+
+// Default TypoScript for {{ package.packageName }}
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+    '{{ package.extensionKey }}',
+    'Configuration/TypoScript',
+    '{{ package.title }}'
+);
