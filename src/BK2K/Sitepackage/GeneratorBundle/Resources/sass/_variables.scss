@@ -37,6 +37,7 @@ $brand-success:             #5cb85c !default;
 $brand-info:                #5bc0de !default;
 $brand-warning:             #f0ad4e !default;
 $brand-danger:              #d9534f !default;
+$brand-notice:              #efefef !default;
 
 
 // Content
@@ -499,6 +500,9 @@ $state-danger-text:              #a94442 !default;
 $state-danger-bg:                #f2dede !default;
 $state-danger-border:            darken($state-danger-bg, 5%) !default;
 
+$state-notice-text:              #212121 !default;
+$state-notice-bg:                $brand-notice !default;
+$state-notice-border:            darken($state-notice-bg, 5%) !default;
 
 // Cards
 $card-spacer-x:            1.25rem !default;
@@ -600,6 +604,9 @@ $alert-danger-bg:             $state-danger-bg !default;
 $alert-danger-text:           $state-danger-text !default;
 $alert-danger-border:         $state-danger-border !default;
 
+$alert-notice-bg:             $state-notice-bg !default;
+$alert-notice-text:           $state-notice-text !default;
+$alert-notice-border:         $state-notice-border !default;
 
 // Progress bars
 

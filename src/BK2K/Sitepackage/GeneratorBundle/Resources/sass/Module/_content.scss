@@ -15,10 +15,14 @@
     > .container-fluid {
         padding-left: 0;
         padding-right: 0;
-        *:last-child {
+        > *:last-child {
             margin-bottom: 0;
         }
     }
+}
+.content-section-smallest {
+    padding-top: ($spacer * 1.5);
+    padding-bottom: ($spacer * 1.5);
 }
 .content-section-small {
     @include media-breakpoint-up(sm) {
@@ -37,6 +41,9 @@
         padding-top: ($spacer * 8);
         padding-bottom: ($spacer * 8);
     }
+}
+.content-section-none {
+    padding: 0;
 }
 .content-section-centered {
     .container {
