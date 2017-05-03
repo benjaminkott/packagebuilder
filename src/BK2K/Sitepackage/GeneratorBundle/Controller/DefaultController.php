@@ -136,20 +136,20 @@ class DefaultController extends Controller
     protected function createSitePackageForm(Package $sitepackage)
     {
         return $this->createForm(
-                PackageType::class,
-                $sitepackage,
-                [
-                    'action' => $this->generateUrl('sp_new')
+            PackageType::class,
+            $sitepackage,
+            [
+                'action' => $this->generateUrl('sp_new')
+            ]
+        )->add(
+            'save',
+            SubmitType::class,
+            [
+                'label' => 'Download Sitepackage',
+                'attr' => [
+                    'class' => 'btn-primary'
                 ]
-            )->add(
-                'save',
-                SubmitType::class,
-                [
-                    'label' => 'Download Sitepackage',
-                    'attr' => [
-                        'class' => 'btn-primary'
-                    ]
-                ]
-            );
+            ]
+        );
     }
 }
