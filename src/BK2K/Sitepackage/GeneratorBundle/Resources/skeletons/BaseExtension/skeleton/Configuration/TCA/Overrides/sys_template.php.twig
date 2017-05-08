@@ -1,11 +1,14 @@
 <?php
 defined('TYPO3_MODE') || die();
 
-/***************
- * Default TypoScript for {{ package.packageName }}
- */
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
-    $_EXTKEY,
-    'Configuration/TypoScript',
-    '{{ package.title }}'
-);
+call_user_func(function()
+{
+    /*
+     * Default TypoScript for {{ package.packageName }}
+     */
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+        $_EXTKEY,
+        'Configuration/TypoScript',
+        '{{ package.title }}'
+    );
+});

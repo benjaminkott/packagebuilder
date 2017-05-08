@@ -1,36 +1,39 @@
 <?php
 defined('TYPO3_MODE') || die();
 
-/***************
- * Temporary variables
- */
-$extensionKey = '{{ package.extensionKey }}';
+call_user_func(function()
+{
+    /*
+     * Temporary variables
+     */
+    $extensionKey = '{{ package.extensionKey }}';
 
-/***************
- * Register PageTS
- */
- \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
-    $extensionKey,
-    'Configuration/PageTS/Sitepackage.txt',
-    '{{ package.title }}: All'
-);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
-    $extensionKey,
-    'Configuration/PageTS/Mod/WebLayout/BackendLayouts.txt',
-    '{{ package.title }}: Backend Layouts'
-);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
-    $extensionKey,
-    'Configuration/PageTS/TCEMAIN.txt',
-    '{{ package.title }}: TCEMAIN'
-);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
-    $extensionKey,
-    'Configuration/PageTS/TCEFORM.txt',
-    '{{ package.title }}: TCEFORM'
-);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
-    $extensionKey,
-    'Configuration/PageTS/RTE.txt',
-    '{{ package.title }}: RTE'
-);
+    /*
+     * Register PageTS
+     */
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
+        $extensionKey,
+        'Configuration/PageTS/Sitepackage.txt',
+        '{{ package.title }}: All'
+    );
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
+        $extensionKey,
+        'Configuration/PageTS/Mod/WebLayout/BackendLayouts.txt',
+        '{{ package.title }}: Backend Layouts'
+    );
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
+        $extensionKey,
+        'Configuration/PageTS/TCEMAIN.txt',
+        '{{ package.title }}: TCEMAIN'
+    );
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
+        $extensionKey,
+        'Configuration/PageTS/TCEFORM.txt',
+        '{{ package.title }}: TCEFORM'
+    );
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
+        $extensionKey,
+        'Configuration/PageTS/RTE.txt',
+        '{{ package.title }}: RTE'
+    );
+});
