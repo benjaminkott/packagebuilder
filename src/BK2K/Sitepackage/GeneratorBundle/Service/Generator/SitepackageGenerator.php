@@ -1,45 +1,37 @@
 <?php
 
-namespace BK2K\Sitepackage\GeneratorBundle\Service\Generator;
-
 /*
- *  The MIT License (MIT)
+ * This file is part of the bk2k/packagebuilder.
  *
- *  Copyright (c) 2016 Benjamin Kott, http://www.bk2k.info
- *
- *  Permission is hereby granted, free of charge, to any person obtaining a copy
- *  of this software and associated documentation files (the "Software"), to deal
- *  in the Software without restriction, including without limitation the rights
- *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- *  copies of the Software, and to permit persons to whom the Software is
- *  furnished to do so, subject to the following conditions:
- *
- *  The above copyright notice and this permission notice shall be included in
- *  all copies or substantial portions of the Software.
- *
- *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- *  THE SOFTWARE.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
  */
+
+namespace BK2K\Sitepackage\GeneratorBundle\Service\Generator;
 
 use BK2K\Sitepackage\GeneratorBundle\Entity\Package;
 use BK2K\Sitepackage\GeneratorBundle\Utility\FileUtility;
 
 /**
- * SitepackageGenerator.
+ * SitepackageGenerator
  */
 class SitepackageGenerator
 {
-    protected $zipPath;
-
-    protected $filename;
-
     const SKELETON_NAME = 'skeleton';
 
+    /**
+     * @var string
+     */
+    protected $zipPath;
+
+    /**
+     * @var string
+     */
+    protected $filename;
+
+    /**
+     * @param Package $package
+     */
     public function create(Package $package = null)
     {
         $extensionKey = $package->getExtensionKey();
@@ -56,7 +48,7 @@ class SitepackageGenerator
                     $baseFileName = $this->replaceSkeletonNameInPath($file, $source_dir);
                     if (is_dir($file)) {
                         $zipFile->addEmptyDir($baseFileName);
-                    } else if (!$this->isTwigFile($file)) {
+                    } elseif (!$this->isTwigFile($file)) {
                         $zipFile->addFile($file, $baseFileName);
                     } else {
                         $content = $this->getFileContent($file, $package);
@@ -69,16 +61,27 @@ class SitepackageGenerator
         }
     }
 
+    /**
+     * @return string
+     */
     public function getZipPath()
     {
         return $this->zipPath;
     }
 
+    /**
+     * @return string
+     */
     public function getFilename()
     {
         return $this->filename;
     }
 
+    /**
+     * @param string $file
+     * @param Package $package
+     * @return string
+     */
     private function getFileContent($file, Package $package)
     {
         $content = file_get_contents($file);
@@ -94,6 +97,10 @@ class SitepackageGenerator
         return $rendered;
     }
 
+    /**
+     * @param string $file
+     * @return bool
+     */
     private function isTwigFile($file)
     {
         $pathinfo = pathinfo($file);
@@ -101,31 +108,31 @@ class SitepackageGenerator
     }
 
     /**
-     * @param $file
-     * @param $source_dir
+     * @param string $file
+     * @param string $sourceDir
      * @return mixed
      */
-    protected function createRelativeFilePath($file, $source_dir)
+    protected function createRelativeFilePath($file, $sourceDir)
     {
-        return substr($file, strlen($source_dir));
+        return substr($file, strlen($sourceDir));
     }
 
     /**
-     * @param $file
-     * @param $source_dir
+     * @param string $file
+     * @param string $sourceDir
      * @return mixed
      */
-    protected function replaceSkeletonNameInPath($file, $source_dir)
+    protected function replaceSkeletonNameInPath($file, $sourceDir)
     {
         return str_replace(
             self::SKELETON_NAME . '/',
             '',
-            $this->createRelativeFilePath($file, $source_dir)
+            $this->createRelativeFilePath($file, $sourceDir)
         );
     }
 
     /**
-     * @param $baseFileName
+     * @param string $baseFileName
      * @return mixed
      */
     protected function removeTwigExtension($baseFileName)
