@@ -6,3 +6,8 @@ services:
         class: BK2K\Sitepackage\GeneratorBundle\Twig\ContentGetExtension
         tags:
             - { name: 'twig.extension' }
+
+    sitepackage_generator.form_extention.button_icon:
+        class: BK2K\Sitepackage\GeneratorBundle\Form\Extension\ButtonTypeIconExtension
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ButtonType }

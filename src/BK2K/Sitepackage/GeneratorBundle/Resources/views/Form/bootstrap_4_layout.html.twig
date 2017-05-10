@@ -14,10 +14,25 @@
     {{- parent() -}}
 {%- endblock textarea_widget %}
 
-{% block button_widget -%}
+{%- block button_widget -%}
     {% set attr = attr|merge({class: (attr.class|default('btn-default') ~ ' btn')|trim}) %}
-    {{- parent() -}}
-{%- endblock %}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
+        {%- if icon is not empty -%}
+           {{ contentget( "bundles/sitepackagegenerator/images/#{icon}.svg" ) }}
+        {%- endif -%}
+        <span class="btn-text">{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</span>
+    </button>
+{%- endblock button_widget -%}
 
 {% block money_widget -%}
     <div class="input-group">
