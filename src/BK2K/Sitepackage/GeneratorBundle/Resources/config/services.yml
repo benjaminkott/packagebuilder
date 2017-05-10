@@ -1,3 +1,8 @@
 services:
     sitepackage_generator.generator:
         class: BK2K\Sitepackage\GeneratorBundle\Service\Generator\SitepackageGenerator
+
+    sitepackage_generator.twig.extension.contentget:
+        class: BK2K\Sitepackage\GeneratorBundle\Twig\ContentGetExtension
+        tags:
+            - { name: 'twig.extension' }
