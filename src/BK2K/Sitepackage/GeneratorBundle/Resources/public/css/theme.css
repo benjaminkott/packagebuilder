@@ -4431,6 +4431,25 @@ a.bg-danger:focus, a.bg-danger:hover {
   .alert-notice .alert-link {
     color: #080808; }
 
+.btn {
+  position: relative;
+  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1); }
+  .btn:hover, .btn:focus {
+    outline: none;
+    box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.2); }
+  .btn:active {
+    outline: none;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1); }
+  .btn svg {
+    position: absolute;
+    top: 50%;
+    left: auto;
+    height: 1em;
+    width: 1em;
+    transform: translate(0, -50%); }
+    .btn svg + .btn-text {
+      margin-left: 1.25em; }
+
 .content-section {
   padding: 2rem 1rem; }
   @media (min-width: 544px) {
@@ -4554,6 +4573,10 @@ dl {
 @media (min-width: 768px) {
   html {
     font-size: 20px; } }
+
+svg #Outline_Icons * {
+  stroke: currentColor;
+  stroke-width: 1.25; }
 
 .font-weight-lighter {
   font-weight: lighter; }
