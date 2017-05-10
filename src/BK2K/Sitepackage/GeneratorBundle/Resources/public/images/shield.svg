@@ -1,0 +1,23 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+	 height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+<g id="Outline_Icons">
+	<g>
+		<path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M11.508,0.5h-0.017
+			C9,2.998,1.5,5.02,1.5,5.02c0,7.96,0.5,14.96,10,18.48c9.5-3.52,10-10.52,10-18.48C21.5,5.02,14,2.998,11.508,0.5z"/>
+		<path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M11.506,3.5h-0.013
+			C9.652,5.345,4.108,6.84,4.108,6.84c0,5.885,0.37,11.059,7.392,13.66c7.022-2.601,7.392-7.775,7.392-13.66
+			C18.892,6.84,13.348,5.345,11.506,3.5z"/>
+		
+			<line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="4.252" y1="10.848" x2="11.553" y2="3.546"/>
+		
+			<line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="5.18" y1="14.92" x2="14.708" y2="5.391"/>
+		
+			<line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="7.189" y1="17.911" x2="18.391" y2="6.708"/>
+		
+			<line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="10.278" y1="19.821" x2="18.695" y2="11.404"/>
+	</g>
+</g>
+<g id="invisible_shape">
+	<rect fill="none" width="24" height="24"/>
+</g>
+</svg>

@@ -9,7 +9,10 @@
         <p class="lead">
             We have sucessfully generated your sitepackage. You can now review the generated configuration below, or download the the prepared sitepackage.
         </p>
-        <a href="/download/" class="btn btn-secondary-outline btn-lg text-uppercase">Download</a>
+        <a href="/download/" class="btn btn-secondary-outline btn-lg text-uppercase">
+            {{ contentget( 'bundles/sitepackagegenerator/images/download-box.svg' ) }}
+            <span class="btn-text">Download</span>
+        </a>
     </div>
 </div>
 
@@ -50,8 +53,14 @@
             <dd class="col-sm-9">{{ sitepackage.author.homepage }}</dd>
         </dl>
         <p>
-            <a href="/new/" class="btn btn-secondary">Restart</a>
-            <a href="/edit/" class="btn btn-secondary">Edit Configuration</a>
+            <a href="/new/" class="btn btn-secondary">
+                {{ contentget( 'bundles/sitepackagegenerator/images/arrow-left.svg' ) }}
+                <span class="btn-text">Restart</span>
+            </a>
+            <a href="/edit/" class="btn btn-primary">
+                {{ contentget( 'bundles/sitepackagegenerator/images/pencil.svg' ) }}
+                <span class="btn-text">Edit Configuration</span>
+            </a>
         </p>
     </div>
 </div>

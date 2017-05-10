@@ -4446,9 +4446,10 @@ a.bg-danger:focus, a.bg-danger:hover {
     left: auto;
     height: 1em;
     width: 1em;
+    margin-left: -0.15em;
     transform: translate(0, -50%); }
     .btn svg + .btn-text {
-      margin-left: 1.25em; }
+      margin-left: 1.2em; }
 
 .content-section {
   padding: 2rem 1rem; }

@@ -192,7 +192,11 @@ class DefaultController extends Controller
         )->add(
             'save',
             SubmitType::class,
-            ['label' => 'Create Sitepackage', 'attr' => ['class' => 'btn-primary']]
+            [
+                'label' => 'Create Sitepackage',
+                'icon' => 'floppy-disk',
+                'attr' => ['class' => 'btn-primary']
+            ]
         );
     }
 
@@ -209,7 +213,11 @@ class DefaultController extends Controller
         )->add(
             'save',
             SubmitType::class,
-            ['label' => 'Update Sitepackage', 'attr' => ['class' => 'btn-primary']]
+            [
+                'label' => 'Update Sitepackage',
+                'icon' => 'floppy-disk',
+                'attr' => ['class' => 'btn-primary']
+            ]
         );
     }
 }
