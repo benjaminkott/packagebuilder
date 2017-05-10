@@ -51,49 +51,114 @@ class DefaultController extends Controller
      */
     public function newAction(Request $request)
     {
-        $sitePackage = new Package();
-        $form = $this->createSitePackageForm($sitePackage);
+        $session = $request->getSession();
+        $sitepackage = $session->set('sitepackage', null);
+        $sitepackage = new Package();
+        $form = $this->createNewSitePackageForm($sitepackage);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // VendorName
-            $sitePackage->setVendorName(StringUtility::stringToUpperCamelCase($sitePackage->getAuthor()->getCompany()));
-            $sitePackage->setVendorNameAlternative(StringUtility::camelCaseToLowerCaseDashed($sitePackage->getVendorName()));
-            // PackageName
-            $sitePackage->setPackageName(StringUtility::stringToUpperCamelCase($sitePackage->getTitle()));
-            $sitePackage->setPackageNameAlternative(StringUtility::camelCaseToLowerCaseDashed($sitePackage->getPackageName()));
-            // ExtensionKey
-            $sitePackage->setExtensionKey(StringUtility::camelCaseToLowerCaseUnderscored($sitePackage->getPackageName()));
-
-            // Generator
-            $generator = $this->get('sitepackage_generator.generator');
-            $generator->create($sitePackage);
-            $filename = $generator->getFilename();
-            $response = new BinaryFileResponse($generator->getZipPath());
-            $response->trustXSendfileTypeHeader();
-            $response->setContentDisposition(
-                ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-                $filename,
-                StringUtility::toASCII($filename)
-            );
-            $response->deleteFileAfterSend(true);
-            return $response;
-        } else {
-            return $this->render(
-                'SitepackageGeneratorBundle:Default:New.html.twig',
-                [
-                    'form' => $form->createView(),
-                ]
-            );
+            $sitepackage->setVendorName(StringUtility::stringToUpperCamelCase($sitepackage->getAuthor()->getCompany()));
+            $sitepackage->setVendorNameAlternative(StringUtility::camelCaseToLowerCaseDashed($sitepackage->getVendorName()));
+            $sitepackage->setPackageName(StringUtility::stringToUpperCamelCase($sitepackage->getTitle()));
+            $sitepackage->setPackageNameAlternative(StringUtility::camelCaseToLowerCaseDashed($sitepackage->getPackageName()));
+            $sitepackage->setExtensionKey(StringUtility::camelCaseToLowerCaseUnderscored($sitepackage->getPackageName()));
+            $session = $request->getSession();
+            $session->set('sitepackage', $sitepackage);
+            return $this->redirectToRoute('sp_success');
         }
+        return $this->render(
+            'SitepackageGeneratorBundle:Default:New.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @Route("/edit/", name="sp_edit")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editAction(Request $request)
+    {
+        $session = $request->getSession();
+        $sitepackage = $session->get('sitepackage');
+        if ($sitepackage === null) {
+            $this->addFlash(
+                'danger',
+                'Whoops, we could not find the package configuration. Please submit the configuration again.'
+            );
+            return $this->redirectToRoute('sp_new');
+        }
+        $form = $this->createEditSitePackageForm($sitepackage);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $sitepackage->setVendorName(StringUtility::stringToUpperCamelCase($sitepackage->getAuthor()->getCompany()));
+            $sitepackage->setVendorNameAlternative(StringUtility::camelCaseToLowerCaseDashed($sitepackage->getVendorName()));
+            $sitepackage->setPackageName(StringUtility::stringToUpperCamelCase($sitepackage->getTitle()));
+            $sitepackage->setPackageNameAlternative(StringUtility::camelCaseToLowerCaseDashed($sitepackage->getPackageName()));
+            $sitepackage->setExtensionKey(StringUtility::camelCaseToLowerCaseUnderscored($sitepackage->getPackageName()));
+            $session = $request->getSession();
+            $session->set('sitepackage', $sitepackage);
+            return $this->redirectToRoute('sp_success');
+        }
+        return $this->render(
+            'SitepackageGeneratorBundle:Default:Edit.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
     }
 
     /**
      * @Route("/success/", name="sp_success")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function successAction()
+    public function successAction(Request $request)
     {
-        return $this->render('SitepackageGeneratorBundle:Default:Success.html.twig');
+        $session = $request->getSession();
+        $sitepackage = $session->get('sitepackage');
+        if ($sitepackage === null) {
+            $this->addFlash(
+                'danger',
+                'Whoops, we could not find the package configuration. Please submit the configuration again.'
+            );
+            return $this->redirectToRoute('sp_new');
+        }
+        return $this->render(
+            'SitepackageGeneratorBundle:Default:Success.html.twig',
+            [
+                'sitepackage' => $sitepackage
+            ]
+        );
+    }
+
+    /**
+     * @Route("/download/", name="sp_download")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function downloadAction(Request $request)
+    {
+        $session = $request->getSession();
+        $sitepackage = $session->get('sitepackage');
+        if ($sitepackage === null) {
+            $this->addFlash(
+                'danger',
+                'Whoops, we could not find the package configuration. Please submit the configuration again.'
+            );
+            return $this->redirectToRoute('sp_new');
+        }
+        $generator = $this->get('sitepackage_generator.generator');
+        $generator->create($sitepackage);
+        $filename = $generator->getFilename();
+        $response = new BinaryFileResponse($generator->getZipPath());
+        $response->trustXSendfileTypeHeader();
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $filename,
+            StringUtility::toASCII($filename)
+        );
+        $response->deleteFileAfterSend(true);
+        return $response;
     }
 
     /**
@@ -118,23 +183,33 @@ class DefaultController extends Controller
      * @param $sitepackage
      * @return \Symfony\Component\Form\Form
      */
-    protected function createSitePackageForm(Package $sitepackage)
+    protected function createNewSitePackageForm(Package $sitepackage)
     {
         return $this->createForm(
             PackageType::class,
             $sitepackage,
-            [
-                'action' => $this->generateUrl('sp_new')
-            ]
+            ['action' => $this->generateUrl('sp_new')]
         )->add(
             'save',
             SubmitType::class,
-            [
-                'label' => 'Download Sitepackage',
-                'attr' => [
-                    'class' => 'btn-primary'
-                ]
-            ]
+            ['label' => 'Create Sitepackage', 'attr' => ['class' => 'btn-primary']]
+        );
+    }
+
+    /**
+     * @param $sitepackage
+     * @return \Symfony\Component\Form\Form
+     */
+    protected function createEditSitePackageForm(Package $sitepackage)
+    {
+        return $this->createForm(
+            PackageType::class,
+            $sitepackage,
+            ['action' => $this->generateUrl('sp_edit')]
+        )->add(
+            'save',
+            SubmitType::class,
+            ['label' => 'Update Sitepackage', 'attr' => ['class' => 'btn-primary']]
         );
     }
 }

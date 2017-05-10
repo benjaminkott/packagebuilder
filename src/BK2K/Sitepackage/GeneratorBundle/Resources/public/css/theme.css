@@ -399,7 +399,7 @@ output {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   font-family: inherit;
   font-weight: 200;
   line-height: 1.1;
@@ -4482,7 +4482,7 @@ a.bg-danger:focus, a.bg-danger:hover {
   .content-layout-default .btn-secondary-outline {
     color: #212121;
     border-color: #212121; }
-    .content-layout-default .btn-secondary-outline:hover {
+    .content-layout-default .btn-secondary-outline:active, .content-layout-default .btn-secondary-outline:focus, .content-layout-default .btn-secondary-outline:hover {
       color: #fff;
       background-color: #212121;
       border-color: #212121; }
@@ -4496,7 +4496,7 @@ a.bg-danger:focus, a.bg-danger:hover {
   .content-layout-primary .btn-secondary-outline {
     color: #fff;
     border-color: #fff; }
-    .content-layout-primary .btn-secondary-outline:hover {
+    .content-layout-primary .btn-secondary-outline:active, .content-layout-primary .btn-secondary-outline:focus, .content-layout-primary .btn-secondary-outline:hover {
       color: #69bba8;
       background-color: #fff;
       border-color: #fff; }
@@ -4510,7 +4510,7 @@ a.bg-danger:focus, a.bg-danger:hover {
   .content-layout-secondary .btn-secondary-outline {
     color: #fff;
     border-color: #fff; }
-    .content-layout-secondary .btn-secondary-outline:hover {
+    .content-layout-secondary .btn-secondary-outline:active, .content-layout-secondary .btn-secondary-outline:focus, .content-layout-secondary .btn-secondary-outline:hover {
       color: #212121;
       background-color: #fff;
       border-color: #fff; }
@@ -4524,7 +4524,7 @@ a.bg-danger:focus, a.bg-danger:hover {
   .content-layout-dark .btn-secondary-outline {
     color: #fff;
     border-color: #fff; }
-    .content-layout-dark .btn-secondary-outline:hover {
+    .content-layout-dark .btn-secondary-outline:active, .content-layout-dark .btn-secondary-outline:focus, .content-layout-dark .btn-secondary-outline:hover {
       color: #313131;
       background-color: #fff;
       border-color: #fff; }
@@ -4538,13 +4538,18 @@ a.bg-danger:focus, a.bg-danger:hover {
   .content-layout-light .btn-secondary-outline {
     color: #212121;
     border-color: #212121; }
-    .content-layout-light .btn-secondary-outline:hover {
+    .content-layout-light .btn-secondary-outline:active, .content-layout-light .btn-secondary-outline:focus, .content-layout-light .btn-secondary-outline:hover {
       color: #eceeef;
       background-color: #212121;
       border-color: #212121; }
 
 .content-layout-light + .content-layout-light {
   border-top: 1px solid #e0e0e0; }
+
+ol,
+ul,
+dl {
+  margin-bottom: 1.5rem; }
 
 @media (min-width: 768px) {
   html {

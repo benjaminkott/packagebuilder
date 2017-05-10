@@ -41,6 +41,15 @@ class Package
     private $title;
 
     /**
+     * @Assert\Regex(
+     *     pattern = "/^[A-Za-z0-9\x7f-\xff .,:!?&-]+$/",
+     *     message = "Only letters, numbers and spaces are allowed"
+     * )
+     * @var string
+     */
+    private $description;
+
+    /**
      * @var string
      */
     private $packageName;
@@ -118,6 +127,24 @@ class Package
     public function setTitle($title)
     {
         $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return Package
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
         return $this;
     }
 

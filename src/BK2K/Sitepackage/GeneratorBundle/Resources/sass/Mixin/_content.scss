@@ -8,6 +8,8 @@
         .btn-secondary-outline {
             color: $color;
             border-color: $color;
+            &:active,
+            &:focus,
             &:hover {
                 color: $background;
                 background-color: $color;

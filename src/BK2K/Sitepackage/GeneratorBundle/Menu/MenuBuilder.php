@@ -30,6 +30,7 @@ class MenuBuilder implements ContainerAwareInterface
     {
         $menu = $factory->createItem('root');
         $menu->addChild('Home', ['route' => 'homepage']);
+        $menu->addChild('New Sitepackage', ['route' => 'sp_new']);
         return $menu;
     }
 }

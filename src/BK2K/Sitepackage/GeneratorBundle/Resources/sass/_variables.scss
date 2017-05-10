@@ -201,7 +201,7 @@ $display4-weight:             300 !default;
 
 $line-height:                1.5 !default;
 
-$headings-margin-bottom:     ($spacer * 1.5) !default;
+$headings-margin-bottom:     $spacer !default;
 $headings-font-family:       inherit !default;
 $headings-font-weight:       200 !default;
 $headings-line-height:       1.1 !default;
