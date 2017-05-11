@@ -9,31 +9,11 @@ call_user_func(function()
     $extensionKey = '{{ package.extensionKey }}';
 
     /**
-     * Register PageTS
+     * Default PageTS for {{ package.packageName }}
      */
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
         $extensionKey,
-        'Configuration/PageTS/Sitepackage.txt',
-        '{{ package.title }}: All'
-    );
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
-        $extensionKey,
-        'Configuration/PageTS/Mod/WebLayout/BackendLayouts.txt',
-        '{{ package.title }}: Backend Layouts'
-    );
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
-        $extensionKey,
-        'Configuration/PageTS/TCEMAIN.txt',
-        '{{ package.title }}: TCEMAIN'
-    );
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
-        $extensionKey,
-        'Configuration/PageTS/TCEFORM.txt',
-        '{{ package.title }}: TCEFORM'
-    );
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerPageTSConfigFile(
-        $extensionKey,
-        'Configuration/PageTS/RTE.txt',
-        '{{ package.title }}: RTE'
+        'Configuration/PageTS/All.txt',
+        '{{ package.title }}'
     );
 });
