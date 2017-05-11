@@ -11,31 +11,6 @@
 
 
 ##############
-#### MENU ####
-##############
-lib.navigation = HMENU
-lib.navigation {
-    1 = TMENU
-    1 {
-        wrap = <ul>|</ul>
-        expAll = 1
-        NO = 1
-        NO {
-            wrapItemAndSub = <li>|</li>
-        }
-        ACT < .NO
-        ACT {
-            wrapItemAndSub = <li class="active">|</li>
-        }
-        CUR < .ACT
-        CUR {
-            wrapItemAndSub = <li class="current">|</li>
-        }
-    }
-}
-
-
-##############
 #### PAGE ####
 ##############
 page = PAGE
@@ -56,7 +31,6 @@ page {
             default = TEXT
             default.value = Default
         }
-
         templateRootPaths {
             0 = EXT:{{ package.extensionKey }}/Resources/Private/Templates/Page/
             1 = {$page.fluidtemplate.templateRootPath}
@@ -68,6 +42,14 @@ page {
         layoutRootPaths {
             0 = EXT:{{ package.extensionKey }}/Resources/Private/Layouts/Page/
             1 = {$page.fluidtemplate.layoutRootPath}
+        }
+        dataProcessing {
+            10 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+            10 {
+                levels = 2
+                includeSpacer = 1
+                as = mainnavigation
+            }
         }
     }
 
