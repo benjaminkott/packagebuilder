@@ -17,8 +17,6 @@ use BK2K\Sitepackage\GeneratorBundle\Utility\FileUtility;
  */
 class SitepackageGenerator
 {
-    const SKELETON_NAME = 'skeleton';
-
     /**
      * @var string
      */
@@ -36,16 +34,16 @@ class SitepackageGenerator
     {
         $extensionKey = $package->getExtensionKey();
         $this->filename = $extensionKey . '.zip';
-        $source_dir = __DIR__ . '/../../Resources/skeletons/BaseExtension/';
+        $sourceDir = __DIR__ . '/../../Resources/skeletons/BaseExtension/' . $package->getBasePackage() . '/';
         $this->zipPath = tempnam(sys_get_temp_dir(), $this->filename);
-        $fileList = FileUtility::listDirectory($source_dir);
+        $fileList = FileUtility::listDirectory($sourceDir);
 
         $zipFile = new \ZipArchive();
         $opened = $zipFile->open($this->zipPath, \ZipArchive::CREATE);
         if ($opened === true) {
             foreach ($fileList as $file) {
                 if ($file !== $this->zipPath && file_exists($file)) {
-                    $baseFileName = $this->replaceSkeletonNameInPath($file, $source_dir);
+                    $baseFileName = $this->createRelativeFilePath($file, $sourceDir);
                     if (is_dir($file)) {
                         $zipFile->addEmptyDir($baseFileName);
                     } elseif (!$this->isTwigFile($file)) {
@@ -115,20 +113,6 @@ class SitepackageGenerator
     protected function createRelativeFilePath($file, $sourceDir)
     {
         return substr($file, strlen($sourceDir));
-    }
-
-    /**
-     * @param string $file
-     * @param string $sourceDir
-     * @return mixed
-     */
-    protected function replaceSkeletonNameInPath($file, $sourceDir)
-    {
-        return str_replace(
-            self::SKELETON_NAME . '/',
-            '',
-            $this->createRelativeFilePath($file, $sourceDir)
-        );
     }
 
     /**

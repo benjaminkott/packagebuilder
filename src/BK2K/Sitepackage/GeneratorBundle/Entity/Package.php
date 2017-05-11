@@ -18,6 +18,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Package
 {
     /**
+     * @Assert\NotBlank()
+     * @Assert\Choice({
+     *     "fluid_styled_content"
+     * })
+     * @var string
+     */
+    private $basePackage;
+
+    /**
      * @var string
      */
     private $vendorName;
@@ -30,7 +39,7 @@ class Package
     /**
      * @Assert\NotBlank()
      * @Assert\Length(
-     *      min = 3
+     *     min = 3
      * )
      * @Assert\Regex(
      *     pattern = "/^[A-Za-z0-9\x7f-\xff .:&-]+$/",
@@ -75,6 +84,24 @@ class Package
      * @var Author
      */
     private $author;
+
+    /**
+     * @return string
+     */
+    public function getBasePackage()
+    {
+        return $this->basePackage;
+    }
+
+    /**
+     * @param string $basePackage
+     * @return Package
+     */
+    public function setBasePackage($basePackage)
+    {
+        $this->basePackage = $basePackage;
+        return $this;
+    }
 
     /**
      * @return string

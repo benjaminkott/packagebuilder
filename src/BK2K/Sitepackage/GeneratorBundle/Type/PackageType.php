@@ -12,6 +12,7 @@ namespace BK2K\Sitepackage\GeneratorBundle\Type;
 use BK2K\Sitepackage\GeneratorBundle\Entity\Package;
 use BK2K\Sitepackage\GeneratorBundle\Entity\Package\Author;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -32,6 +33,13 @@ class PackageType extends AbstractType
     {
         $builder
             ->setAction($options['action'])
+            ->add('basePackage', ChoiceType::class, [
+                'choices' => [
+                    'Fluid Styled Content' => 'fluid_styled_content'
+                ],
+                'expanded' => true,
+                'data' => 'fluid_styled_content'
+            ])
             ->add('title', TextType::class, [
                 'attr' => [
                     'autocomplete' => 'off',
