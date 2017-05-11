@@ -28,12 +28,16 @@
         <dl class="row">
             <dt class="col-sm-3">Titel</dt>
             <dd class="col-sm-9">{{ sitepackage.title }}</dd>
+            {% if sitepackage.description %}
             <dt class="col-sm-3">Description</dt>
             <dd class="col-sm-9">{{ sitepackage.description }}</dd>
+            {% endif %}
             <dt class="col-sm-3">Extension Key</dt>
             <dd class="col-sm-9">{{ sitepackage.extensionKey }}</dd>
+            {% if sitepackage.repositoryUrl %}
             <dt class="col-sm-3">Repository</dt>
             <dd class="col-sm-9">{{ sitepackage.repositoryUrl }}</dd>
+            {% endif %}
         </dl>
         <h3>PHP</h3>
         <dl class="row">
