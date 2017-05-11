@@ -4,10 +4,15 @@ defined('TYPO3_MODE') || die();
 call_user_func(function()
 {
     /**
+     * Temporary variables
+     */
+    $extensionKey = '{{ package.extensionKey }}';
+
+    /**
      * Default TypoScript for {{ package.packageName }}
      */
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
-        $_EXTKEY,
+        $extensionKey,
         'Configuration/TypoScript',
         '{{ package.title }}'
     );
