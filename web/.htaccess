@@ -20,6 +20,10 @@ DirectoryIndex app.php
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # Force connection to be https
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
     # Determine the RewriteBase automatically and set it as environment variable.
     # If you are using Apache aliases to do mass virtual hosting or installed the
     # project in a subdirectory, the base path will be prepended to allow proper
@@ -52,7 +56,7 @@ DirectoryIndex app.php
     # We only want to let Apache serve files and not directories.
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ - [L]
-    
+
     RewriteCond %{HTTP_HOST} ^packagebuilder\.dev\.local$
     RewriteRule ^ %{ENV:BASE}/app_dev.php [L]
 
