@@ -1,0 +1,22 @@
+{
+  "name": "{{ package.packageNameAlternative }}",
+  "description": "{{ package.description }}",
+  "repository": {
+    "type": "git",
+    "url": "{{ package.repositoryUrl }}"
+  },
+  "homepage": "{{ package.author.homepage }}",
+  "author": "{{ package.author.name }}",
+  "version": "1.0.0",
+  "license": "GPL-2.0+",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-cssmin": "^2.2.0",
+    "grunt-contrib-less": "^1.4.1",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-postcss": "^0.8.0",
+    "grunt-image": "^2.3.1",
+    "autoprefixer": "^7.1.1"
+  }
+}

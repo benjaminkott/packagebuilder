@@ -35,10 +35,11 @@ class PackageType extends AbstractType
             ->setAction($options['action'])
             ->add('basePackage', ChoiceType::class, [
                 'choices' => [
+                    'Bootstrap Package' => 'bootstrap_package',
                     'Fluid Styled Content' => 'fluid_styled_content'
                 ],
                 'expanded' => true,
-                'data' => 'fluid_styled_content'
+                'data' => 'bootstrap_package'
             ])
             ->add('title', TextType::class, [
                 'attr' => [

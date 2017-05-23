@@ -20,6 +20,7 @@ class Package
     /**
      * @Assert\NotBlank()
      * @Assert\Choice({
+     *     "bootstrap_package",
      *     "fluid_styled_content"
      * })
      * @var string

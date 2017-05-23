@@ -1,0 +1,29 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+<f:section name="Main">
+
+    <div class="section section-default">
+        <div class="container">
+            <div class="alert alert-info">
+                <dl>
+                    <dt>Template file</dt>
+                    <dd>
+                        <code>typo3conf/ext/{{ package.extensionKey }}/Resources/Private/Templates/Example.html</code>
+                    </dd>
+                    <dt>Backend Configuration</dt>
+                    <dd>
+                        <code>typo3conf/ext/{{ package.extensionKey }}/Configuration/PageTS/Mod/WebLayout/BackendLayouts/example.txt</code>
+                    </dd>
+                    <dt>TypoScript</dt>
+                    <dd>
+                        <code>page.10.templateName.stdWrap.cObject.pagets__{{ package.extensionKey }}_example = TEXT</code><br>
+                        <code>page.10.templateName.stdWrap.cObject.pagets__{{ package.extensionKey }}_example.value = Example</code>
+                    </dd>
+                </dl>
+            </div>
+            <f:cObject typoscriptObjectPath="lib.dynamicContent" data="{pageUid: '{data.uid}', colPos: '0'}" />
+        </div>
+    </div>
+
+</f:section>
+</html>
