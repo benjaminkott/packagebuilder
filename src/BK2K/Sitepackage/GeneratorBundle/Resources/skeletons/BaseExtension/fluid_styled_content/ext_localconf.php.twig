@@ -5,3 +5,7 @@ defined('TYPO3_MODE') || die();
  * Add default RTE configuration
  */
 $GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']['{{ package.extensionKey }}'] = 'EXT:{{ package.extensionKey }}/Configuration/RTE/Default.yaml';
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+    '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $_EXTKEY . '/Configuration/PageTS/">'
+);
