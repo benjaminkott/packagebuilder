@@ -2,12 +2,22 @@
 node_modules
 bower_components
 
+/.web-server-pid
+/app/config/parameters.yml
+
 # Var
+/var/*
+!/var/cache
 /var/cache/*
+!var/cache/.gitkeep
+!/var/logs
 /var/logs/*
+!var/logs/.gitkeep
+!/var/sessions
 /var/sessions/*
-/var/bootstrap.php.cache
-/var/SymfonyRequirements.php
+!var/sessions/.gitkeep
+
+!var/SymfonyRequirements.php
 
 # Managed by Composer
 /vendor/

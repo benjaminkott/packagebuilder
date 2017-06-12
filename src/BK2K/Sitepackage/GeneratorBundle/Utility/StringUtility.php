@@ -15,10 +15,10 @@ namespace BK2K\Sitepackage\GeneratorBundle\Utility;
 class StringUtility
 {
     /**
-     * @param type $string
+     * @param string $string
      * @return string
      */
-    public function clean($string)
+    public static function clean($string)
     {
         $string = str_replace('.', '', $string);
         $string = str_replace(':', '', $string);
@@ -33,7 +33,7 @@ class StringUtility
      * @param string $string
      * @return string
      */
-    public function toASCII($string)
+    public static function toASCII($string)
     {
         return strtr(utf8_decode($string),
             utf8_decode('ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ'),
