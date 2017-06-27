@@ -24,9 +24,21 @@ class StringUtility
         $string = str_replace(':', '', $string);
         $string = str_replace('-', ' ', $string);
         $string = str_replace('&', '', $string);
+        $string = self::convertUmlauts($string);
         $string = self::toASCII($string);
         $string = trim($string);
         return $string;
+    }
+
+    /**
+     * @param string $string
+     * @return string
+     */
+    public static function convertUmlauts($string)
+    {
+        $search = ['Ä', 'Ö', 'Ü', 'ä', 'ö', 'ü', 'ß'];
+        $replace = ['Ae', 'Oe', 'Ue', 'ae', 'oe', 'ue', 'ss'];
+        return str_replace($search, $replace, $string);
     }
 
     /**
