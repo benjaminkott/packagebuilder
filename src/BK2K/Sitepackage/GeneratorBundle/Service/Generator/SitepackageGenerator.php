@@ -30,7 +30,7 @@ class SitepackageGenerator
     /**
      * @param Package $package
      */
-    public function create(Package $package = null)
+    public function create(Package $package)
     {
         $extensionKey = $package->getExtensionKey();
         $this->filename = $extensionKey . '.zip';
@@ -102,7 +102,7 @@ class SitepackageGenerator
     private function isTwigFile($file)
     {
         $pathinfo = pathinfo($file);
-        return $pathinfo['extension'] == 'twig';
+        return $pathinfo['extension'] === 'twig';
     }
 
     /**
