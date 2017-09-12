@@ -27,7 +27,7 @@ before_install:
     - composer --version
 
 before_script:
-    - composer --no-interaction
+    - composer install --no-interaction --no-progress --optimize-autoloader
 
 script:
     - >
