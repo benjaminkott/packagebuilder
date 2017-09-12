@@ -1,0 +1,36 @@
+
+# .travis.yml
+language: php
+
+branches:
+    only:
+        - master
+
+matrix:
+    fast_finish: true
+    include:
+        - php: 7.0
+
+sudo: false
+
+addons:
+    apt:
+        packages:
+            - parallel
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
+before_install:
+    - composer self-update
+    - composer --version
+
+after_success:
+    if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+        curl -LO https://deployer.org/deployer.phar
+        mv deployer.phar /usr/local/bin/dep
+        chmod +x /usr/local/bin/dep
+        dep self-update
+        dep deploy
+    fi
