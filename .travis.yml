@@ -14,6 +14,8 @@ matrix:
 sudo: false
 
 addons:
+    ssh_known_hosts:
+        - sitepackagebuilder.com
     apt:
         packages:
             - parallel
