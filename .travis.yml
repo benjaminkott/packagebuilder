@@ -42,8 +42,8 @@ script:
 after_success:
     if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
         curl -LO https://deployer.org/deployer.phar;
-        mv deployer.phar /usr/local/bin/dep;
-        chmod +x /usr/local/bin/dep;
+        sudo mv deployer.phar /usr/local/bin/dep;
+        sudo chmod +x /usr/local/bin/dep;
         dep self-update;
         dep deploy;
     fi
