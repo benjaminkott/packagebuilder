@@ -1,5 +1,14 @@
 <?php
+
+/*
+ * This file is part of the bk2k/packagebuilder.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Deployer;
+
 require 'recipe/symfony3.php';
 
 // Configuration
