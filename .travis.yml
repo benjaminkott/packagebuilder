@@ -26,6 +26,16 @@ before_install:
     - composer self-update
     - composer --version
 
+script:
+    - >
+        echo;
+        echo "Running php lint";
+        find . -name \*.php ! -path "./src/*" | parallel --gnu php -d display_errors=stderr -l {} > /dev/null \;
+    - >
+        echo;
+        echo "Running php-cs-fixer";
+        vendor/bin/php-cs-fixer --diff --dry-run -v fix
+
 after_success:
     if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
         curl -LO https://deployer.org/deployer.phar
