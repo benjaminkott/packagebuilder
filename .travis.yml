@@ -46,7 +46,9 @@ after_success:
         eval "$(ssh-agent -s)";
         chmod 600 /tmp/deploy_rsa;
         ssh-add /tmp/deploy_rsa;
-        pwd;
         curl -LO https://deployer.org/deployer.phar;
-        ./deployer.phar deploy;
+        sudo mv deployer.phar /usr/local/bin/dep;
+        sudo chmod +x /usr/local/bin/dep;
+        dep self-update;
+        dep deploy;
     fi
