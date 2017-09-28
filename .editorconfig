@@ -12,6 +12,12 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 charset = utf-8
 
+# Markdown
+[*.md]
+trim_trailing_whitespace = false
+indent_style = space
+indent_size = 4
+
 # package.json
 [{package.json}]
 indent_style = space
