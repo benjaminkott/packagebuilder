@@ -1715,16 +1715,16 @@ fieldset[disabled] a.btn {
   border-color: #ccc; }
   .btn-secondary:hover {
     color: #212121;
-    background-color: #e6e6e6;
+    background-color: #e6e5e5;
     border-color: #adadad; }
   .btn-secondary:focus, .btn-secondary.focus {
     color: #212121;
-    background-color: #e6e6e6;
+    background-color: #e6e5e5;
     border-color: #adadad; }
   .btn-secondary:active, .btn-secondary.active,
   .open > .btn-secondary.dropdown-toggle {
     color: #212121;
-    background-color: #e6e6e6;
+    background-color: #e6e5e5;
     border-color: #adadad;
     background-image: none; }
     .btn-secondary:active:hover, .btn-secondary:active:focus, .btn-secondary:active.focus, .btn-secondary.active:hover, .btn-secondary.active:focus, .btn-secondary.active.focus,
@@ -4427,9 +4427,9 @@ a.bg-danger:focus, a.bg-danger:hover {
   border-color: #e2e2e2;
   color: #212121; }
   .alert-notice hr {
-    border-top-color: #d6d6d6; }
+    border-top-color: #d6d5d5; }
   .alert-notice .alert-link {
-    color: #080808; }
+    color: #080707; }
 
 .btn {
   position: relative;
