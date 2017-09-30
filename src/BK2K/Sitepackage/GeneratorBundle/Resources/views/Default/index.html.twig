@@ -136,10 +136,16 @@
         </p>
         <p>
             {% if author.github %}
-                <a href="https://www.github.com/{{ author.github }}" class="btn btn-outline-primary">GitHub</a>
+                <a href="https://www.github.com/{{ author.github }}" class="btn btn-outline-primary">
+                    {{ contentget( 'bundles/sitepackagegenerator/images/github.svg' ) }}
+                    <span class="btn-text">GitHub</span>
+                </a>
             {% endif %}
             {% if author.twitter %}
-                <a href="https://www.twitter.com/{{ author.twitter }}" class="btn btn-outline-primary">Twitter</a>
+                <a href="https://www.twitter.com/{{ author.twitter }}" class="btn btn-outline-primary">
+                    {{ contentget( 'bundles/sitepackagegenerator/images/twitter.svg' ) }}
+                    <span class="btn-text">Twitter</span>
+                </a>
             {% endif %}
         </p>
     </div>

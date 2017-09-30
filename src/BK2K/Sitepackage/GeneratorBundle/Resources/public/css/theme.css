@@ -5813,6 +5813,10 @@ svg #Outline_Icons * {
   stroke: currentColor;
   stroke-width: 1.25; }
 
+svg #Filled_Icons * {
+  fill: currentColor;
+  stroke-width: 0; }
+
 .font-weight-lighter {
   font-weight: lighter; }
 
