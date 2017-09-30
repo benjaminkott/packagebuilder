@@ -3,8 +3,8 @@
 
 {% block body %}
 
-<div class="content-section content-section-large content-section-centered content-layout-primary">
-    <div class="container text-xs-center">
+<div class="content-section content-section-large content-section-centered bg-primary text-white">
+    <div class="container text-center">
         <h1 class="text-uppercase display-4">
             S/PKG/BLD
         </h1>
@@ -13,7 +13,7 @@
             or start your own template right now.
         </p>
         <p>
-            <a href="/new/" class="btn btn-secondary-outline btn-lg text-uppercase">
+            <a href="/new/" class="btn btn-outline-inverse btn-lg text-uppercase">
                 {{ contentget( 'bundles/sitepackagegenerator/images/box-add.svg' ) }}
                 <span class="btn-text">Create Sitepackage</span>
             </a>
@@ -21,8 +21,8 @@
     </div>
 </div>
 
-<div class="content-section content-section-centered content-layout-default">
-    <div class="container text-xs-center">
+<div class="content-section content-section-centered bg-default">
+    <div class="container text-center">
         <h2 class="text-uppercase">What is a Sitepackage?</h2>
         <p>
             A Sitepackage is a <strong>TYPO3 Extension</strong> that containers all relevant configuration for a Website.
@@ -42,61 +42,61 @@
     </div>
 </div>
 
-<div class="content-section content-section-centered content-layout-default">
-    <div class="container text-xs-center">
+<div class="content-section content-section-centered bg-default">
+    <div class="container text-center">
         <h3>Pros and Cons</h3>
         <div class="table-responsive">
             <table class="table">
                 <thead>
                     <tr>
                         <th></th>
-                        <th class="text-xs-center font-weight-normal">Site&shy;package</th>
-                        <th class="text-xs-center font-weight-normal">Classic</th>
+                        <th class="text-center font-weight-normal">Site&shy;package</th>
+                        <th class="text-center font-weight-normal">Classic</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="text-xs-left">Config files not accessible by editors </td>
+                        <td class="text-left">Config files not accessible by editors </td>
                         <td class="text-success">Yes</td>
                         <td class="text-danger">No</td>
                     </tr>
                     <tr>
-                        <td class="text-xs-left">Config files are protected <span class="text-muted">*</span></td>
+                        <td class="text-left">Config files are protected <span class="text-muted">*</span></td>
                         <td class="text-success">Yes</td>
                         <td class="text-danger">No</td>
                     </tr>
                     <tr>
-                        <td class="text-xs-left">Autoload PageTS</td>
+                        <td class="text-left">Autoload PageTS</td>
                         <td class="text-success">Yes</td>
                         <td class="text-danger">No</td>
                     </tr>
                     <tr>
-                        <td class="text-xs-left">Autoload TypoScript</td>
+                        <td class="text-left">Autoload TypoScript</td>
                         <td class="text-success">Yes</td>
                         <td class="text-danger">No</td>
                     </tr>
                     <tr>
-                        <td class="text-xs-left">Static PageTS Template</td>
+                        <td class="text-left">Static PageTS Template</td>
                         <td class="text-success">Yes</td>
                         <td class="text-danger">No</td>
                     </tr>
                     <tr>
-                        <td class="text-xs-left">Static TypoScript Template</td>
+                        <td class="text-left">Static TypoScript Template</td>
                         <td class="text-success">Yes</td>
                         <td class="text-danger">No</td>
                     </tr>
                     <tr>
-                        <td class="text-xs-left">Dependency Management</td>
+                        <td class="text-left">Dependency Management</td>
                         <td class="text-success">Yes</td>
                         <td class="text-danger">No</td>
                     </tr>
                     <tr>
-                        <td class="text-xs-left">Distribution through TER</td>
+                        <td class="text-left">Distribution through TER</td>
                         <td class="text-success">Yes</td>
                         <td class="text-danger">No</td>
                     </tr>
                     <tr>
-                        <td class="text-xs-left">Clean Version Control possible</td>
+                        <td class="text-left">Clean Version Control possible</td>
                         <td class="text-success">Yes</td>
                         <td class="text-danger">No</td>
                     </tr>
@@ -109,8 +109,8 @@
     </div>
 </div>
 
-<div class="content-section content-section-centered content-layout-light">
-    <div class="container text-xs-center">
+<div class="content-section content-section-centered bg-light">
+    <div class="container text-center">
         <h2>Start your own Sitepackage</h2>
         <p>
             <a href="/new/" class="btn btn-primary">
@@ -121,12 +121,12 @@
     </div>
 </div>
 
-<div class="content-section content-section-centered content-layout-dark">
-    <div class="container text-xs-center">
+<div class="content-section content-section-centered bg-dark text-white">
+    <div class="container text-center">
         <h2>About the Author</h2>
 
         <figure class="figure">
-            <img src="https://www.gravatar.com/avatar/{{ author.hash }}?s=120" class="figure-img img-circle img-fluid center-block" alt="{{ author.name }}" />
+            <img src="https://www.gravatar.com/avatar/{{ author.hash }}?s=120" class="figure-img rounded-circle center-block" alt="{{ author.name }}" />
         </figure>
         <h3>
             {{ author.name }}
@@ -136,10 +136,10 @@
         </p>
         <p>
             {% if author.github %}
-                <a href="https://www.github.com/{{ author.github }}" class="btn btn-primary-outline">GitHub</a>
+                <a href="https://www.github.com/{{ author.github }}" class="btn btn-outline-primary">GitHub</a>
             {% endif %}
             {% if author.twitter %}
-                <a href="https://www.twitter.com/{{ author.twitter }}" class="btn btn-primary-outline">Twitter</a>
+                <a href="https://www.twitter.com/{{ author.twitter }}" class="btn btn-outline-primary">Twitter</a>
             {% endif %}
         </p>
     </div>

@@ -13,20 +13,15 @@
 </head>
 <body>
 
-    <header class="navbar navbar-dark navbar-static-top bg-inverse" role="banner">
-        <div class="clearfix">
-            <button class="navbar-toggler pull-xs-right hidden-sm-up" type="button" data-toggle="collapse" data-target="#bd-main-nav">
-                &#9776;
-            </button>
-            <a class="navbar-brand hidden-sm-up" href="/">
-                S/PKG/BLD
-            </a>
-        </div>
-        <div class="collapse navbar-toggleable-xs" id="bd-main-nav">
+    <header class="navbar navbar-dark bg-darkest navbar-expand-lg" role="banner">
+        <a class="navbar-brand" href="{{ path('homepage') }}">
+            S/PKG/BLD
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
             <nav>
-                <a class="navbar-brand hidden-xs-down" href="/">
-                    S/PKG/BLD
-                </a>
                 {{
                     knp_menu_render(
                         'SitepackageGeneratorBundle:MenuBuilder:mainMenu',
@@ -46,7 +41,7 @@
         <div class="content-section content-section-none">
             <div class="alert-pagegroup">
                 {% for flashMassage in flashMassages %}
-                    <div class="alert alert-{{ key }} alert-dismissible fade in" role="alert">
+                    <div class="alert alert-{{ key }} alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -62,21 +57,27 @@
     </main>
 
     <footer class="footer">
-        <div class="content-section content-section-small content-layout-secondary">
-            <div class="container-fluid  text-xs-center">
-                <p class="m-b-1">
+        <div class="content-section content-section-small bg-darkest text-white">
+            <div class="container-fluid text-center">
+                <p class="mb-1">
                     &copy; Benjamin Kott {{ 'now'|date('Y') }}
                 </p>
-                <nav class="nav nav-inline">
-                    <a class="nav-link" href="/imprint/">Imprint</a>
-                    <a class="nav-link" href="/privacy/">Privacy</a>
+                <nav>
+                    <ul class="nav justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('imprint') }}">Imprint</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('privacy') }}">Privacy</a>
+                        </li>
+                    </ul>
                 </nav>
             </div>
         </div>
     </footer>
 
     <script src="{{ asset('bundles/sitepackagegenerator/javascript/libs/jquery.min.js') }}"></script>
-    <script src="{{ asset('bundles/sitepackagegenerator/javascript/libs/tether.min.js') }}"></script>
+    <script src="{{ asset('bundles/sitepackagegenerator/javascript/libs/popper.min.js') }}"></script>
     <script src="{{ asset('bundles/sitepackagegenerator/javascript/libs/bootstrap.min.js') }}"></script>
 
     {% block javascripts %}{% endblock %}

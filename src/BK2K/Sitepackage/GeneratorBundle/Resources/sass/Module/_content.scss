@@ -53,10 +53,21 @@
 
 
 //
-// Content Variants
+// Color variations
 //
-@each $section, $values in $content-sections {
-    $bg:    map-get($values, bg);
-    $color: map-get($values, color);
-    @include content-variant($section, $bg, $color);
+@each $color, $value in $theme-colors {
+    .bg-#{$color} {
+        .btn-outline-inverse {
+            border-color: inherit;
+            color: inherit;
+            &:hover {
+                border-color: #ffffff;
+                background-color: #ffffff;
+                color: $value;
+            }
+        }
+    }
+    .bg-#{$color} + .bg-#{$color} {
+        border-top: 1px solid darken($value, 10%);
+    }
 }

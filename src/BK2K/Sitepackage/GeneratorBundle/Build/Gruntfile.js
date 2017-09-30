@@ -55,15 +55,15 @@ module.exports = function(grunt) {
                 src: '<%= paths.modules %>jquery/dist/jquery.min.js',
                 dest: '<%= paths.js %>libs/jquery.min.js'
             },
-            tether: {
-                src: '<%= paths.modules %>tether/dist/js/tether.min.js',
-                dest: '<%= paths.js %>libs/tether.min.js'
+            popper: {
+                src: '<%= paths.modules %>popper.js/dist/umd/popper.min.js',
+                dest: '<%= paths.js %>libs/popper.min.js'
             },
             bootstrap: {
                 src: '<%= paths.modules %>bootstrap/dist/js/bootstrap.min.js',
                 dest: '<%= paths.js %>libs/bootstrap.min.js'
             }
-        },
+        }
     });
 
     /**

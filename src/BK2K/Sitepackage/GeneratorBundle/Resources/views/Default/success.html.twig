@@ -3,20 +3,20 @@
 
 {% block body %}
 
-<div class="content-section content-section-centered content-layout-primary">
-    <div class="container text-xs-center">
+<div class="content-section content-section-centered bg-primary text-white">
+    <div class="container text-center">
         <h1>Congratulations!</h1>
         <p class="lead">
             We have sucessfully generated your sitepackage. You can now review the generated configuration below, or download the the prepared sitepackage.
         </p>
-        <a href="/download/" class="btn btn-secondary-outline btn-lg text-uppercase">
+        <a href="/download/" class="btn btn-outline-inverse btn-lg text-uppercase">
             {{ contentget( 'bundles/sitepackagegenerator/images/download-box.svg' ) }}
             <span class="btn-text">Download</span>
         </a>
     </div>
 </div>
 
-<div class="content-section content-section-centered content-layout-light">
+<div class="content-section content-section-centered bg-light">
     <div class="container">
         <h2>Generated Configuration</h2>
         <h3>Base Package</h3>
