@@ -14,12 +14,27 @@ page {
             pagets__{{ package.extensionKey }}_example.value = Example
         }
     }
+
     includeCSSLibs {
         googlewebfont >
     }
+
     includeCSS {
         theme = EXT:{{ package.extensionKey }}/Resources/Public/Css/theme.min.css
     }
+
+    includeJSLibs {
+
+    }
+
+    includeJS {
+
+    }
+
+    includeJSFooterlibs {
+
+    }
+
     includeJSFooter {
         {{ package.extensionKey }}_scripts = EXT:{{ package.extensionKey }}/Resources/Public/JavaScript/Dist/scripts.js
     }
