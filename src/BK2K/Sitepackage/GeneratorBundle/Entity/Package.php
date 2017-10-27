@@ -25,7 +25,7 @@ class Package
      * })
      * @var string
      */
-    private $basePackage;
+    private $basePackage = 'bootstrap_package';
 
     /**
      * @var string

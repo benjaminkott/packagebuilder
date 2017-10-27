@@ -38,8 +38,7 @@ class PackageType extends AbstractType
                     'Bootstrap Package' => 'bootstrap_package',
                     'Fluid Styled Content' => 'fluid_styled_content'
                 ],
-                'expanded' => true,
-                'data' => 'bootstrap_package'
+                'expanded' => true
             ])
             ->add('title', TextType::class, [
                 'attr' => [
