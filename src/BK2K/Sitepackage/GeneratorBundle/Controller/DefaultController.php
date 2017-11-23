@@ -15,6 +15,7 @@ use BK2K\Sitepackage\GeneratorBundle\Utility\StringUtility;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -176,8 +177,8 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param $sitepackage
-     * @return \Symfony\Component\Form\Form
+     * @param Package $sitepackage
+     * @return FormInterface
      */
     protected function createNewSitePackageForm(Package $sitepackage)
     {
@@ -198,7 +199,7 @@ class DefaultController extends Controller
 
     /**
      * @param Package $sitepackage
-     * @return \Symfony\Component\Form\Form
+     * @return FormInterface
      */
     protected function createEditSitePackageForm(Package $sitepackage)
     {
