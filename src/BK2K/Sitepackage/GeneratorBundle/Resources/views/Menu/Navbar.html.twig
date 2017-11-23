@@ -92,6 +92,7 @@
 {% endblock %}
 
 {% block linkElement %}
+    {% import "knp_menu.html.twig" as macros %}
     {%- set classes = item.linkAttribute('class') is not empty ? [item.linkAttribute('class')] : [] %}
     {%- set classes = classes|merge(['nav-link']) %}
     {%- set attributes = item.linkAttributes %}
