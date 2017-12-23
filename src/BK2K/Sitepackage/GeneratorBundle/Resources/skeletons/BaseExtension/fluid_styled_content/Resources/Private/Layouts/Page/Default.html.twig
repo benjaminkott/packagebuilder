@@ -1,14 +1,14 @@
 <nav>
     <ul>
         <f:for each="{mainnavigation}" as="mainnavigationItem">
-            <li class="{f:if(condition: mainnavigationItem.active, then:'active')}">
+            <li{f:if(condition: mainnavigationItem.active, then:' class="active"')}>
                 <a href="{mainnavigationItem.link}" target="{mainnavigationItem.target}" title="{mainnavigationItem.title}">
                     {mainnavigationItem.title}
                 </a>
                 <f:if condition="{mainnavigationItem.children}">
                     <ul>
                         <f:for each="{mainnavigationItem.children}" as="child">
-                            <li class="{f:if(condition: child.active, then:'active')}">
+                            <li{f:if(condition: child.active, then:' class="active')}>
                                 <a href="{child.link}" target="{child.target}" title="{child.title}">
                                     {child.title}
                                 </a>
