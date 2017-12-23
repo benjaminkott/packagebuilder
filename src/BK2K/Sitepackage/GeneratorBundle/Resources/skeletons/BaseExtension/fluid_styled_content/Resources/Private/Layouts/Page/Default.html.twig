@@ -1,21 +1,23 @@
-<ul>
-    <f:for each="{mainnavigation}" as="mainnavigationItem">
-        <li class="{f:if(condition: mainnavigationItem.active, then:'active')}">
-            <a href="{mainnavigationItem.link}" target="{mainnavigationItem.target}" title="{mainnavigationItem.title}">
-                {mainnavigationItem.title}
-            </a>
-            <f:if condition="{mainnavigationItem.children}">
-                <ul>
-                    <f:for each="{mainnavigationItem.children}" as="child">
-                        <li class="{f:if(condition: child.active, then:'active')}">
-                            <a href="{child.link}" target="{child.target}" title="{child.title}">
-                                {child.title}
-                            </a>
-                        </li>
-                    </f:for>
-                </ul>
-            </f:if>
-        </li>
-    </f:for>
-</ul>
+<nav>
+    <ul>
+        <f:for each="{mainnavigation}" as="mainnavigationItem">
+            <li{f:if(condition: mainnavigationItem.active, then:' class="active"')}>
+                <a href="{mainnavigationItem.link}" title="{mainnavigationItem.title}"{f:if(condition: mainnavigationItem.target, then: ' target="{mainnavigationItem.target}"')}>
+                    {mainnavigationItem.title}
+                </a>
+                <f:if condition="{mainnavigationItem.children}">
+                    <ul>
+                        <f:for each="{mainnavigationItem.children}" as="child">
+                            <li{f:if(condition: child.active, then:' class="active')}>
+                                <a href="{child.link}" title="{child.title}"{f:if(condition: child.target, then: ' target="{child.target}"')}>
+                                    {child.title}
+                                </a>
+                            </li>
+                        </f:for>
+                    </ul>
+                </f:if>
+            </li>
+        </f:for>
+    </ul>
+</nav>
 <f:render section="Main" />
