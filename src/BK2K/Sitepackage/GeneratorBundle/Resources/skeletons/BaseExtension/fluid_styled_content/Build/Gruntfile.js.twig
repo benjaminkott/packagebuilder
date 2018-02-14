@@ -15,8 +15,8 @@ module.exports = function(grunt) {
             js: '<%= paths.resources %>Public/JavaScript/'
         },
         banner: '/*!\n' +
-            ' * {{ package.packageName }} v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
-            ' * Copyright 2015-<%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
+            ' * {{ package.title }} v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
+            ' * Copyright 2017-<%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
             ' * Licensed under the <%= pkg.license %> license\n' +
             ' */\n',
         uglify: {

@@ -1,5 +1,5 @@
 {
-  "name": "{{ package.packageNameAlternative }}",
+  "name": "{{ package.vendorNameAlternative }}-{{ package.packageNameAlternative }}",
   "description": "{{ package.description }}",
   "repository": {
     "type": "git",
@@ -8,7 +8,7 @@
   "homepage": "{{ package.author.homepage }}",
   "author": "{{ package.author.name }}",
   "version": "1.0.0",
-  "license": "GPL-2.0+",
+  "license": "GPL-2.0-or-later",
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-contrib-cssmin": "^2.2.0",
