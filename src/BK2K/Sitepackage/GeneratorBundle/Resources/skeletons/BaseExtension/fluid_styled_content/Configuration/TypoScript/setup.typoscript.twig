@@ -20,16 +20,32 @@ page {
 
     10 = FLUIDTEMPLATE
     10 {
+        # Template names will be generated automaticly by converting the applied
+        # backend_layout, there is no explicit mapping nessesary anymore.
+        #
+        # BackendLayout Key
+        # subnavigation_right_2_columns -> SubnavigationRight2Columns.html
+        #
+        # Backend Record
+        # uid: 1 -> 1.html
+        #
+        # Database Entry
+        # value: -1 -> None.html
+        # value: pagets__subnavigation_right_2_columns -> SubnavigationRight2Columns.html
         templateName = TEXT
-        templateName.stdWrap.cObject = CASE
-        templateName.stdWrap.cObject {
-            key.data = pagelayout
-
-            pagets__{{ package.extensionKey }}_default = TEXT
-            pagets__{{ package.extensionKey }}_default.value = Default
-
-            default = TEXT
-            default.value = Default
+        templateName {
+            cObject = TEXT
+            cObject {
+                data = pagelayout
+                required = 1
+                case = uppercamelcase
+                split {
+                    token = pagets__
+                    cObjNum = 1
+                    1.current = 1
+                }
+            }
+            ifEmpty = Default
         }
         templateRootPaths {
             0 = EXT:{{ package.extensionKey }}/Resources/Private/Templates/Page/
