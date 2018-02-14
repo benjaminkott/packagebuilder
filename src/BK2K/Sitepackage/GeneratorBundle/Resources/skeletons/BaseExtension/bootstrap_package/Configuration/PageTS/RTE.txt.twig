@@ -2,43 +2,7 @@
 #### RTE ####
 #############
 RTE {
-    config {
-        tt_content {
-            bodytext {
-                types {
-                    text {
-                        preset = {{ package.extensionKey }}
-                    }
-                    textcolumn {
-                        preset = {{ package.extensionKey }}
-                    }
-                    texticon {
-                        preset = {{ package.extensionKey }}
-                    }
-                    textmedia {
-                        preset = {{ package.extensionKey }}
-                    }
-                    textpic {
-                        preset = {{ package.extensionKey }}
-                    }
-                    textteaser {
-                        preset = {{ package.extensionKey }}
-                    }
-                    panel {
-                        preset = {{ package.extensionKey }}
-                    }
-                }
-            }
-        }
-        tx_bootstrappackage_accordion_item {
-            bodytext {
-                preset = {{ package.extensionKey }}
-            }
-        }
-        tx_bootstrappackage_tab_item {
-            bodytext {
-                preset = {{ package.extensionKey }}
-            }
-        }
+    default {
+        preset = {{ package.extensionKey }}
     }
 }
