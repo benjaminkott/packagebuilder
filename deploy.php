@@ -18,7 +18,7 @@ set('ssh_type', 'native');
 set('http_user', getenv('DEPLOYER_USER'));
 
 // Shared files/dirs between deploys
-add('shared_files', []);
+add('shared_files', ['.env']);
 add('shared_dirs', []);
 
 // Writable dirs by web server

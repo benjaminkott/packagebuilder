@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %} - TYPO3 Sitepackage Builder</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,700,200italic,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/theme.css" />
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+
+    <header class="navbar navbar-dark bg-darkest navbar-expand-lg" role="banner">
+        <a class="navbar-brand" href="{{ path('default_index') }}">
+            S/PKG/BLD
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <nav>
+                {{
+                    knp_menu_render(
+                        'mainnavigation',
+                        {
+                            'currentClass': 'active',
+                            'listClass': 'nav navbar-nav',
+                            'listItemClass': 'nav-item',
+                            'template':'menu/navbar.html.twig'
+                        }
+                    )
+                }}
+            </nav>
+        </div>
+    </header>
+
+    {% for key, flashMassages in app.session.flashBag.all %}
+        <div class="content-section content-section-none">
+            <div class="alert-pagegroup">
+                {% for flashMassage in flashMassages %}
+                    <div class="alert alert-{{ key }} alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ flashMassage }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+
+    <main class="main">
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="content-section content-section-small bg-darkest text-white">
+            <div class="container-fluid text-center">
+                <p class="mb-1">
+                    &copy; Benjamin Kott {{ 'now'|date('Y') }}
+                </p>
+                <nav>
+                    <ul class="nav justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('default_imprint') }}">Imprint</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('default_privacy') }}">Privacy</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/javascript/libs/jquery.min.js"></script>
+    <script src="/javascript/libs/popper.min.js"></script>
+    <script src="/javascript/libs/bootstrap.min.js"></script>
+
+    {% block javascripts %}{% endblock %}
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-77390203-1', 'auto');
+        ga('set', 'anonymizeIp', true);
+        ga('send', 'pageview');
+    </script>
+
+</body>
+</html>

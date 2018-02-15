@@ -1,33 +1,14 @@
-# Node Modules and Bower Components
-node_modules
-bower_components
-
-/.web-server-pid
-/app/config/parameters.yml
-/bin/symfony_requirements
-
-# Var
-/var/*
-!/var/cache
-/var/cache/*
-!var/cache/.gitkeep
-!/var/logs
-/var/logs/*
-!var/logs/.gitkeep
-!/var/sessions
-/var/sessions/*
-!var/sessions/.gitkeep
-
-!var/SymfonyRequirements.php
-
-# Managed by Composer
-/vendor/
-
-# Web
-/web/bundles/*
-/web/config.php
-/nbproject/*
+/.vscode/
+/build/
+/node_modules/
 /deployer.phar
-
-.idea/
-.vscode/
+###> symfony/framework-bundle ###
+.env
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+###> friendsofphp/php-cs-fixer ###
+.php_cs
+.php_cs.cache
+###< friendsofphp/php-cs-fixer ###
