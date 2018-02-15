@@ -9,7 +9,7 @@
 
 namespace Deployer;
 
-require 'recipe/symfony3.php';
+require 'recipe/common.php';
 
 // Configuration
 set('application', getenv('DEPLOYER_APPLICATION'));
@@ -32,12 +32,19 @@ host(getenv('DEPLOYER_HOST'))
     ->set('deploy_path', '~/sites/{{application}}');
 
 // Tasks
-task('build', function () {
-    run('cd {{release_path}} && build');
-});
-task('deploy:writable', function () {
-    // Not supported on target host
-});
+task('deploy', [
+    'deploy:info',
+    'deploy:prepare',
+    'deploy:lock',
+    'deploy:release',
+    'deploy:update_code',
+    'deploy:shared',
+    'deploy:vendors',
+    'deploy:symlink',
+    'deploy:unlock',
+    'cleanup',
+])->desc('Deploy your project');
+after('deploy', 'success');
 
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
