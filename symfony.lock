@@ -11,6 +11,18 @@
             "ref": "cb4152ebcadbe620ea2261da1a1c5a9b8cea7672"
         }
     },
+    "doctrine/cache": {
+        "version": "v1.7.1"
+    },
+    "doctrine/collections": {
+        "version": "v1.5.0"
+    },
+    "doctrine/common": {
+        "version": "v2.8.1"
+    },
+    "doctrine/inflector": {
+        "version": "v1.3.0"
+    },
     "doctrine/lexer": {
         "version": "v1.0.1"
     },
@@ -49,6 +61,15 @@
     },
     "psr/simple-cache": {
         "version": "1.0.0"
+    },
+    "sensio/framework-extra-bundle": {
+        "version": "4.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.0",
+            "ref": "aaddfdf43cdecd4cf91f992052d76c2cadc04543"
+        }
     },
     "symfony/asset": {
         "version": "v4.0.4"
@@ -135,7 +156,7 @@
         "version": "v1.7.0"
     },
     "symfony/process": {
-        "version": "v3.4.4"
+        "version": "v4.0.4"
     },
     "symfony/profiler-pack": {
         "version": "v1.0.3"
@@ -153,7 +174,7 @@
         }
     },
     "symfony/stopwatch": {
-        "version": "v3.4.4"
+        "version": "v4.0.4"
     },
     "symfony/translation": {
         "version": "3.3",
