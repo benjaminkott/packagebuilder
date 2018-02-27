@@ -2,6 +2,7 @@
 /build/
 /node_modules/
 /deployer.phar
+/package-lock.json
 ###> symfony/framework-bundle ###
 .env
 /public/bundles/
