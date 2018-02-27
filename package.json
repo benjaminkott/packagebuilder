@@ -11,14 +11,14 @@
   "version": "1.0.0",
   "license": "MIT",
   "devDependencies": {
-    "bootstrap": "^4.0.0-beta",
-    "grunt": "^1.0.1",
+    "bootstrap": "^4.0.0",
+    "grunt": "^1.0.2",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-cssmin": "^2.2.1",
-    "grunt-contrib-uglify": "^3.1.0",
+    "grunt-contrib-uglify": "^3.3.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-sass": "^2.0.0",
-    "jquery": "^3.2.1",
-    "popper.js": "^1.12.5"
+    "grunt-sass": "^2.1.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.12.9"
   }
 }
