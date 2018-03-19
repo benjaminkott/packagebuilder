@@ -10,5 +10,10 @@
         "typo3/cms-core": "^8.7.0 || ^9.0",
         "typo3/cms-rte-ckeditor": "^8.7.0 || ^9.0",
         "bk2k/bootstrap-package": "^9.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "{{ package.vendorName }}\\{{ package.packageName }}\\": "Classes/"
+        }
     }
 }
