@@ -38,7 +38,9 @@ class Package
     private $vendorNameAlternative;
 
     /**
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(
+     *     message="Please enter a title for your site package"
+     * )
      * @Assert\Length(
      *     min = 3
      * )

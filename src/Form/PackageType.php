@@ -7,14 +7,11 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace App\Type;
+namespace App\Form;
 
 use App\Entity\Package;
-use App\Entity\Package\Author;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -60,33 +57,7 @@ class PackageType extends AbstractType
                     'placeholder' => 'https://github.com/username/my_sitepackage'
                 ]
             ])
-            ->add(
-                $builder->create('author', FormType::class, ['data_class' => Author::class])
-                    ->add('name', TextType::class, [
-                        'attr' => [
-                            'autocomplete' => 'off',
-                            'placeholder' => 'John Doe'
-                        ]
-                    ])
-                    ->add('email', EmailType::class, [
-                        'attr' => [
-                            'autocomplete' => 'off',
-                            'placeholder' => 'john.doe@example.com'
-                        ]
-                    ])
-                    ->add('company', TextType::class, [
-                        'attr' => [
-                            'autocomplete' => 'off',
-                            'placeholder' => 'Company Inc.'
-                        ]
-                    ])
-                    ->add('homepage', TextType::class, [
-                        'attr' => [
-                            'autocomplete' => 'off',
-                            'placeholder' => 'https://www.example.com'
-                        ]
-                    ])
-            );
+            ->add('author', AuthorType::class);
     }
 
     /**
@@ -96,8 +67,6 @@ class PackageType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Package::class,
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token'
         ]);
     }
 
