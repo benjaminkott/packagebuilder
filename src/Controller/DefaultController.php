@@ -10,8 +10,8 @@
 namespace App\Controller;
 
 use App\Entity\Package;
-use App\Service\SitepackageGenerator;
 use App\Form\PackageType;
+use App\Service\SitepackageGenerator;
 use App\Utility\StringUtility;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
