@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Author
 {
     /**
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Please enter the authors' name.")
      * @Assert\Length(
      *     min = 3
      * )
@@ -26,7 +26,7 @@ class Author
     private $name;
 
     /**
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Please enter the authors' email address.")
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
      * )
@@ -35,7 +35,7 @@ class Author
     private $email;
 
     /**
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Please enter the authors' company.")
      * @Assert\Length(
      *     min = 3
      * )
@@ -48,7 +48,7 @@ class Author
     private $company;
 
     /**
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Please enter the authors' homepage URL.")
      * @Assert\Url()
      * @var string
      */
