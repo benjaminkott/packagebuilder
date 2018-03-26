@@ -7,7 +7,7 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace App\Type;
+namespace App\Form;
 
 use App\Entity\Package;
 use App\Entity\Package\Author;
@@ -96,8 +96,6 @@ class PackageType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Package::class,
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token'
         ]);
     }
 
