@@ -3,24 +3,23 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
         "knplabs/knp-menu-bundle": "^2.2",
         "sensio/framework-extra-bundle": "^5.1",
-        "symfony/asset": "^4.0",
-        "symfony/console": "^4.0",
-        "symfony/dotenv": "^4.0",
-        "symfony/flex": "^1.0",
-        "symfony/form": "^4.0",
-        "symfony/framework-bundle": "^4.0",
-        "symfony/lts": "^4@dev",
-        "symfony/security-csrf": "^4.0",
-        "symfony/twig-bundle": "^4.0",
-        "symfony/validator": "^4.0",
-        "symfony/web-server-bundle": "^4.0",
-        "symfony/yaml": "^4.0"
+        "symfony/asset": "^4.1",
+        "symfony/console": "^4.1",
+        "symfony/dotenv": "^4.1",
+        "symfony/flex": "^1.1",
+        "symfony/form": "^4.1",
+        "symfony/framework-bundle": "^4.1",
+        "symfony/security-csrf": "^4.1",
+        "symfony/twig-bundle": "^4.1",
+        "symfony/validator": "^4.1",
+        "symfony/web-server-bundle": "^4.1",
+        "symfony/yaml": "^4.1"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.2",
+        "friendsofphp/php-cs-fixer": "^2.13",
         "symfony/profiler-pack": "^1.0"
     },
     "autoload": {
@@ -42,7 +41,7 @@
     },
     "config": {
         "platform": {
-            "php": "7.1.13"
+            "php": "7.2"
         },
         "preferred-install": {
             "*": "dist"
