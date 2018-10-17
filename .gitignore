@@ -1,3 +1,4 @@
+/.ddev/docker-compose.yaml
 /.vscode/
 /build/
 /node_modules/
