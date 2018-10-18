@@ -45,12 +45,22 @@ indent_size = 4
 indent_style = space
 indent_size = 4
 
-# YML-Files
-[*.yml]
+# ReST-Files
+[*.rst]
+indent_style = space
+indent_size = 3
+
+# TypoScript
+[*.typoscript]
 indent_style = space
 indent_size = 4
 
-# package.json or .travis.yml
-[{package.json,.travis.yml}]
+# YML-Files
+[{*.yml,*.yaml}]
+indent_style = space
+indent_size = 4
+
+# package.json, composer.json or .travis.yml
+[{package.json,composer.json,.travis.yml}]
 indent_style = space
 indent_size = 2

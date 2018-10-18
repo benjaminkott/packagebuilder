@@ -8,8 +8,6 @@ module.exports = function(grunt) {
         paths: {
             root: '../',
             resources: '<%= paths.root %>Resources/',
-            less: '<%= paths.resources %>Public/Less/',
-            css: '<%= paths.resources %>Public/Css/',
             fonts: '<%= paths.resources %>Public/Fonts/',
             img: '<%= paths.resources %>Public/Images/',
             js: '<%= paths.resources %>Public/JavaScript/'
@@ -34,40 +32,7 @@ module.exports = function(grunt) {
                 }
             }
         },
-        less: {
-            theme: {
-                src: '<%= paths.less %>theme.less',
-                dest: '<%= paths.css %>theme.css'
-            }
-        },
-        postcss: {
-            options: {
-                map: false,
-                processors: [
-                    require('autoprefixer')({
-                        browsers: [
-                            'Last 2 versions',
-                            'Firefox ESR',
-                            'IE 9'
-                        ]
-                    })
-                ]
-            },
-            theme: {
-                src: '<%= paths.css %>theme.css'
-            }
-        },
-        cssmin: {
-            options: {
-                keepSpecialComments: '*',
-                advanced: false
-            },
-            theme: {
-                src: '<%= paths.css %>theme.css',
-                dest: '<%= paths.css %>theme.min.css'
-            }
-        },
-        image: {
+        imagemin: {
             extension: {
                 files: [{
                     expand: true,
@@ -83,10 +48,6 @@ module.exports = function(grunt) {
             options: {
                 livereload: true
             },
-            less: {
-                files: '<%= paths.less %>**/*.less',
-                tasks: ['css']
-            },
             javascript: {
                 files: '<%= paths.js %>Src/**/*.js',
                 tasks: ['js']
@@ -98,18 +59,14 @@ module.exports = function(grunt) {
      * Register tasks
      */
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-postcss');
-    grunt.loadNpmTasks('grunt-image');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
 
     /**
      * Grunt update task
      */
-    grunt.registerTask('css', ['less', 'postcss', 'cssmin']);
     grunt.registerTask('js', ['uglify']);
-    grunt.registerTask('build', ['js', 'css', 'image']);
+    grunt.registerTask('build', ['js', 'imagemin']);
     grunt.registerTask('default', ['build']);
 
 };
