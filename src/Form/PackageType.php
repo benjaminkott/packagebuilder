@@ -30,7 +30,16 @@ class PackageType extends AbstractType
     {
         $builder
             ->setAction($options['action'])
+            ->add('typo3Version', ChoiceType::class, [
+                'label' => 'TYPO3 Version',
+                'choices' => [
+                    '9.5' => 9005000,
+                    '8.7' => 8007000
+                ],
+                'expanded' => true
+            ])
             ->add('basePackage', ChoiceType::class, [
+                'label' => 'Base Package',
                 'choices' => [
                     'Bootstrap Package' => 'bootstrap_package',
                     'Fluid Styled Content' => 'fluid_styled_content'
@@ -51,6 +60,7 @@ class PackageType extends AbstractType
                 ]
             ])
             ->add('repositoryUrl', TextType::class, [
+                'label' => 'Repository URL',
                 'required' => false,
                 'attr' => [
                     'autocomplete' => 'off',

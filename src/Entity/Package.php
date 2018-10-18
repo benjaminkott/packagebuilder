@@ -20,6 +20,16 @@ class Package
     /**
      * @Assert\NotBlank()
      * @Assert\Choice({
+     *     9005000,
+     *     8007000
+     * })
+     * @var int
+     */
+    private $typo3Version = 9005000;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Choice({
      *     "bootstrap_package",
      *     "fluid_styled_content"
      * })
@@ -87,6 +97,24 @@ class Package
      * @var Author
      */
     private $author;
+
+    /**
+     * @return int
+     */
+    public function getTypo3Version()
+    {
+        return $this->typo3Version;
+    }
+
+    /**
+     * @param int $typo3Version
+     * @return Package
+     */
+    public function setTypo3Version($typo3Version)
+    {
+        $this->typo3Version = $typo3Version;
+        return $this;
+    }
 
     /**
      * @return string
