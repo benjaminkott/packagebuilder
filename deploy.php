@@ -15,7 +15,8 @@ require 'recipe/common.php';
 set('application', getenv('DEPLOYER_APPLICATION'));
 set('repository', 'https://github.com/benjaminkott/packagebuilder.git');
 set('ssh_type', 'native');
-set('http_user', getenv('DEPLOYER_USER'));
+set('keep_releases', '3');
+set('allow_anonymous_stats', false);
 
 // Shared files/dirs between deploys
 add('shared_files', ['.env']);
@@ -29,7 +30,8 @@ host(getenv('DEPLOYER_HOST'))
     ->user(getenv('DEPLOYER_USER'))
     ->port('22')
     ->set('bin/php', getenv('DEPLOYER_PHP'))
-    ->set('deploy_path', '~/sites/{{application}}');
+    ->set('bin/composer', getenv('DEPLOYER_COMPOSER'))
+    ->set('deploy_path', '~/html/application/{{application}}');
 
 // Tasks
 task('deploy', [

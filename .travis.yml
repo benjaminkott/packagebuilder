@@ -14,7 +14,7 @@ sudo: false
 
 addons:
     ssh_known_hosts:
-        - sitepackagebuilder.com
+        - 185.215.157.217
     apt:
         packages:
             - parallel
