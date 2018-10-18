@@ -7,9 +7,9 @@
     "keywords": ["TYPO3 CMS"],
     "version": "1.0.0",
     "require": {
-        "typo3/cms-core": "^8.7 || ^9.0",
-        "typo3/cms-rte-ckeditor": "^8.7 || ^9.0",
-        "typo3/cms-fluid-styled-content": "^8.7 || ^9.0"
+        "typo3/cms-core": "{% if package.typo3version < 9005000 %}^8.7{% else %}^9.5{% endif %}",
+        "typo3/cms-rte-ckeditor": "{% if package.typo3version < 9005000 %}^8.7{% else %}^9.5{% endif %}",
+        "typo3/cms-fluid-styled-content": "{% if package.typo3version < 9005000 %}^8.7{% else %}^9.5{% endif %}"
     },
     "autoload": {
         "psr-4": {
