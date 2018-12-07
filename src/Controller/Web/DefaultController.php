@@ -7,7 +7,7 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace App\Controller;
+namespace App\Controller\Web;
 
 use App\Entity\Package;
 use App\Form\PackageType;

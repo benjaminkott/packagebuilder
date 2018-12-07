@@ -2,6 +2,7 @@ framework:
     secret: '%env(APP_SECRET)%'
     default_locale: en
     csrf_protection: true
+    templating: { engines: ['twig'] }
     #http_method_override: true
 
     # Enables session support. Note that the session will ONLY be started if you read or write from it.

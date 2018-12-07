@@ -1,4 +1,5 @@
 /.ddev/docker-compose.yaml
+/.ddev/.gitignore
 /.vscode/
 /build/
 /node_modules/
