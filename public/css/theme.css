@@ -6566,6 +6566,65 @@ ul,
 dl {
   margin-bottom: 1.5rem; }
 
+.markdown > table,
+.markdown > pre,
+.markdown > pre[class*="language-"] {
+  margin-bottom: 1.5em; }
+  .markdown > table:last-child,
+  .markdown > pre:last-child,
+  .markdown > pre[class*="language-"]:last-child {
+    margin-bottom: 0; }
+
+.markdown table {
+  display: block;
+  width: 100%;
+  overflow: auto; }
+  .markdown table th {
+    font-weight: 600; }
+  .markdown table th,
+  .markdown table td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5; }
+  .markdown table tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1; }
+    .markdown table tr:nth-child(2n) {
+      background-color: #f6f8fa; }
+  .markdown table img {
+    background-color: transparent; }
+
+.markdown pre,
+.markdown pre[class*="language-"] {
+  margin: 1.5em 0; }
+
+.markdown blockquote {
+  border-left: 0.5em solid #e2e2e2;
+  background-color: #f2f2f2;
+  padding: 1rem; }
+  .markdown blockquote *:first-child {
+    margin-top: 0; }
+  .markdown blockquote *:last-child {
+    margin-bottom: 0; }
+
+.toc ul {
+  padding: 0;
+  margin: 0;
+  list-style: none; }
+
+.toc ul ul {
+  font-weight: 300; }
+
+.toc > ul > li + li {
+  margin-top: 0.5em; }
+
+.toc a {
+  color: #212121;
+  display: block; }
+  .toc a:focus, .toc a:active, .toc a:hover {
+    text-decoration: none; }
+  .toc a.toc-link-active {
+    color: #69bba8; }
+
 @media (min-width: 768px) {
   html {
     font-size: 20px; } }

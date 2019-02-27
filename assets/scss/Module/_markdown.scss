@@ -1,0 +1,51 @@
+//
+// Markdown
+//
+.markdown {
+    > table,
+    > pre,
+    > pre[class*="language-"] {
+        margin-bottom: 1.5em;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    table {
+        display: block;
+        width: 100%;
+        overflow: auto;
+        th {
+            font-weight: 600
+        }
+        th,
+        td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+        tr {
+            background-color: #fff;
+            border-top: 1px solid #c6cbd1;
+            &:nth-child(2n) {
+                background-color: #f6f8fa;
+            }
+        }
+        img {
+            background-color: transparent;
+        }
+    }
+    pre,
+    pre[class*="language-"] {
+        margin: 1.5em 0;
+    }
+    blockquote {
+        border-left: 0.5em solid #e2e2e2;
+        background-color: #f2f2f2;
+        padding: $spacer;
+        *:first-child {
+            margin-top: 0;
+        }
+        *:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

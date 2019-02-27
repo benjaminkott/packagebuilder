@@ -54,6 +54,7 @@ class MenuBuilder
         $menu = $this->factory->createItem('root');
         $menu->addChild('Home', ['route' => 'default_index']);
         $menu->addChild('New Sitepackage', ['route' => 'default_new']);
+        $menu->addChild('Documentation', ['route' => 'documentation_index']);
         return $menu;
     }
 }

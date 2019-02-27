@@ -1,0 +1,28 @@
+//
+// Table of Contents
+//
+.toc {
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    ul ul {
+        font-weight: 300;
+    }
+    > ul > li + li {
+        margin-top: 0.5em;
+    }
+    a {
+        color: #212121;
+        display: block;
+        &:focus,
+        &:active,
+        &:hover {
+            text-decoration: none;
+        }
+        &.toc-link-active {
+            color: $link-color;
+        }
+    }
+}

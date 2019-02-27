@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block title %}Documentation{% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('bundles/sitepackagegenerator/css/prism.css') }}" />{% endblock %}
+{% block javascripts %}<script src="{{ asset('bundles/sitepackagegenerator/javascript/libs/prism.js') }}"></script>{% endblock %}
+
+{% block body %}
+<div class="content-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-push-2">
+                <div class="markdown">
+                    {% autoescape false %}
+                        {{html}}
+                    {% endautoescape %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="toc">
+            {{ _self.menu(tree, pathname) }}
+        </div>
+    </div>
+</div>
+<div class="content-section content-section-small content-section-centered bg-light">
+    <div class="container text-center">
+        <h3>Found a mistake?</h3>
+        <p>Help us to provide more accurate information. A small contribution
+            with a useful addition, a helpful note or a correction will help
+            others to more productive.</p>
+        <a href="https://github.com/benjaminkott/packagebuilder/edit/master/docs/{{ file.filename }}" target="_blank" class="btn btn-primary">
+            {{ contentget( 'bundles/sitepackagegenerator/images/github.svg' ) }}
+            <span class="btn-text">Edit on GitHub</span>
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% macro menu(tree, pathname, currentPath) -%}
+<ul>
+    {% for item in tree %}
+        {% if item.menu %}
+        <li>
+            {% set itemPath = ((currentPath) ? [currentPath, item.segment]|join('/') : item.segment) %}
+            {% set active = ((itemPath == pathname) ? ' toc-link-active' : '') %}
+            <a href="{{ url('documentation_index', {'pathname': itemPath }) }}" class="toc-link{{ active }}">
+                {{ item.name }}
+            </a>
+            {% if item.children %}
+            {{ _self.menu(item.children, pathname, itemPath) }}
+            {% endif %}
+        </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+{%- endmacro %}

@@ -30,6 +30,10 @@ services:
         tags:
           - { name: 'knp_menu.menu_builder', method: 'main', alias: 'mainnavigation' }
 
+    App\Service\DocumentationGenerator:
+        class: App\Service\DocumentationGenerator
+        arguments: ['%kernel.root_dir%/../']
+
     App\Form\Extension\ButtonTypeIconExtension:
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ButtonType }

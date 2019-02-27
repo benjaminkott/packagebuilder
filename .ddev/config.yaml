@@ -6,7 +6,7 @@ php_version: "7.2"
 webserver_type: apache-fpm
 router_http_port: "80"
 router_https_port: "443"
-xdebug_enabled: false
+xdebug_enabled: true
 additional_hostnames: []
 additional_fqdns: []
 provider: default
@@ -15,7 +15,7 @@ hooks:
   - exec: composer install -d /var/www/html
 
 
-# This config.yaml was created with ddev version v1.4.0 
+# This config.yaml was created with ddev version v1.4.0
 # webimage: drud/ddev-webserver:v1.4.0
 # dbimage: drud/ddev-dbserver:v1.4.0
 # dbaimage: drud/phpmyadmin:v1.4.0
@@ -67,9 +67,9 @@ hooks:
 # working_dir:
 #   web: /var/www/html
 #   db: /home
-# would set the default working directory for the web and db services. 
-# These values specify the destination directory for ddev ssh and the 
-# directory in which commands passed into ddev exec are run. 
+# would set the default working directory for the web and db services.
+# These values specify the destination directory for ddev ssh and the
+# directory in which commands passed into ddev exec are run.
 
 # omit_containers: ["dba", "ddev-ssh-agent"]
 # would omit the dba (phpMyAdmin) and ddev-ssh-agent containers. Currently

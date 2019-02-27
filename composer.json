@@ -4,6 +4,7 @@
     "type": "project",
     "require": {
         "php": "^7.2.0",
+        "cebe/markdown": "^1.2",
         "friendsofsymfony/rest-bundle": "^2.4",
         "knplabs/knp-menu-bundle": "^2.2",
         "sensio/framework-extra-bundle": "^5.2",
