@@ -1,3 +1,5 @@
+const sass = require('node-sass');
+
 module.exports = function(grunt) {
 
     /**
@@ -8,7 +10,7 @@ module.exports = function(grunt) {
         paths: {
             root: '../',
             resources: '<%= paths.root %>Resources/',
-            less: '<%= paths.resources %>Public/Less/',
+            sass: '<%= paths.resources %>Public/Scss/',
             css: '<%= paths.resources %>Public/Css/',
             fonts: '<%= paths.resources %>Public/Fonts/',
             img: '<%= paths.resources %>Public/Images/',
@@ -34,10 +36,17 @@ module.exports = function(grunt) {
                 }
             }
         },
-        less: {
+        sass: {
+            options: {
+                implementation: sass,
+                outputStyle: 'expanded',
+                precision: 8,
+                sourceMap: false
+            },
             layout: {
-                src: '<%= paths.less %>layout.less',
-                dest: '<%= paths.css %>layout.css'
+                files: {
+                    '<%= paths.css %>layout.css': '<%= paths.sass %>layout.scss'
+                }
             }
         },
         postcss: {
@@ -67,13 +76,13 @@ module.exports = function(grunt) {
                 dest: '<%= paths.css %>layout.min.css'
             }
         },
-        image: {
+        imagemin: {
             extension: {
                 files: [{
                     expand: true,
                     cwd: '<%= paths.resources %>',
                     src: [
-                        '**/*.{png,jpg,gif,svg}'
+                        '**/*.{png,jpg,gif}'
                     ],
                     dest: '<%= paths.resources %>'
                 }]
@@ -83,8 +92,8 @@ module.exports = function(grunt) {
             options: {
                 livereload: true
             },
-            less: {
-                files: '<%= paths.less %>**/*.less',
+            sass: {
+                files: '<%= paths.sass %>**/*.scss',
                 tasks: ['css']
             },
             javascript: {
@@ -96,20 +105,20 @@ module.exports = function(grunt) {
 
     /**
      * Register tasks
-     */
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-less');
+    //  */
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-postcss');
-    grunt.loadNpmTasks('grunt-image');
+    grunt.loadNpmTasks('grunt-sass');
 
     /**
      * Grunt update task
      */
-    grunt.registerTask('css', ['less', 'postcss', 'cssmin']);
+    grunt.registerTask('css', ['sass', 'postcss', 'cssmin']);
     grunt.registerTask('js', ['uglify']);
-    grunt.registerTask('build', ['js', 'css', 'image']);
+    grunt.registerTask('build', ['js', 'css', 'imagemin']);
     grunt.registerTask('default', ['build']);
 
 };
