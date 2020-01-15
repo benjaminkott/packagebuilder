@@ -10,12 +10,14 @@
 namespace App\Entity;
 
 use App\Entity\Package\Author;
+use JMS\Serializer\Annotation as Serializer;
+use Swagger\Annotations as SWG;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Package
  */
-class Package
+class Package implements \JsonSerializable
 {
     /**
      * @Assert\NotBlank()
@@ -23,6 +25,9 @@ class Package
      *     9005000,
      *     8007000
      * })
+     *
+     * @SWG\Property(type="int", example="9005000")
+     * @Serializer\Type("int")
      * @var int
      */
     private $typo3Version = 9005000;
@@ -33,6 +38,9 @@ class Package
      *     "bootstrap_package",
      *     "fluid_styled_content"
      * })
+     *
+     * @SWG\Property(type="string", example="bootstrap_package")
+     * @Serializer\Type("string")
      * @var string
      */
     private $basePackage = 'bootstrap_package';
@@ -58,6 +66,9 @@ class Package
      *     pattern = "/^[A-Za-z0-9\x7f-\xff .:&-]+$/",
      *     message = "Only letters, numbers and spaces are allowed"
      * )
+     *
+     * @SWG\Property(type="string", example="My Sitepackage")
+     * @Serializer\Type("string")
      * @var string
      */
     private $title;
@@ -67,6 +78,9 @@ class Package
      *     pattern = "/^[A-Za-z0-9\x7f-\xff .,:!?&-]+$/",
      *     message = "Only letters, numbers and spaces are allowed"
      * )
+     *
+     * @SWG\Property(type="string", example="Project Configuration for Client")
+     * @Serializer\Type("string")
      * @var string
      */
     private $description;
@@ -88,12 +102,17 @@ class Package
 
     /**
      * @Assert\Url()
+     * @SWG\Property(type="string", example="https://github.com/benjaminkott/packagebuilder")
+     *
+     * @Serializer\Type("string")
      * @var string
      */
     private $repositoryUrl = '';
 
     /**
      * @Assert\Valid
+     *
+     * @Serializer\Type(Author::class)
      * @var Author
      */
     private $author;
@@ -294,5 +313,25 @@ class Package
     {
         $this->author = $author;
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'typo3Version' => $this->getTypo3Version(),
+            'basePackage' => $this->getBasePackage(),
+            'vendorName' => $this->getVendorName(),
+            'vendorNameAlternative' => $this->getVendorNameAlternative(),
+            'title' => $this->getTitle(),
+            'description' => $this->getDescription(),
+            'packageName' => $this->getPackageName(),
+            'packageNameAlternative' => $this->getPackageNameAlternative(),
+            'extensionKey' => $this->getExtensionKey(),
+            'repositoryUrl' => $this->getRepositoryUrl(),
+            'author' => $this->getAuthor(),
+        ];
     }
 }

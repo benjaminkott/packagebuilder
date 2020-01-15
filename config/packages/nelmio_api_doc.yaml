@@ -1,0 +1,9 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Sitepackage Builder
+            description: Sitepackage Builder is your kickstarter for modern TYPO3 Theme development.
+            version: 1.0.0
+    areas:
+        path_patterns:
+            - ^/api/v1/(?!/doc$) # Accepts routes under /api except /api/doc

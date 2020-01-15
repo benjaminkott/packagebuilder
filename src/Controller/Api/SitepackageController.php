@@ -10,77 +10,66 @@
 namespace App\Controller\Api;
 
 use App\Entity\Package;
-use App\Entity\Package\Author;
 use App\Service\SitepackageGenerator;
 use App\Utility\StringUtility;
-use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\Controller\FOSRestController;
+use JMS\Serializer\SerializerInterface;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Swagger\Annotations as SWG;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Routing\Annotation\Route;
+
 use Symfony\Component\Validator\Validation;
 
 /**
- * @Rest\RouteResource("sitepackage", pluralize=false)
- * @Rest\NamePrefix("api_")
+ * @Route("/api/v1/sitepackage", defaults={"_format"="json"})
  */
-class SitepackageController extends FOSRestController
+class SitepackageController extends AbstractController
 {
+    /**
+     * @var \JMS\Serializer\Serializer
+     */
+    protected $serializer;
+
     /**
      * @var SitepackageGenerator
      */
     protected $sitepackageGenerator;
 
     public function __construct(
+        SerializerInterface $serializer,
         SitepackageGenerator $sitepackageGenerator
     ) {
+        $this->serializer = $serializer;
         $this->sitepackageGenerator = $sitepackageGenerator;
     }
 
-    public function postAction(Request $request): Response
+    /**
+     * @Route("/", methods={"POST"})
+     * @SWG\Parameter(
+     *     name="sitepackage",
+     *     in="body",
+     *     @Model(type=\App\Entity\Package::class),
+     * )
+     * @SWG\Response(
+     *     response=200,
+     *     description="Successfully generated.",
+     *     @SWG\Schema(type="file"),
+     * )
+     * @SWG\Response(
+     *     response=400,
+     *     description="Request malformed."
+     * )
+     * @SWG\Tag(name="sitepackage")
+     */
+    public function createSitepackage(Request $request): Response
     {
-        $data = json_decode(
-            $request->getContent(),
-            true
-        );
-
-        $sitepackage = new Package();
-        if (isset($data['typo3Version'])) {
-            $sitepackage->setTypo3Version($data['typo3Version']);
-        }
-        if (isset($data['title'])) {
-            $sitepackage->setTitle($data['title']);
-        }
-        if (isset($data['description'])) {
-            $sitepackage->setDescription($data['title']);
-        }
-        if (isset($data['repositoryUrl'])) {
-            $sitepackage->setRepositoryUrl($data['repositoryUrl']);
-        }
-        $author = new Author();
-        if (isset($data['author']['name'])) {
-            $author->setName($data['author']['name']);
-        }
-        if (isset($data['author']['email'])) {
-            $author->setEmail($data['author']['email']);
-        }
-        if (isset($data['author']['company'])) {
-            $author->setCompany($data['author']['company']);
-        }
-        if (isset($data['author']['homepage'])) {
-            $author->setHomepage($data['author']['homepage']);
-        }
-        $sitepackage->setAuthor($author);
-
-        $validator = Validation::createValidatorBuilder()
-            ->enableAnnotationMapping()
-            ->getValidator();
-        $violations = $validator->validate($sitepackage);
-
-        if ($violations->count() != 0) {
-            $view = $this->view($violations, Response::HTTP_BAD_REQUEST);
-            return $this->handleView($view);
-        }
+        $content = $request->getContent();
+        $sitepackage = $this->serializer->deserialize($content, Package::class, 'json');
+        $this->validateObject($sitepackage);
 
         $sitepackage->setVendorName(StringUtility::stringToUpperCamelCase($sitepackage->getAuthor()->getCompany()));
         $sitepackage->setVendorNameAlternative(StringUtility::camelCaseToLowerCaseDashed($sitepackage->getVendorName()));
@@ -95,5 +84,20 @@ class SitepackageController extends FOSRestController
         return $this
             ->file($this->sitepackageGenerator->getZipPath(), StringUtility::toASCII($filename))
             ->deleteFileAfterSend(true);
+    }
+
+    /**
+     * @param $object
+     */
+    protected function validateObject($object): void
+    {
+        $validator = Validation::createValidatorBuilder()
+            ->enableAnnotationMapping()
+            ->getValidator();
+        $errors = $validator->validate($object);
+        if (\count($errors) > 0) {
+            $errorsString = (string)$errors;
+            throw new BadRequestHttpException($errorsString);
+        }
     }
 }

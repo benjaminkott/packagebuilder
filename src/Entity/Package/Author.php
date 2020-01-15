@@ -9,18 +9,22 @@
 
 namespace App\Entity\Package;
 
+use JMS\Serializer\Annotation as Serializer;
+use Swagger\Annotations as SWG;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Author
  */
-class Author
+class Author implements \JsonSerializable
 {
     /**
      * @Assert\NotBlank(message="Please enter the authors' name.")
      * @Assert\Length(
      *     min = 3
      * )
+     * @SWG\Property(type="string", example="Benjamin Kott")
+     * @Serializer\Type("string")
      * @var string
      */
     private $name;
@@ -30,6 +34,8 @@ class Author
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
      * )
+     * @SWG\Property(type="string", example="contact@sitepackagebuilder.com")
+     * @Serializer\Type("string")
      * @var string
      */
     private $email;
@@ -43,6 +49,8 @@ class Author
      *     pattern = "/^[A-Za-z0-9\x7f-\xff .:&-]+$/",
      *     message = "Only letters, numbers and spaces are allowed"
      * )
+     * @SWG\Property(type="string", example="BK2K")
+     * @Serializer\Type("string")
      * @var string
      */
     private $company;
@@ -50,6 +58,8 @@ class Author
     /**
      * @Assert\NotBlank(message="Please enter the authors' homepage URL.")
      * @Assert\Url()
+     * @SWG\Property(type="string", example="https://www.sitepackagebuilder.com")
+     * @Serializer\Type("string")
      * @var string
      */
     private $homepage;
@@ -124,5 +134,18 @@ class Author
     {
         $this->homepage = $homepage;
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'name' => $this->getName(),
+            'email' => $this->getEmail(),
+            'company' => $this->getCompany(),
+            'homepage' => $this->getHomepage(),
+        ];
     }
 }

@@ -1,8 +1,3 @@
 controllers:
-    resource: ../../src/Controller/Web/
+    resource: ../../src/Controller/
     type: annotation
-
-api:
-    resource: ../../src/Controller/Api/
-    type: rest
-    prefix: /api/
