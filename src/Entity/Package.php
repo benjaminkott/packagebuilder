@@ -20,6 +20,7 @@ class Package
     /**
      * @Assert\NotBlank()
      * @Assert\Choice({
+     *     10002000,
      *     9005000,
      *     8007000
      * })
