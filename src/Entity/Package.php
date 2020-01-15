@@ -22,7 +22,7 @@ class Package implements \JsonSerializable
     /**
      * @Assert\NotBlank()
      * @Assert\Choice({
-     *     10002000,
+     *     10004000,
      *     9005000,
      *     8007000
      * })
