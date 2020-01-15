@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,700,200italic,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/css/theme.css" />
+    <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
@@ -75,10 +75,9 @@
         </div>
     </footer>
 
-    <script src="/javascript/libs/jquery.min.js"></script>
-    <script src="/javascript/libs/popper.min.js"></script>
-    <script src="/javascript/libs/bootstrap.min.js"></script>
-
+    <script src="{{ asset('javascript/libs/jquery.min.js') }}"></script>
+    <script src="{{ asset('javascript/libs/popper.min.js') }}"></script>
+    <script src="{{ asset('javascript/libs/bootstrap.min.js') }}"></script>
     {% block javascripts %}{% endblock %}
 
     <script>
