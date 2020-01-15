@@ -5,11 +5,8 @@
     "homepage": "{{ package.author.homepage }}",
     "license": ["GPL-2.0-or-later"],
     "keywords": ["TYPO3 CMS"],
-    "version": "1.0.0",
     "require": {
-        "typo3/cms-core": "^8.7 || ^9.5",
-        "typo3/cms-rte-ckeditor": "^8.7 || ^9.5",
-        "bk2k/bootstrap-package": "^10.0"
+        "bk2k/bootstrap-package": "{% if package.typo3version < 9000000 %}^10.0{% elseif package.typo3version < 10000000 %}^10.0 || ^11.0{% else %}^11.0{% endif %}"
     },
     "autoload": {
         "psr-4": {
