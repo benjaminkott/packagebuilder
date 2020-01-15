@@ -4,25 +4,26 @@
     "type": "project",
     "require": {
         "php": "^7.2.0",
-        "friendsofsymfony/rest-bundle": "^2.4",
-        "knplabs/knp-menu-bundle": "^2.2",
-        "sensio/framework-extra-bundle": "^5.2",
-        "symfony/asset": "^4.1",
-        "symfony/console": "^4.1",
-        "symfony/dotenv": "^4.1",
-        "symfony/expression-language": "^4.1",
-        "symfony/flex": "^1.1",
-        "symfony/form": "^4.1",
-        "symfony/framework-bundle": "^4.1",
-        "symfony/security-csrf": "^4.1",
-        "symfony/serializer": "^4.1",
-        "symfony/twig-bundle": "^4.1",
-        "symfony/validator": "^4.1",
-        "symfony/web-server-bundle": "^4.1",
-        "symfony/yaml": "^4.1"
+        "friendsofsymfony/rest-bundle": "^2.6",
+        "knplabs/knp-menu-bundle": "^3.0",
+        "sensio/framework-extra-bundle": "^5.5",
+        "symfony/asset": "^4.4",
+        "symfony/console": "^4.4",
+        "symfony/dotenv": "^4.4",
+        "symfony/expression-language": "^4.4",
+        "symfony/flex": "^1.6",
+        "symfony/form": "^4.4",
+        "symfony/framework-bundle": "^4.4",
+        "symfony/security-csrf": "^4.4",
+        "symfony/serializer": "^4.4",
+        "symfony/templating": "^4.4",
+        "symfony/twig-bundle": "^4.4",
+        "symfony/validator": "^4.4",
+        "symfony/web-server-bundle": "^4.4",
+        "symfony/yaml": "^4.4"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.13",
+        "friendsofphp/php-cs-fixer": "^2.16",
         "symfony/profiler-pack": "^1.0"
     },
     "autoload": {
@@ -40,12 +41,12 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "cgl": [
+            "php-cs-fixer --diff -v fix"
         ]
     },
     "config": {
-        "platform": {
-            "php": "7.2.0"
-        },
         "preferred-install": {
             "*": "dist"
         },

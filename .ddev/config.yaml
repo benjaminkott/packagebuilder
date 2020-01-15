@@ -12,6 +12,7 @@ additional_fqdns: []
 nfs_mount_enabled: false
 provider: default
 omit_containers: [db, dba]
+webimage_extra_packages: [php-xml, php-yaml]
 use_dns_when_possible: true
 timezone: Europe/Berlin
 
