@@ -33,6 +33,7 @@ class PackageType extends AbstractType
             ->add('typo3Version', ChoiceType::class, [
                 'label' => 'TYPO3 Version',
                 'choices' => [
+                    '10.2' => 10002000,
                     '9.5' => 9005000,
                     '8.7' => 8007000
                 ],
