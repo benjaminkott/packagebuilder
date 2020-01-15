@@ -5,7 +5,6 @@
     "homepage": "{{ package.author.homepage }}",
     "license": ["GPL-2.0-or-later"],
     "keywords": ["TYPO3 CMS"],
-    "version": "1.0.0",
     "require": {
         "typo3/cms-core": "{% if package.typo3version < 9000000 %}^8.7{% elseif package.typo3version < 10000000 %}^9.5{% else %}^10.2{% endif %}",
         "typo3/cms-rte-ckeditor": "{% if package.typo3version < 9000000 %}^8.7{% elseif package.typo3version < 10000000 %}^9.5{% else %}^10.2{% endif %}",
