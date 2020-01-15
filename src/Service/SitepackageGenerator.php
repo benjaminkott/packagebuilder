@@ -11,6 +11,8 @@ namespace App\Service;
 
 use App\Entity\Package;
 use App\Utility\FileUtility;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 
 /**
  * SitepackageGenerator
@@ -84,7 +86,7 @@ class SitepackageGenerator
     {
         $content = file_get_contents($file);
         $fileUniqueId = uniqid('file');
-        $twig = new \Twig_Environment(new \Twig_Loader_Array([$fileUniqueId => $content]));
+        $twig = new Environment(new ArrayLoader([$fileUniqueId => $content]));
         $rendered = $twig->render(
             $fileUniqueId,
             [

@@ -9,13 +9,13 @@
 
 namespace App\Twig;
 
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * ContentExtension.
  **/
-class ContentGetExtension extends Twig_Extension
+class ContentGetExtension extends AbstractExtension
 {
     /**
      * @return array
@@ -23,7 +23,7 @@ class ContentGetExtension extends Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_SimpleFunction('contentget', [$this, 'fileGetContents'], ['is_safe' => ['html']]),
+            new TwigFunction('contentget', [$this, 'fileGetContents'], ['is_safe' => ['html']]),
         ];
     }
 
