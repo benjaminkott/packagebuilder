@@ -10,6 +10,7 @@
 namespace App\Entity;
 
 use App\Entity\Package\Author;
+use App\Utility\StringUtility;
 use JMS\Serializer\Annotation as Serializer;
 use Swagger\Annotations as SWG;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -19,6 +20,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Package implements \JsonSerializable
 {
+    /**
+     * @var bool
+     */
+    private $extended = false;
+
     /**
      * @Assert\NotBlank()
      * @Assert\Choice({
@@ -47,14 +53,34 @@ class Package implements \JsonSerializable
     private $basePackage = 'bootstrap_package';
 
     /**
+     * @Assert\Length(
+     *     allowEmptyString = true,
+     *     min = 3
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^[A-Z][A-Za-z0-9]+$/",
+     *     message = "Only letters, numbers and spaces are allowed"
+     * )
+     * @SWG\Property(type="string", example="BK2K", default="generated from author->company if empty")
+     * @Serializer\Type("string")
      * @var string
      */
-    private $vendorName;
+    private $vendorName = '';
 
     /**
+     * @Assert\Length(
+     *     allowEmptyString = true,
+     *     min = 3
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^[a-z][a-z0-9-]+$/",
+     *     message = "Only letters, numbers and hyphens are allowed"
+     * )
+     * @SWG\Property(type="string", example="bk2k", default="generated from vendor name if empty")
+     * @Serializer\Type("string")
      * @var string
      */
-    private $vendorNameAlternative;
+    private $vendorNameAlternative = '';
 
     /**
      * @Assert\NotBlank(
@@ -87,19 +113,49 @@ class Package implements \JsonSerializable
     private $description;
 
     /**
+     * @Assert\Length(
+     *     allowEmptyString = true,
+     *     min = 3
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^[A-Z][A-Za-z0-9]+$/",
+     *     message = "Only letters and numbers are allowed"
+     * )
+     * @SWG\Property(type="string", example="MySitepackage", default="generated from title if empty")
+     * @Serializer\Type("string")
      * @var string
      */
-    private $packageName;
+    private $packageName = '';
 
     /**
+     * @Assert\Length(
+     *     allowEmptyString = true,
+     *     min = 3
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^[a-z][a-z0-9-]+$/",
+     *     message = "Only lower case letters, numbers and hyphens are allowed"
+     * )
+     * @SWG\Property(type="string", example="my-sitepackage", default="generated from package name if empty")
+     * @Serializer\Type("string")
      * @var string
      */
-    private $packageNameAlternative;
+    private $packageNameAlternative = '';
 
     /**
+     * @Assert\Length(
+     *     allowEmptyString = true,
+     *     min = 3
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^[a-z][a-z0-9_]+$/",
+     *     message = "Only lower case letters, numbers and undscores are allowed"
+     * )
+     * @SWG\Property(type="string", example="my_sitepackage", default="generated from package name if empty")
+     * @Serializer\Type("string")
      * @var string
      */
-    private $extensionKey;
+    private $extensionKey = '';
 
     /**
      * @Assert\Url()
@@ -112,11 +168,28 @@ class Package implements \JsonSerializable
 
     /**
      * @Assert\Valid
-     *
      * @Serializer\Type(Author::class)
      * @var Author
      */
     private $author;
+
+    /**
+     * @return bool
+     */
+    public function getExtended()
+    {
+        return $this->extended;
+    }
+
+    /**
+     * @param bool $extended
+     * @return Package
+     */
+    public function setExtended($extended)
+    {
+        $this->extended = $extended;
+        return $this;
+    }
 
     /**
      * @return int
@@ -159,6 +232,10 @@ class Package implements \JsonSerializable
      */
     public function getVendorName()
     {
+        if (empty($this->vendorName)) {
+            return StringUtility::stringToUpperCamelCase($this->getAuthor()->getCompany());
+        }
+
         return $this->vendorName;
     }
 
@@ -168,7 +245,10 @@ class Package implements \JsonSerializable
      */
     public function setVendorName($vendorName)
     {
-        $this->vendorName = $vendorName;
+        if ($this->getVendorName() !== $vendorName) {
+            $this->vendorName = StringUtility::stringToUpperCamelCase($vendorName);
+        }
+
         return $this;
     }
 
@@ -177,6 +257,10 @@ class Package implements \JsonSerializable
      */
     public function getVendorNameAlternative()
     {
+        if (empty($this->vendorNameAlternative)) {
+            return StringUtility::camelCaseToLowerCaseDashed($this->getVendorName());
+        }
+
         return $this->vendorNameAlternative;
     }
 
@@ -186,7 +270,9 @@ class Package implements \JsonSerializable
      */
     public function setVendorNameAlternative($vendorNameAlternative)
     {
-        $this->vendorNameAlternative = $vendorNameAlternative;
+        if ($this->getVendorNameAlternative() !== $vendorNameAlternative) {
+            $this->vendorNameAlternative = StringUtility::camelCaseToLowerCaseDashed($vendorNameAlternative);
+        }
         return $this;
     }
 
@@ -231,6 +317,10 @@ class Package implements \JsonSerializable
      */
     public function getPackageName()
     {
+        if (empty($this->packageName)) {
+            return StringUtility::stringToUpperCamelCase($this->getTitle());
+        }
+
         return $this->packageName;
     }
 
@@ -240,7 +330,10 @@ class Package implements \JsonSerializable
      */
     public function setPackageName($packageName)
     {
-        $this->packageName = $packageName;
+        if ($this->getPackageName() !== $packageName) {
+            $this->packageName = StringUtility::stringToUpperCamelCase($packageName);
+        }
+
         return $this;
     }
 
@@ -249,6 +342,10 @@ class Package implements \JsonSerializable
      */
     public function getPackageNameAlternative()
     {
+        if (empty($this->packageNameAlternative)) {
+            return StringUtility::camelCaseToLowerCaseDashed($this->getPackageName());
+        }
+
         return $this->packageNameAlternative;
     }
 
@@ -258,7 +355,10 @@ class Package implements \JsonSerializable
      */
     public function setPackageNameAlternative($packageNameAlternative)
     {
-        $this->packageNameAlternative = $packageNameAlternative;
+        if ($this->getPackageNameAlternative() !== $packageNameAlternative) {
+            $this->packageNameAlternative = StringUtility::camelCaseToLowerCaseDashed($packageNameAlternative);
+        }
+
         return $this;
     }
 
@@ -267,6 +367,10 @@ class Package implements \JsonSerializable
      */
     public function getExtensionKey()
     {
+        if (empty($this->extensionKey)) {
+            return StringUtility::camelCaseToLowerCaseUnderscored($this->getPackageName());
+        }
+
         return $this->extensionKey;
     }
 
@@ -276,7 +380,10 @@ class Package implements \JsonSerializable
      */
     public function setExtensionKey($extensionKey)
     {
-        $this->extensionKey = $extensionKey;
+        if ($this->getExtensionKey() !== $extensionKey) {
+            $this->extensionKey = StringUtility::camelCaseToLowerCaseUnderscored($extensionKey);
+        }
+
         return $this;
     }
 

@@ -70,13 +70,6 @@ class SitepackageController extends AbstractController
         $content = $request->getContent();
         $sitepackage = $this->serializer->deserialize($content, Package::class, 'json');
         $this->validateObject($sitepackage);
-
-        $sitepackage->setVendorName(StringUtility::stringToUpperCamelCase($sitepackage->getAuthor()->getCompany()));
-        $sitepackage->setVendorNameAlternative(StringUtility::camelCaseToLowerCaseDashed($sitepackage->getVendorName()));
-        $sitepackage->setPackageName(StringUtility::stringToUpperCamelCase($sitepackage->getTitle()));
-        $sitepackage->setPackageNameAlternative(StringUtility::camelCaseToLowerCaseDashed($sitepackage->getPackageName()));
-        $sitepackage->setExtensionKey(StringUtility::camelCaseToLowerCaseUnderscored($sitepackage->getPackageName()));
-
         $this->sitepackageGenerator->create($sitepackage);
         $filename = $this->sitepackageGenerator->getFilename();
         BinaryFileResponse::trustXSendfileTypeHeader();
