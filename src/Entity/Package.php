@@ -31,7 +31,7 @@ class Package implements \JsonSerializable
      * @Serializer\Type("int")
      * @var int
      */
-    private $typo3Version = 9005000;
+    private $typo3Version = 10004000;
 
     /**
      * @Assert\NotBlank()
