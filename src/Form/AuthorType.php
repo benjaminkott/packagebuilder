@@ -23,25 +23,25 @@ class AuthorType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'attr' => [
-                    'autocomplete' => 'off',
+                    'autocomplete' => 'on',
                     'placeholder' => 'John Doe',
                 ],
             ])
             ->add('email', EmailType::class, [
                 'attr' => [
-                    'autocomplete' => 'off',
+                    'autocomplete' => 'on',
                     'placeholder' => 'john.doe@example.com',
                 ],
             ])
             ->add('company', TextType::class, [
                 'attr' => [
-                    'autocomplete' => 'off',
+                    'autocomplete' => 'on',
                     'placeholder' => 'Company Inc.',
                 ],
             ])
             ->add('homepage', TextType::class, [
                 'attr' => [
-                    'autocomplete' => 'off',
+                    'autocomplete' => 'on',
                     'placeholder' => 'https://www.example.com',
                 ],
             ]);

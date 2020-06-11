@@ -62,6 +62,7 @@ class StringUtility
     {
         $string = self::clean($string);
         $string = preg_replace('/[^a-z0-9]+/i', ' ', $string);
+        $string = preg_replace('/[A-Z]+/', ' $0', $string);
         $string = trim($string);
         $string = strtolower($string);
         $string = ucwords($string);

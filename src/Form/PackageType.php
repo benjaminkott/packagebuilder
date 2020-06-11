@@ -12,6 +12,7 @@ namespace App\Form;
 use App\Entity\Package;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,6 +29,8 @@ class PackageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $extended = $options['data']->getExtended();
+
         $builder
             ->setAction($options['action'])
             ->add('typo3Version', ChoiceType::class, [
@@ -67,8 +70,66 @@ class PackageType extends AbstractType
                     'autocomplete' => 'off',
                     'placeholder' => 'https://github.com/username/my_sitepackage'
                 ]
-            ])
-            ->add('author', AuthorType::class);
+            ]);
+
+        if ($extended) {
+            $builder
+                ->add('vendorName', TextType::class, [
+                    'label' => 'PHP Vendor Name',
+                    'required' => false,
+                    'attr' => [
+                        'autocomplete' => 'on',
+                        'placeholder' => 'BK2K',
+                    ],
+                ])
+                ->add('packageName', TextType::class, [
+                    'label' => 'PHP Package Name',
+                    'required' => false,
+                    'attr' => [
+                        'autocomplete' => 'off',
+                        'placeholder' => 'my_sitepackage',
+                    ],
+                ])
+                ->add('vendorNameAlternative', TextType::class, [
+                    'label' => 'Composer Vendor Name',
+                    'required' => false,
+                    'attr' => [
+                        'autocomplete' => 'on',
+                        'placeholder' => 'BK2K',
+                    ],
+                ])
+                ->add('packageNameAlternative', TextType::class, [
+                    'label' => 'Composer Package Name',
+                    'required' => false,
+                    'attr' => [
+                        'autocomplete' => 'off',
+                        'placeholder' => 'my_sitepackage',
+                    ],
+                ])
+                ->add('extensionKey', TextType::class, [
+                    'label' => 'Extension Key',
+                    'required' => false,
+                    'attr' => [
+                        'autocomplete' => 'off',
+                        'placeholder' => 'my_sitepackage',
+                    ],
+                ]);
+        }
+
+        if (!$extended) {
+            $builder->add(
+                'extended',
+                SubmitType::class,
+                [
+                    'label' => 'Extended Configuration',
+                    'icon' => 'pencil',
+                    'attr' => ['class' => 'btn-secondary'],
+                    'validate' => false
+                ]
+            );
+        }
+
+        $builder->add('author', AuthorType::class);
     }
 
     /**

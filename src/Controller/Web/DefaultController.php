@@ -53,19 +53,23 @@ class DefaultController extends Controller
     {
         $session = $request->getSession();
         $session->set('sitepackage', null);
+
         $sitepackage = new Package();
         $form = $this->createNewSitePackageForm($sitepackage);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $sitepackage->setVendorName(StringUtility::stringToUpperCamelCase($sitepackage->getAuthor()->getCompany()));
-            $sitepackage->setVendorNameAlternative(StringUtility::camelCaseToLowerCaseDashed($sitepackage->getVendorName()));
-            $sitepackage->setPackageName(StringUtility::stringToUpperCamelCase($sitepackage->getTitle()));
-            $sitepackage->setPackageNameAlternative(StringUtility::camelCaseToLowerCaseDashed($sitepackage->getPackageName()));
-            $sitepackage->setExtensionKey(StringUtility::camelCaseToLowerCaseUnderscored($sitepackage->getPackageName()));
-            $session = $request->getSession();
-            $session->set('sitepackage', $sitepackage);
 
-            return $this->redirectToRoute('default_success');
+        if ($form->isSubmitted()) {
+            if ($form->get('extended')->isClicked()) {
+                $sitepackage->setExtended(true);
+            }
+
+            if ($sitepackage->getExtended()) {
+                $session->set('sitepackage', $sitepackage);
+                return $this->redirectToRoute('default_edit');
+            } elseif ($form->isValid()) {
+                $session->set('sitepackage', $sitepackage);
+                return $this->redirectToRoute('default_success');
+            }
         }
 
         return $this->render(
@@ -83,6 +87,7 @@ class DefaultController extends Controller
     {
         $session = $request->getSession();
         $sitepackage = $session->get('sitepackage');
+
         if ($sitepackage === null) {
             $this->addFlash(
                 'danger',
@@ -90,16 +95,11 @@ class DefaultController extends Controller
             );
             return $this->redirectToRoute('default_new');
         }
+
         $form = $this->createEditSitePackageForm($sitepackage);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $sitepackage->setVendorName(StringUtility::stringToUpperCamelCase($sitepackage->getAuthor()->getCompany()));
-            $sitepackage->setVendorNameAlternative(StringUtility::camelCaseToLowerCaseDashed($sitepackage->getVendorName()));
-            $sitepackage->setPackageName(StringUtility::stringToUpperCamelCase($sitepackage->getTitle()));
-            $sitepackage->setPackageNameAlternative(StringUtility::camelCaseToLowerCaseDashed($sitepackage->getPackageName()));
-            $sitepackage->setExtensionKey(StringUtility::camelCaseToLowerCaseUnderscored($sitepackage->getPackageName()));
-            $session = $request->getSession();
-            $session->set('sitepackage', $sitepackage);
             return $this->redirectToRoute('default_success');
         }
 
