@@ -53,13 +53,7 @@ module.exports = function(grunt) {
             options: {
                 map: false,
                 processors: [
-                    require('autoprefixer')({
-                        browsers: [
-                            'Last 2 versions',
-                            'Firefox ESR',
-                            'IE 9'
-                        ]
-                    })
+                    require('autoprefixer')()
                 ]
             },
             layout: {
