@@ -22,3 +22,8 @@ indent_size = 4
 [{package.json}]
 indent_style = space
 indent_size = 2
+
+# github workflows
+[.github/workflows/*.yml]
+indent_style = space
+indent_size = 2

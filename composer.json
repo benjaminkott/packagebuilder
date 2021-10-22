@@ -52,6 +52,9 @@
         ],
         "cgl": [
             "php-cs-fixer --diff -v fix"
+        ],
+        "cgl:ci": [
+            "php-cs-fixer --diff -v --dry-run fix"
         ]
     },
     "config": {

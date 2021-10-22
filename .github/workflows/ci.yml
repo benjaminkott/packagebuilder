@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - 'task/**'
+      - 'bugfix/**'
+      - 'feature/**'
+  pull_request:
+
+jobs:
+  build-php:
+    name: Build PHP
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up PHP 7.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          tools: composer:v2
+
+      - name: Composer Install
+        run: composer install --no-progress --no-suggest --no-interaction
+
+      - name: CGL
+        run: |
+          composer cgl:ci
+
+      - name: Yarn install
+        run: yarn install --silent
+
+      - name: Yarn build
+        run: yarn build
