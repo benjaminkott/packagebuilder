@@ -6,6 +6,9 @@
 /deployer.phar
 /package-lock.json
 
+/bin/*
+!/bin/console
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php

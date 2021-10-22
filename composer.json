@@ -3,7 +3,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^7.4.0",
+        "php": "^7.4",
         "doctrine/annotations": "^1.13",
         "doctrine/cache": "^1.12",
         "jms/serializer-bundle": "^3.10",
@@ -58,6 +58,8 @@
         ]
     },
     "config": {
+        "bin-dir": "bin",
+        "vendor-dir": "vendor",
         "optimize-autoloader": true,
         "preferred-install": {
             "*": "dist"
