@@ -1,0 +1,87 @@
+//
+// Color system
+// --------------------------------------------------
+$white:                             #ffffff !default;
+$gray-100:                          #f8f8f8 !default;
+$gray-200:                          #e9e9e9 !default;
+$gray-300:                          #dedede !default;
+$gray-400:                          #cecece !default;
+$gray-500:                          #ababab !default;
+$gray-600:                          #6c6c6c !default;
+$gray-700:                          #494949 !default;
+$gray-800:                          #313131 !default;
+$gray-900:                          #212121 !default;
+$black:                             #000000 !default;
+
+$primary:                           #2a9d8f !default;
+$secondary:                         #e76f51 !default;
+$tertiary:                          #f4a261 !default;
+$quaternary:                        #e9c46a !default;
+
+$default:                           #eaebec !default;
+$success:                           #5cb85c !default;
+$info:                              #319fc0 !default;
+$warning:                           #f0ad4e !default;
+$danger:                            #d9534f !default;
+$lighter:                           $gray-100 !default;
+$light:                             $gray-200 !default;
+$dark:                              $gray-800 !default;
+$darker:                            $gray-900 !default;
+
+$theme-colors: (
+    'primary':                      $primary,
+    'secondary':                    $secondary,
+    'tertiary':                     $tertiary,
+    'quaternary':                   $quaternary,
+    'success':                      $success,
+    'info':                         $info,
+    'warning':                      $warning,
+    'danger':                       $danger,
+    'default':                      $default,
+    'lighter':                      $lighter,
+    'light':                        $light,
+    'dark':                         $dark,
+    'darker':                       $darker,
+) !default;
+
+$body-bg:                           $white !default;
+$body-color:                        $gray-900 !default;
+
+$min-contrast-ratio:                2.4 !default;
+
+//
+// Settings
+//
+$enable-rounded:            false !default;
+
+//
+// Spacer
+//
+$spacer: 1rem !default;
+
+//
+// Fonts
+//
+$font-family-sans-serif:     'Source Sans Pro', sans-serif !default;
+$font-family-serif:          'Source Serif Pro', serif !default;
+$headings-margin-bottom:     $spacer !default;
+$headings-font-weight:       200 !default;
+$lead-font-size:             1.5rem !default;
+$lead-font-weight:           200 !default;
+
+//
+// Border Radius
+//
+$border-radius:              0 !default;
+$border-radius-lg:           0 !default;
+$border-radius-sm:           0 !default;
+
+//
+// Input
+//
+$input-border-color:         #ddd !default;
+
+//
+// Navbar
+//
+$navbar-border-radius:       0 !default;

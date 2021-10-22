@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * This file is part of the bk2k/packagebuilder.
- *
+ * This file is part of the package bk2k/packagebuilder.
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
 
-namespace App\Twig;
+namespace App\Twig\Extension;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -27,9 +28,9 @@ class VersionNumberExtension extends AbstractExtension
                 'version',
                 [
                     $this,
-                    'versionFilter'
+                    'versionFilter',
                 ]
-            )
+            ),
         ];
     }
 
@@ -38,20 +39,21 @@ class VersionNumberExtension extends AbstractExtension
      */
     public function versionFilter($version, $positions = 3)
     {
-        $versionString = str_pad((int) $version, 9, '0', STR_PAD_LEFT);
+        $versionInt = (int) $version;
+        $versionString = str_pad((string) $versionInt, 9, '0', STR_PAD_LEFT);
         $parts = [
             substr($versionString, 0, 3),
             substr($versionString, 3, 3),
-            substr($versionString, 6, 3)
+            substr($versionString, 6, 3),
         ];
 
         switch ($positions) {
             case 1:
-                return (int)$parts[0];
+                return (int) $parts[0];
             case 2:
-                return (int)$parts[0] . '.' . (int)$parts[1];
+                return (int) $parts[0] . '.' . (int) $parts[1];
             default:
-                return (int)$parts[0] . '.' . (int)$parts[1] . '.' . (int)$parts[2];
+                return (int) $parts[0] . '.' . (int) $parts[1] . '.' . (int) $parts[2];
         }
     }
 }

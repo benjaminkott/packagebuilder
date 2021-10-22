@@ -1,23 +1,19 @@
 {% extends 'base.html.twig' %}
 {% block title %}Success{% endblock %}
-
 {% block body %}
 
-<div class="content-section content-section-centered bg-primary text-white">
-    <div class="container text-center">
+    {% frame with { backgroundColor: 'primary', options: ['center'] } %}
         <h1>Congratulations!</h1>
         <p class="lead">
             We have sucessfully generated your sitepackage. You can now review the generated configuration below, or download the the prepared sitepackage.
         </p>
-        <a href="{{ path('default_download') }}" class="btn btn-outline-inverse btn-lg text-uppercase">
+        <a href="{{ path('default_download') }}" class="btn btn-outline-default btn-lg text-uppercase">
             {{ contentget( 'images/download-box.svg' ) }}
             <span class="btn-text">Download</span>
         </a>
-    </div>
-</div>
+    {% endframe %}
 
-<div class="content-section content-section-centered bg-light">
-    <div class="container">
+    {% frame %}
         <h2>Generated Configuration</h2>
         <h3>Base Package</h3>
         <dl class="row">
@@ -64,7 +60,7 @@
             <dd class="col-sm-9">{{ sitepackage.author.homepage }}</dd>
         </dl>
         <p>
-            <a href="{{ path('default_new') }}" class="btn btn-secondary">
+            <a href="{{ path('default_new') }}" class="btn btn-light">
                 {{ contentget( 'images/arrow-left.svg' ) }}
                 <span class="btn-text">Restart</span>
             </a>
@@ -73,7 +69,6 @@
                 <span class="btn-text">Edit Configuration</span>
             </a>
         </p>
-    </div>
-</div>
+    {% endframe %}
 
 {% endblock %}

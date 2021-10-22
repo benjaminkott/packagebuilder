@@ -1,8 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
- * This file is part of the bk2k/packagebuilder.
- *
+ * This file is part of the package bk2k/packagebuilder.
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
@@ -10,13 +9,14 @@
 namespace App\Utility;
 
 /**
- * FileUtility
+ * FileUtility.
  */
 class FileUtility
 {
     /**
      * @param string $dir
-     * @param bool $filesOnly
+     * @param bool   $filesOnly
+     *
      * @return array
      */
     public static function listDirectory($dir, $filesOnly = false)
@@ -24,7 +24,7 @@ class FileUtility
         $result = [];
         $root = scandir($dir);
         foreach ($root as $value) {
-            if ($value === '.' || $value === '..') {
+            if ('.' === $value || '..' === $value) {
                 continue;
             }
             if (is_file("$dir$value")) {
@@ -38,6 +38,7 @@ class FileUtility
                 $result[] = $subValue;
             }
         }
+
         return $result;
     }
 }

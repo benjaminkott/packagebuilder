@@ -1,8 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
- * This file is part of the bk2k/packagebuilder.
- *
+ * This file is part of the package bk2k/packagebuilder.
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
@@ -15,7 +14,7 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Package
+ * Package.
  */
 class Package implements \JsonSerializable
 {
@@ -29,6 +28,7 @@ class Package implements \JsonSerializable
      *
      * @SWG\Property(type="int", example="9005000")
      * @Serializer\Type("int")
+     *
      * @var int
      */
     private $typo3Version = 10004000;
@@ -42,6 +42,7 @@ class Package implements \JsonSerializable
      *
      * @SWG\Property(type="string", example="bootstrap_package")
      * @Serializer\Type("string")
+     *
      * @var string
      */
     private $basePackage = 'bootstrap_package';
@@ -70,6 +71,7 @@ class Package implements \JsonSerializable
      *
      * @SWG\Property(type="string", example="My Sitepackage")
      * @Serializer\Type("string")
+     *
      * @var string
      */
     private $title;
@@ -82,6 +84,7 @@ class Package implements \JsonSerializable
      *
      * @SWG\Property(type="string", example="Project Configuration for Client")
      * @Serializer\Type("string")
+     *
      * @var string
      */
     private $description;
@@ -106,6 +109,7 @@ class Package implements \JsonSerializable
      * @SWG\Property(type="string", example="https://github.com/benjaminkott/packagebuilder")
      *
      * @Serializer\Type("string")
+     *
      * @var string
      */
     private $repositoryUrl = '';
@@ -114,6 +118,7 @@ class Package implements \JsonSerializable
      * @Assert\Valid
      *
      * @Serializer\Type(Author::class)
+     *
      * @var Author
      */
     private $author;
@@ -128,11 +133,13 @@ class Package implements \JsonSerializable
 
     /**
      * @param int $typo3Version
+     *
      * @return Package
      */
     public function setTypo3Version($typo3Version)
     {
         $this->typo3Version = $typo3Version;
+
         return $this;
     }
 
@@ -146,11 +153,13 @@ class Package implements \JsonSerializable
 
     /**
      * @param string $basePackage
+     *
      * @return Package
      */
     public function setBasePackage($basePackage)
     {
         $this->basePackage = $basePackage;
+
         return $this;
     }
 
@@ -164,11 +173,13 @@ class Package implements \JsonSerializable
 
     /**
      * @param string $vendorName
+     *
      * @return Package
      */
     public function setVendorName($vendorName)
     {
         $this->vendorName = $vendorName;
+
         return $this;
     }
 
@@ -182,11 +193,13 @@ class Package implements \JsonSerializable
 
     /**
      * @param string $vendorNameAlternative
+     *
      * @return Package
      */
     public function setVendorNameAlternative($vendorNameAlternative)
     {
         $this->vendorNameAlternative = $vendorNameAlternative;
+
         return $this;
     }
 
@@ -200,11 +213,13 @@ class Package implements \JsonSerializable
 
     /**
      * @param string $title
+     *
      * @return Package
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -218,11 +233,13 @@ class Package implements \JsonSerializable
 
     /**
      * @param string $description
+     *
      * @return Package
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -236,11 +253,13 @@ class Package implements \JsonSerializable
 
     /**
      * @param string $packageName
+     *
      * @return Package
      */
     public function setPackageName($packageName)
     {
         $this->packageName = $packageName;
+
         return $this;
     }
 
@@ -254,11 +273,13 @@ class Package implements \JsonSerializable
 
     /**
      * @param string $packageNameAlternative
+     *
      * @return Package
      */
     public function setPackageNameAlternative($packageNameAlternative)
     {
         $this->packageNameAlternative = $packageNameAlternative;
+
         return $this;
     }
 
@@ -272,11 +293,13 @@ class Package implements \JsonSerializable
 
     /**
      * @param string $extensionKey
+     *
      * @return Package
      */
     public function setExtensionKey($extensionKey)
     {
         $this->extensionKey = $extensionKey;
+
         return $this;
     }
 
@@ -290,11 +313,13 @@ class Package implements \JsonSerializable
 
     /**
      * @param string $repositoryUrl
+     *
      * @return Package
      */
     public function setRepositoryUrl($repositoryUrl)
     {
         $this->repositoryUrl = $repositoryUrl;
+
         return $this;
     }
 
@@ -308,17 +333,16 @@ class Package implements \JsonSerializable
 
     /**
      * @param Author $author
+     *
      * @return Package
      */
     public function setAuthor($author)
     {
         $this->author = $author;
+
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return [

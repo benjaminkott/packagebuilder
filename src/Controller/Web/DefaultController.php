@@ -1,8 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
- * This file is part of the bk2k/packagebuilder.
- *
+ * This file is part of the package bk2k/packagebuilder.
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
@@ -13,7 +12,7 @@ use App\Entity\Package;
 use App\Form\PackageType;
 use App\Service\SitepackageGenerator;
 use App\Utility\StringUtility;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -22,28 +21,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * DefaultController
+ * DefaultController.
  */
-class DefaultController extends Controller
+class DefaultController extends AbstractController
 {
     /**
      * @Route("/", name="default_index")
      */
     public function index(): Response
     {
-        return $this->render(
-            'default/index.html.twig',
-            [
-                'author' => [
-                    'name' => 'Benjamin Kott',
-                    'email' => 'benjamin.kott@outlook.com',
-                    'hash' => md5('benjamin.kott@outlook.com'),
-                    'twitter' => 'benjaminkott',
-                    'github' => 'benjaminkott',
-                    'description' => 'Benjamin is Frontend-Developer at <a class="font-weight-bold" href="https://www.typo3.com" target="_blank">TYPO3</a> and worked on projects based on TYPO3 CMS from mid- to enterprise size. Since 2014 his <a class="font-weight-bold" href="https://github.com/benjaminkott/bootstrap_package" target="_blank">Bootstrap Package</a> is used as codebase for the official TYPO3 CMS Introduction Package with the goal to provide an extensive best practice example on how to create websites efficiently with TYPO3 CMS.'
-                ]
-            ]
-        );
+        return $this->render('default/index.html.twig');
     }
 
     /**
@@ -71,7 +58,7 @@ class DefaultController extends Controller
         return $this->render(
             'default/new.html.twig',
             [
-                'form' => $form->createView()
+                'form' => $form->createView(),
             ]
         );
     }
@@ -83,11 +70,12 @@ class DefaultController extends Controller
     {
         $session = $request->getSession();
         $sitepackage = $session->get('sitepackage');
-        if ($sitepackage === null) {
+        if (null === $sitepackage) {
             $this->addFlash(
                 'danger',
                 'Whoops, we could not find the package configuration. Please submit the configuration again.'
             );
+
             return $this->redirectToRoute('default_new');
         }
         $form = $this->createEditSitePackageForm($sitepackage);
@@ -100,6 +88,7 @@ class DefaultController extends Controller
             $sitepackage->setExtensionKey(StringUtility::camelCaseToLowerCaseUnderscored($sitepackage->getPackageName()));
             $session = $request->getSession();
             $session->set('sitepackage', $sitepackage);
+
             return $this->redirectToRoute('default_success');
         }
 
@@ -118,18 +107,19 @@ class DefaultController extends Controller
     {
         $session = $request->getSession();
         $sitepackage = $session->get('sitepackage');
-        if ($sitepackage === null) {
+        if (null === $sitepackage) {
             $this->addFlash(
                 'danger',
                 'Whoops, we could not find the package configuration. Please submit the configuration again.'
             );
+
             return $this->redirectToRoute('default_new');
         }
 
         return $this->render(
             'default/success.html.twig',
             [
-                'sitepackage' => $sitepackage
+                'sitepackage' => $sitepackage,
             ]
         );
     }
@@ -141,11 +131,12 @@ class DefaultController extends Controller
     {
         $session = $request->getSession();
         $sitepackage = $session->get('sitepackage');
-        if ($sitepackage === null) {
+        if (null === $sitepackage) {
             $this->addFlash(
                 'danger',
                 'Whoops, we could not find the package configuration. Please submit the configuration again.'
             );
+
             return $this->redirectToRoute('default_new');
         }
         $sitepackageGenerator->create($sitepackage);
@@ -175,7 +166,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param Package $sitepackage
      * @return FormInterface
      */
     protected function createNewSitePackageForm(Package $sitepackage)
@@ -190,13 +180,12 @@ class DefaultController extends Controller
             [
                 'label' => 'Create Sitepackage',
                 'icon' => 'floppy-disk',
-                'attr' => ['class' => 'btn-primary']
+                'attr' => ['class' => 'btn-primary'],
             ]
         );
     }
 
     /**
-     * @param Package $sitepackage
      * @return FormInterface
      */
     protected function createEditSitePackageForm(Package $sitepackage)
@@ -211,7 +200,7 @@ class DefaultController extends Controller
             [
                 'label' => 'Update Sitepackage',
                 'icon' => 'floppy-disk',
-                'attr' => ['class' => 'btn-primary']
+                'attr' => ['class' => 'btn-primary'],
             ]
         );
     }

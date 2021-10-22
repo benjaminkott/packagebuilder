@@ -1,37 +1,30 @@
 {% extends 'base.html.twig' %}
 {% block title %}Legal Disclosure{% endblock %}
-
 {% block body %}
 
-
-<div class="content-section content-section-centered bg-primary text-white">
-    <div class="container text-center">
+    {% frame with { backgroundColor: 'primary' } %}
         <h1>Legal Disclosure</h1>
-    </div>
-</div>
+    {% endframe %}
 
-<div class="content-section content-section-centered bg-default">
-    <div class="container text-center">
+    {% frame %}
         <h2>Information in accordance with section 5 TMG</h2>
         <p>
             Benjamin Kott<br>
-            Parkstrasse 56<br>
-            40477 D&uuml;sseldorf
+            Ulmenstraße 77<br>
+            40476 D&uuml;sseldorf
         </p>
-    </div>
-</div>
-<div class="content-section content-section-centered bg-default">
-    <div class="container text-center">
+    {% endframe %}
+
+    {% frame %}
         <h2>Contact</h2>
         <p>
             Telephone: +49 173 7376890<br>
-            E-Mail: <a href="mailto:info@bk2k.info">info@bk2k.info</a><br>
+            E-Mail: <a href="mailto:benjamin.kott@outlook.com">benjamin.kott@outlook.com</a><br>
             Internetaddress: <a href="http://www.bk2k.info" target="_blank">http://www.bk2k.info</a>
         </p>
-    </div>
-</div>
-<div class="content-section content-section-centered bg-default">
-    <div class="container text-center">
+    {% endframe %}
+
+    {% frame %}
         <h2>Disclaimer</h2>
         <h3>Accountability for content</h3>
         <p>
@@ -45,7 +38,6 @@
         <p>
             Our web pages and their contents are subject to German copyright law. Unless expressly permitted by law (&sect; 44a et seq. of the copyright law), every form of utilizing, reproducing or processing works subject to copyright protection on our web pages requires the prior consent of the respective owner of the rights. Individual reproductions of a work are allowed only for private use, so must not serve either directly or indirectly for earnings. Unauthorized utilization of copyrighted works is punishable (&sect; 106 of the copyright law).
         </p>
-    </div>
-</div>
+    {% endframe %}
 
 {% endblock %}

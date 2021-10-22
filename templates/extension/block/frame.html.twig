@@ -1,0 +1,11 @@
+<div {% if id %}id="{{ id }}" {% endif %}class="{{ classes|join(' ') }}">
+    <div class="frame-group-container">
+        <div class="frame-group-inner">
+            <div class="frame-container frame-container-default">
+                <div class="frame-inner">
+                    {{ content|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

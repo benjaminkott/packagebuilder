@@ -1,8 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
- * This file is part of the bk2k/packagebuilder.
- *
+ * This file is part of the package bk2k/packagebuilder.
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
@@ -16,32 +15,20 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * AbstractIconExtension
+ * AbstractIconExtension.
  */
 abstract class AbstractIconExtension extends AbstractTypeExtension
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->setAttribute('icon', $options['icon']);
     }
 
-    /**
-     * @param FormView $view
-     * @param FormInterface $form
-     * @param array $options
-     */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['icon'] = $options['icon'];
     }
 
-    /**
-     * @param OptionsResolver $resolver
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(['icon' => null]);

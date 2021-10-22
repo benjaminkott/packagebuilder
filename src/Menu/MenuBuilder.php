@@ -1,8 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
- * This file is part of the bk2k/packagebuilder.
- *
+ * This file is part of the package bk2k/packagebuilder.
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
@@ -15,7 +14,7 @@ use Knp\Menu\MenuFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * MenuBuilder
+ * MenuBuilder.
  */
 class MenuBuilder
 {
@@ -34,11 +33,6 @@ class MenuBuilder
      */
     private $matcher;
 
-    /**
-     * @param ContainerInterface $container
-     * @param FactoryInterface $factory
-     * @param MatcherInterface $matcher
-     */
     public function __construct(ContainerInterface $container, FactoryInterface $factory, MatcherInterface $matcher)
     {
         $this->container = $container;
@@ -46,15 +40,13 @@ class MenuBuilder
         $this->matcher = $matcher;
     }
 
-    /**
-     * @param array $options
-     */
     public function main(array $options)
     {
         $menu = $this->factory->createItem('root');
         $menu->addChild('Home', ['route' => 'default_index']);
         $menu->addChild('New Sitepackage', ['route' => 'default_new']);
         $menu->addChild('API', ['route' => 'api_docs']);
+
         return $menu;
     }
 }

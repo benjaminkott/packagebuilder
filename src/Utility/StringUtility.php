@@ -1,8 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
- * This file is part of the bk2k/packagebuilder.
- *
+ * This file is part of the package bk2k/packagebuilder.
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
@@ -10,12 +9,13 @@
 namespace App\Utility;
 
 /**
- * StringUtility
+ * StringUtility.
  */
 class StringUtility
 {
     /**
      * @param string $string
+     *
      * @return string
      */
     public static function clean($string)
@@ -27,22 +27,26 @@ class StringUtility
         $string = self::convertUmlauts($string);
         $string = self::toASCII($string);
         $string = trim($string);
+
         return $string;
     }
 
     /**
      * @param string $string
+     *
      * @return string
      */
     public static function convertUmlauts($string)
     {
         $search = ['Ä', 'Ö', 'Ü', 'ä', 'ö', 'ü', 'ß'];
         $replace = ['Ae', 'Oe', 'Ue', 'ae', 'oe', 'ue', 'ss'];
+
         return str_replace($search, $replace, $string);
     }
 
     /**
      * @param string $string
+     *
      * @return string
      */
     public static function toASCII($string)
@@ -56,6 +60,7 @@ class StringUtility
 
     /**
      * @param string $string
+     *
      * @return string
      */
     public static function stringToUpperCamelCase($string)
@@ -66,11 +71,13 @@ class StringUtility
         $string = strtolower($string);
         $string = ucwords($string);
         $string = str_replace(' ', '', $string);
+
         return $string;
     }
 
     /**
      * @param string $string
+     *
      * @return string
      */
     public static function camelCaseToLowerCaseUnderscored($string)
@@ -84,11 +91,13 @@ class StringUtility
         foreach ($ret as &$match) {
             $match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
         }
+
         return implode('_', $ret);
     }
 
     /**
      * @param string $string
+     *
      * @return string
      */
     public static function camelCaseToLowerCaseDashed($string)
@@ -102,6 +111,7 @@ class StringUtility
         foreach ($ret as &$match) {
             $match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
         }
+
         return implode('-', $ret);
     }
 }

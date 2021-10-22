@@ -1,8 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
- * This file is part of the bk2k/packagebuilder.
- *
+ * This file is part of the package bk2k/packagebuilder.
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
@@ -14,7 +13,7 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Author
+ * Author.
  */
 class Author implements \JsonSerializable
 {
@@ -25,6 +24,7 @@ class Author implements \JsonSerializable
      * )
      * @SWG\Property(type="string", example="Benjamin Kott")
      * @Serializer\Type("string")
+     *
      * @var string
      */
     private $name;
@@ -36,6 +36,7 @@ class Author implements \JsonSerializable
      * )
      * @SWG\Property(type="string", example="contact@sitepackagebuilder.com")
      * @Serializer\Type("string")
+     *
      * @var string
      */
     private $email;
@@ -51,6 +52,7 @@ class Author implements \JsonSerializable
      * )
      * @SWG\Property(type="string", example="BK2K")
      * @Serializer\Type("string")
+     *
      * @var string
      */
     private $company;
@@ -60,6 +62,7 @@ class Author implements \JsonSerializable
      * @Assert\Url()
      * @SWG\Property(type="string", example="https://www.sitepackagebuilder.com")
      * @Serializer\Type("string")
+     *
      * @var string
      */
     private $homepage;
@@ -74,11 +77,13 @@ class Author implements \JsonSerializable
 
     /**
      * @param string $name
+     *
      * @return Author
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -92,11 +97,13 @@ class Author implements \JsonSerializable
 
     /**
      * @param string $email
+     *
      * @return Author
      */
     public function setEmail($email)
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -110,11 +117,13 @@ class Author implements \JsonSerializable
 
     /**
      * @param string $company
+     *
      * @return Author
      */
     public function setCompany($company)
     {
         $this->company = $company;
+
         return $this;
     }
 
@@ -128,17 +137,16 @@ class Author implements \JsonSerializable
 
     /**
      * @param string $homepage
+     *
      * @return Author
      */
     public function setHomepage($homepage)
     {
         $this->homepage = $homepage;
+
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return [

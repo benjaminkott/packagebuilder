@@ -1,8 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
- * This file is part of the bk2k/packagebuilder.
- *
+ * This file is part of the package bk2k/packagebuilder.
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
@@ -21,7 +20,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-
 use Symfony\Component\Validator\Validation;
 
 /**
@@ -96,7 +94,7 @@ class SitepackageController extends AbstractController
             ->getValidator();
         $errors = $validator->validate($object);
         if (\count($errors) > 0) {
-            $errorsString = (string)$errors;
+            $errorsString = (string) $errors;
             throw new BadRequestHttpException($errorsString);
         }
     }
