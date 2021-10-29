@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: Build PHP
+    name: Build
     runs-on: ubuntu-latest
     steps:
 
@@ -59,3 +59,82 @@ jobs:
 
       - name: Yarn build
         run: yarn build
+
+  deployment:
+    name: Deployment
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://sitepackagebuilder.com
+    needs: [build]
+    if: (github.ref == 'refs/heads/master') && github.event_name != 'pull_request' && (github.repository == 'benjaminkott/packagebuilder')
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up PHP 7.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          tools: composer:v2
+
+      - name: Download Deployer
+        run: |
+          curl -LO https://github.com/deployphp/deployer/releases/download/v7.0.0-beta.37/deployer.phar
+          sudo mv deployer.phar /usr/local/bin/dep;
+          sudo chmod +x /usr/local/bin/dep;
+          dep self-update;
+
+      - name: Get Composer cache directory path
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Set ENV
+        run: "echo \"APP_ENV=prod\" >> .env.local"
+
+      - name: Build PHP
+        run: composer install --verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Build Frontend
+        run: yarn install --silent && yarn build
+
+      - name: Setup SSH Key
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh-auth.sock
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_rsa
+          chmod 0600 ~/.ssh/deploy_rsa
+          ssh-keygen -p -P "${{ secrets.SSH_PASSPHRASE }}" -N "" -f ~/.ssh/deploy_rsa
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add ~/.ssh/deploy_rsa
+          ssh-keyscan ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_AUTH_SOCK: /tmp/ssh-auth.sock
+        run: |
+          dep deploy;
