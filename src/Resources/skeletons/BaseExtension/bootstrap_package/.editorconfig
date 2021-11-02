@@ -25,11 +25,6 @@ indent_size = 4
 indent_style = space
 indent_size = 4
 
-# LESS-Files
-[*.less]
-indent_style = space
-indent_size = 4
-
 # JS-Files
 [*.js]
 indent_style = space
@@ -58,9 +53,18 @@ indent_size = 4
 # YML-Files
 [{*.yml,*.yaml}]
 indent_style = space
-indent_size = 4
+indent_size = 2
 
-# package.json, composer.json or .travis.yml
-[{package.json,composer.json,.travis.yml}]
+# package.json
+[package.json]
 indent_style = space
 indent_size = 2
+
+# composer.json
+[composer.json]
+indent_style = space
+indent_size = 4
+
+# phpstan
+[*.neon]
+indent_style = tab
