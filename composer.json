@@ -39,35 +39,35 @@
             "App\\": "src/"
         }
     },
-    "scripts": {
-        "auto-scripts": {
-            "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true,
+            "symfony/runtime": true
         },
+        "bin-dir": "bin",
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true,
+        "vendor-dir": "vendor"
+    },
+    "scripts": {
         "post-install-cmd": [
             "@auto-scripts"
         ],
         "post-update-cmd": [
             "@auto-scripts"
         ],
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
         "cgl": [
             "php-cs-fixer --diff -v fix"
         ],
         "cgl:ci": [
             "php-cs-fixer --diff -v --dry-run fix"
         ]
-    },
-    "config": {
-        "bin-dir": "bin",
-        "vendor-dir": "vendor",
-        "optimize-autoloader": true,
-        "preferred-install": {
-            "*": "dist"
-        },
-        "sort-packages": true,
-        "allow-plugins": {
-            "symfony/flex": true,
-            "symfony/runtime": true
-        }
     }
 }
