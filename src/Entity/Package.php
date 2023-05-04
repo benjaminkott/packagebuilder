@@ -21,18 +21,19 @@ class Package implements \JsonSerializable
     /**
      * @Assert\NotBlank()
      * @Assert\Choice({
+     *     12004000,
      *     11005000,
      *     10004000,
      *     9005000,
      *     8007000
      * })
      *
-     * @SWG\Property(type="int", example="11005000")
+     * @SWG\Property(type="int", example="12004000")
      * @Serializer\Type("int")
      *
      * @var int
      */
-    private $typo3Version = 11005000;
+    private $typo3Version = 12004000;
 
     /**
      * @Assert\NotBlank()
