@@ -17,10 +17,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up PHP 7.4
+      - name: Set up PHP 8.1
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8.1
           tools: composer:v2
 
       - name: Get Composer Cache Directory
@@ -72,10 +72,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up PHP 7.4
+      - name: Set up PHP 8.1
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8.1
           tools: composer:v2
 
       - name: Download Deployer
