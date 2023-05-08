@@ -52,6 +52,7 @@ class PackageType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'required' => false,
+                'empty_data' => '',
                 'attr' => [
                     'autocomplete' => 'off',
                     'placeholder' => 'Optional description for the use of this sitepackage',
@@ -60,6 +61,7 @@ class PackageType extends AbstractType
             ->add('repositoryUrl', TextType::class, [
                 'label' => 'Repository URL',
                 'required' => false,
+                'empty_data' => '',
                 'attr' => [
                     'autocomplete' => 'off',
                     'placeholder' => 'https://github.com/username/my_sitepackage',

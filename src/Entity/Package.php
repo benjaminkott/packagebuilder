@@ -10,7 +10,7 @@ namespace App\Entity;
 
 use App\Entity\Package\Author;
 use JMS\Serializer\Annotation as Serializer;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -28,12 +28,10 @@ class Package implements \JsonSerializable
      *     8007000
      * })
      *
-     * @SWG\Property(type="int", example="12004000")
+     * @OA\Property(type="int", example="12004000")
      * @Serializer\Type("int")
-     *
-     * @var int
      */
-    private $typo3Version = 12004000;
+    private int $typo3Version = 12004000;
 
     /**
      * @Assert\NotBlank()
@@ -42,22 +40,14 @@ class Package implements \JsonSerializable
      *     "fluid_styled_content"
      * })
      *
-     * @SWG\Property(type="string", example="bootstrap_package")
+     * @OA\Property(type="string", example="bootstrap_package")
      * @Serializer\Type("string")
-     *
-     * @var string
      */
-    private $basePackage = 'bootstrap_package';
+    private string $basePackage = 'bootstrap_package';
 
-    /**
-     * @var string
-     */
-    private $vendorName;
+    private string $vendorName;
 
-    /**
-     * @var string
-     */
-    private $vendorNameAlternative;
+    private string $vendorNameAlternative;
 
     /**
      * @Assert\NotBlank(
@@ -71,12 +61,10 @@ class Package implements \JsonSerializable
      *     message = "Only letters, numbers and spaces are allowed"
      * )
      *
-     * @SWG\Property(type="string", example="My Sitepackage")
+     * @OA\Property(type="string", example="My Sitepackage")
      * @Serializer\Type("string")
-     *
-     * @var string
      */
-    private $title;
+    private string $title;
 
     /**
      * @Assert\Regex(
@@ -84,37 +72,22 @@ class Package implements \JsonSerializable
      *     message = "Only letters, numbers and spaces are allowed"
      * )
      *
-     * @SWG\Property(type="string", example="Project Configuration for Client")
+     * @OA\Property(type="string", example="Project Configuration for Client")
      * @Serializer\Type("string")
-     *
-     * @var string
      */
-    private $description;
+    private string $description;
 
-    /**
-     * @var string
-     */
-    private $packageName;
-
-    /**
-     * @var string
-     */
-    private $packageNameAlternative;
-
-    /**
-     * @var string
-     */
-    private $extensionKey;
+    private string $packageName;
+    private string $packageNameAlternative;
+    private string $extensionKey;
 
     /**
      * @Assert\Url()
-     * @SWG\Property(type="string", example="https://github.com/benjaminkott/packagebuilder")
+     * @OA\Property(type="string", example="https://github.com/benjaminkott/packagebuilder")
      *
      * @Serializer\Type("string")
-     *
-     * @var string
      */
-    private $repositoryUrl = '';
+    private string $repositoryUrl = '';
 
     /**
      * @Assert\Valid

@@ -52,8 +52,8 @@ class StringUtility
     public static function toASCII($string)
     {
         return strtr(
-            utf8_decode($string),
-            utf8_decode('ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ'),
+            mb_convert_encoding($string, 'ISO-8859-1'),
+            mb_convert_encoding('ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ', 'ISO-8859-1'),
             'SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy'
         );
     }
@@ -89,7 +89,7 @@ class StringUtility
         );
         $ret = $matches[0];
         foreach ($ret as &$match) {
-            $match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
+            $match = $match == strtoupper((string) $match) ? strtolower((string) $match) : lcfirst((string) $match);
         }
 
         return implode('_', $ret);
@@ -109,7 +109,7 @@ class StringUtility
         );
         $ret = $matches[0];
         foreach ($ret as &$match) {
-            $match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
+            $match = $match == strtoupper((string) $match) ? strtolower((string) $match) : lcfirst((string) $match);
         }
 
         return implode('-', $ret);

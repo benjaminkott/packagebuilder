@@ -13,7 +13,7 @@ use App\Service\SitepackageGenerator;
 use App\Utility\StringUtility;
 use JMS\Serializer\SerializerInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,21 +47,21 @@ class SitepackageController extends AbstractController
 
     /**
      * @Route("/", methods={"POST"})
-     * @SWG\Parameter(
-     *     name="sitepackage",
-     *     in="body",
-     *     @Model(type=\App\Entity\Package::class),
+     *
+     * @OA\RequestBody(
+     *     @Model(type=\App\Entity\Package::class)
      * )
-     * @SWG\Response(
+     *
+     * @OA\Response(
      *     response=200,
      *     description="Successfully generated.",
-     *     @SWG\Schema(type="file"),
+     *     @OA\Schema(type="file"),
      * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=400,
      *     description="Request malformed."
      * )
-     * @SWG\Tag(name="sitepackage")
+     * @OA\Tag(name="sitepackage")
      */
     public function createSitepackage(Request $request): Response
     {

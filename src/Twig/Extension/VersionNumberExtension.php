@@ -26,10 +26,7 @@ class VersionNumberExtension extends AbstractExtension
         return [
             new TwigFilter(
                 'version',
-                [
-                    $this,
-                    'versionFilter',
-                ]
+                $this->versionFilter(...)
             ),
         ];
     }
@@ -47,13 +44,10 @@ class VersionNumberExtension extends AbstractExtension
             substr($versionString, 6, 3),
         ];
 
-        switch ($positions) {
-            case 1:
-                return (int) $parts[0];
-            case 2:
-                return (int) $parts[0] . '.' . (int) $parts[1];
-            default:
-                return (int) $parts[0] . '.' . (int) $parts[1] . '.' . (int) $parts[2];
-        }
+        return match ($positions) {
+            1 => (int) $parts[0],
+            2 => (int) $parts[0] . '.' . (int) $parts[1],
+            default => (int) $parts[0] . '.' . (int) $parts[1] . '.' . (int) $parts[2],
+        };
     }
 }

@@ -18,7 +18,7 @@ class FrameNode extends Node implements NodeOutputInterface
 {
     protected $tagName = 'frame';
 
-    public function __construct(Node $body = null, Node $attributes = null, int $lineno, string $tag = null)
+    public function __construct(int $lineno, Node $body = null, Node $attributes = null, string $tag = null)
     {
         $nodes = ['body' => $body];
         if (null !== $attributes) {

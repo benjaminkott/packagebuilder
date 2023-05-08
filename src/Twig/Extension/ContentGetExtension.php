@@ -24,7 +24,7 @@ class ContentGetExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('contentget', [$this, 'fileGetContents'], ['is_safe' => ['html']]),
+            new TwigFunction('contentget', $this->fileGetContents(...), ['is_safe' => ['html']]),
         ];
     }
 

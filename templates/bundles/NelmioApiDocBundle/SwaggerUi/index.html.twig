@@ -1,25 +1,37 @@
 {% extends "base.html.twig" %}
-{% block title %}API{% endblock %}
+{% block title %}{{ swagger_data.spec.info.title }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('bundles/nelmioapidoc/swagger-ui/swagger-ui.css') }}">
+    {{ nelmioAsset(assets_mode, 'swagger-ui/swagger-ui.css') }}
+    {# {{ nelmioAsset(assets_mode, 'style.css') }} #}
     <style>
         .api-platform .topbar,
-        .api-platform .information-container { display: none; }
-        .api-platform .swagger-ui .col { width: initial; }
-        .api-platform .swagger-ui .wrapper { padding: 0; }
-        .api-platform .swagger-ui .info { margin: 0; }
-        .api-platform .swagger-ui .wrapper .col-12 { padding: 0; }
-        .api-platform .swagger-ui .scheme-container { box-shadow: none; padding: 0; }
-        .api-platform .swagger-ui .auth-wrapper .authorize { margin-right: 0; }
+        .api-platform .information-container {
+            display: none;
+        }
+        .api-platform section.models {
+            margin-bottom: 0;
+        }
+        .api-platform button:focus { outline: none !important; }
+        #swagger-ui-logos {
+            position: absolute;
+            width:0;
+            height:0;
+        }
     </style>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('bundles/nelmioapidoc/swagger-ui/swagger-ui-bundle.js') }}"></script>
-    <script src="{{ asset('bundles/nelmioapidoc/swagger-ui/swagger-ui-standalone-preset.js') }}"></script>
-    <script src="{{ asset('bundles/nelmioapidoc/init-swagger-ui.js') }}"></script>
+    {{ nelmioAsset(assets_mode, 'swagger-ui/swagger-ui-bundle.js') }}
+    {{ nelmioAsset(assets_mode, 'swagger-ui/swagger-ui-standalone-preset.js') }}
+    {{ nelmioAsset(assets_mode, 'init-swagger-ui.js') }}
+    <script type="text/javascript">
+        (function () {
+            var swaggerUI = {{ swagger_ui_config|json_encode(65)|raw }};
+            window.onload = loadSwaggerUI(swaggerUI);
+        })();
+    </script>
 {% endblock %}
 
 {% block body %}
@@ -32,7 +44,7 @@
         {# json_encode(65) is for JSON_UNESCAPED_SLASHES|JSON_HEX_TAG to avoid JS XSS #}
         <script id="swagger-data" type="application/json">{{ swagger_data|json_encode(65)|raw }}</script>
         <div id="swagger-ui" class="api-platform"></div>
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;width:0;height:0">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="swagger-ui-logos">
             <defs>
                 <symbol viewBox="0 0 20 20" id="unlocked">
                     <path d="M15.8 8H14V5.6C14 2.703 12.665 1 10 1 7.334 1 6 2.703 6 5.6V6h2v-.801C8 3.754 8.797 3 10 3c1.203 0 2 .754 2 2.199V8H4c-.553 0-1 .646-1 1.199V17c0 .549.428 1.139.951 1.307l1.197.387C5.672 18.861 6.55 19 7.1 19h5.8c.549 0 1.428-.139 1.951-.307l1.196-.387c.524-.167.953-.757.953-1.306V9.199C17 8.646 16.352 8 15.8 8z"></path>

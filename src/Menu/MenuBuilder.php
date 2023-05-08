@@ -9,35 +9,14 @@
 namespace App\Menu;
 
 use Knp\Menu\FactoryInterface;
-use Knp\Menu\Matcher\MatcherInterface;
-use Knp\Menu\MenuFactory;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * MenuBuilder.
  */
 class MenuBuilder
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    /**
-     * @var MenuFactory
-     */
-    private $factory;
-
-    /**
-     * @var MatcherInterface
-     */
-    private $matcher;
-
-    public function __construct(ContainerInterface $container, FactoryInterface $factory, MatcherInterface $matcher)
+    public function __construct(private readonly FactoryInterface $factory)
     {
-        $this->container = $container;
-        $this->factory = $factory;
-        $this->matcher = $matcher;
     }
 
     public function main(array $options)

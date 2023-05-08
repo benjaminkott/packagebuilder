@@ -26,10 +26,10 @@ final class FrameTokenParser extends AbstractTokenParser
         }
 
         $stream->expect(Token::BLOCK_END_TYPE);
-        $body = $this->parser->subparse([$this, 'decideFrameEnd'], true);
+        $body = $this->parser->subparse($this->decideFrameEnd(...), true);
         $stream->expect(Token::BLOCK_END_TYPE);
 
-        return new FrameNode($body, $attributes, $token->getLine(), $this->getTag());
+        return new FrameNode($token->getLine(), $body, $attributes, $this->getTag());
     }
 
     public function decideFrameEnd(Token $token)

@@ -27,23 +27,23 @@ class BlockExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('frame', [$this, 'frameFunction'], ['needs_environment' => true, 'is_safe' => ['html']]),
+            new TwigFunction('frame', $this->frameFunction(...), ['needs_environment' => true, 'is_safe' => ['html']]),
         ];
     }
 
     public function frameFunction(Environment $environment, string $content, array $attributes): string
     {
-        $attributes['id'] = $attributes['id'] ?? null;
-        $attributes['type'] = $attributes['type'] ?? 'default';
+        $attributes['id'] ??= null;
+        $attributes['type'] ??= 'default';
         $attributes['frameClass'] = $attributes['type'] ?? 'default';
-        $attributes['size'] = $attributes['size'] ?? 'default';
-        $attributes['height'] = $attributes['height'] ?? 'default';
-        $attributes['layout'] = $attributes['layout'] ?? 'default';
-        $attributes['backgroundColor'] = $attributes['backgroundColor'] ?? 'none';
-        $attributes['spaceBefore'] = $attributes['spaceBefore'] ?? 'none';
-        $attributes['spaceAfter'] = $attributes['spaceAfter'] ?? 'none';
-        $attributes['options'] = $attributes['options'] ?? [];
-        $attributes['backgroundImage'] = $attributes['backgroundImage'] ?? null;
+        $attributes['size'] ??= 'default';
+        $attributes['height'] ??= 'default';
+        $attributes['layout'] ??= 'default';
+        $attributes['backgroundColor'] ??= 'none';
+        $attributes['spaceBefore'] ??= 'none';
+        $attributes['spaceAfter'] ??= 'none';
+        $attributes['options'] ??= [];
+        $attributes['backgroundImage'] ??= null;
 
         $identifier = $attributes['id'];
 
@@ -60,8 +60,8 @@ class BlockExtension extends AbstractExtension
 
         if (is_array($attributes['options'])) {
             foreach ($attributes['options'] as $option) {
-                if (trim($option) !== '') {
-                    $classes[] = 'frame-option-' . trim($option);
+                if (trim((string) $option) !== '') {
+                    $classes[] = 'frame-option-' . trim((string) $option);
                 }
             }
         }

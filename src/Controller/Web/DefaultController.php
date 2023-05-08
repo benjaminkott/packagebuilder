@@ -58,7 +58,7 @@ class DefaultController extends AbstractController
         return $this->render(
             'default/new.html.twig',
             [
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -95,7 +95,7 @@ class DefaultController extends AbstractController
         return $this->render(
             'default/edit.html.twig',
             [
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -152,7 +152,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/imprint/", name="default_imprint")
      */
-    public function imprintAction()
+    public function imprintAction(): Response
     {
         return $this->render('default/imprint.html.twig', []);
     }
@@ -160,7 +160,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/privacy/", name="default_privacy")
      */
-    public function privacyAction()
+    public function privacyAction(): Response
     {
         return $this->render('default/privacy.html.twig', []);
     }
