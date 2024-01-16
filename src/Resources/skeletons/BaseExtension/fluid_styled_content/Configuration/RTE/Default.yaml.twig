@@ -6,21 +6,21 @@ imports:
 editor:
     config:
         contentsCss: "EXT:{{ package.extensionKey }}/Resources/Public/Css/rte.css"
-
+{% if package.typo3version < 12004000 %}
         stylesSet:
-            - { name: "Lead", element: "p", attributes: { 'class': 'lead' } }
+            - { name: "Lead", element: "p", attributes: { "class": "lead" } }
 
         toolbarGroups:
-            - { name: styles, groups: [ format, styles ] }
-            - { name: basicstyles, groups: [ basicstyles ] }
-            - { name: paragraph, groups: [ list, indent, blocks, align ] }
+            - { name: styles, groups: [format, styles] }
+            - { name: basicstyles, groups: [basicstyles] }
+            - { name: paragraph, groups: [list, indent, blocks, align] }
             - "/"
-            - { name: links, groups: [ links ] }
-            - { name: clipboard, groups: [ clipboard, cleanup, undo ] }
-            - { name: editing, groups: [ spellchecker ] }
-            - { name: insert, groups: [ insert ] }
-            - { name: tools, groups: [ table, specialchar ] }
-            - { name: document, groups: [ mode ] }
+            - { name: links, groups: [links] }
+            - { name: clipboard, groups: [clipboard, cleanup, undo] }
+            - { name: editing, groups: [spellchecker] }
+            - { name: insert, groups: [insert] }
+            - { name: tools, groups: [table, specialchar] }
+            - { name: document, groups: [mode] }
 
         format_tags: "p;h1;h2;h3;h4;h5;pre"
 
@@ -40,3 +40,63 @@ editor:
             - Anchor
             - Underline
             - Strike
+{% else %}
+        toolbar:
+          items:
+            - style
+            - heading
+            # grouping separator
+            - '|'
+            - bold
+            - italic
+            - subscript
+            - superscript
+            - softhyphen
+            - '|'
+            - bulletedList
+            - numberedList
+            - blockQuote
+            - alignment
+            - '|'
+            - findAndReplace
+            - link
+            - '|'
+            - removeFormat
+            - undo
+            - redo
+            - '|'
+            - insertTable
+            - '|'
+            - specialCharacters
+            - horizontalLine
+            - sourceEditing
+
+        heading:
+          options:
+            - { model: 'paragraph', title: 'Paragraph' }
+            - { model: 'heading2', view: 'h2', title: 'Heading 2' }
+            - { model: 'heading3', view: 'h3', title: 'Heading 3' }
+            - { model: 'formatted', view: 'pre', title: 'Pre-Formatted Text' }
+
+        style:
+          definitions:
+            - { name: "Lead", element: "p", classes: ['lead'] }
+            - { name: "Small", element: "small", classes: [] }
+            - { name: "Muted", element: "span", classes: ['text-muted'] }
+
+        alignment:
+          options:
+            - { name: 'left', className: 'text-start' }
+            - { name: 'center', className: 'text-center' }
+            - { name: 'right', className: 'text-end' }
+            - { name: 'justify', className: 'text-justify' }
+
+        table:
+          defaultHeadings: { rows: 1 }
+          contentToolbar:
+            - tableColumn
+            - tableRow
+            - mergeTableCells
+            - tableProperties
+            - tableCellProperties
+{% endif %}
