@@ -4,7 +4,6 @@
 /build/
 /node_modules/
 /deployer.phar
-/package-lock.json
 
 /bin/*
 !/bin/console

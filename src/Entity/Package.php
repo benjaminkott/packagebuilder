@@ -2,6 +2,7 @@
 
 /*
  * This file is part of the package bk2k/packagebuilder.
+ *
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
@@ -10,7 +11,7 @@ namespace App\Entity;
 
 use App\Entity\Package\Author;
 use JMS\Serializer\Annotation as Serializer;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -18,84 +19,49 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Package implements \JsonSerializable
 {
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Choice({
-     *     12004000,
-     *     11005000,
-     *     10004000,
-     *     9005000,
-     *     8007000
-     * })
-     *
-     * @OA\Property(type="int", example="12004000")
-     * @Serializer\Type("int")
-     */
+    #[Assert\NotBlank]
+    #[Assert\Choice([12004000, 11005000, 10004000, 9005000, 8007000])]
+    #[Serializer\Type('int')]
+    #[OA\Property(type: 'int', example: '12004000')]
     private int $typo3Version = 12004000;
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Choice({
-     *     "bootstrap_package",
-     *     "fluid_styled_content"
-     * })
-     *
-     * @OA\Property(type="string", example="bootstrap_package")
-     * @Serializer\Type("string")
-     */
+    #[Assert\NotBlank]
+    #[Assert\Choice(['bootstrap_package', 'fluid_styled_content'])]
+    #[Serializer\Type('string')]
+    #[OA\Property(type: 'string', example: 'bootstrap_package')]
     private string $basePackage = 'bootstrap_package';
 
     private string $vendorName;
 
     private string $vendorNameAlternative;
 
-    /**
-     * @Assert\NotBlank(
-     *     message="Please enter a title for your site package"
-     * )
-     * @Assert\Length(
-     *     min = 3
-     * )
-     * @Assert\Regex(
-     *     pattern = "/^[A-Za-z0-9\x7f-\xff .:&-]+$/",
-     *     message = "Only letters, numbers and spaces are allowed"
-     * )
-     *
-     * @OA\Property(type="string", example="My Sitepackage")
-     * @Serializer\Type("string")
-     */
+    #[Assert\NotBlank(message: 'Please enter a title for your site package')]
+    #[Assert\Length(min: 3)]
+    #[Assert\Regex(pattern: '/^[A-Za-z0-9\x7f-\xff .:&-]+$/', message: 'Only letters, numbers and spaces are allowed')]
+    #[Serializer\Type('string')]
+    #[OA\Property(type: 'string', example: 'My Sitepackage')]
     private string $title;
 
-    /**
-     * @Assert\Regex(
-     *     pattern = "/^[A-Za-z0-9\x7f-\xff .,:!?&-]+$/",
-     *     message = "Only letters, numbers and spaces are allowed"
-     * )
-     *
-     * @OA\Property(type="string", example="Project Configuration for Client")
-     * @Serializer\Type("string")
-     */
+    #[Assert\Regex(pattern: '/^[A-Za-z0-9\x7f-\xff .,:!?&-]+$/', message: 'Only letters, numbers and spaces are allowed')]
+    #[Serializer\Type('string')]
+    #[OA\Property(type: 'string', example: 'Project Configuration for Client')]
     private string $description;
 
     private string $packageName;
     private string $packageNameAlternative;
     private string $extensionKey;
 
-    /**
-     * @Assert\Url()
-     * @OA\Property(type="string", example="https://github.com/benjaminkott/packagebuilder")
-     *
-     * @Serializer\Type("string")
-     */
+    #[Assert\Url]
+    #[Serializer\Type('string')]
+    #[OA\Property(type: 'string', example: 'https://github.com/benjaminkott/packagebuilder')]
     private string $repositoryUrl = '';
 
     /**
-     * @Assert\Valid
-     *
-     * @Serializer\Type(Author::class)
      *
      * @var Author
      */
+    #[Assert\Valid]
+    #[Serializer\Type(Author::class)]
     private $author;
 
     /**

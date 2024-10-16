@@ -2,6 +2,7 @@
 
 /*
  * This file is part of the package bk2k/packagebuilder.
+ *
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
@@ -9,7 +10,7 @@
 namespace App\Entity\Package;
 
 use JMS\Serializer\Annotation as Serializer;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -18,53 +19,40 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Author implements \JsonSerializable
 {
     /**
-     * @Assert\NotBlank(message="Please enter the authors' name.")
-     * @Assert\Length(
-     *     min = 3
-     * )
-     * @OA\Property(type="string", example="Benjamin Kott")
-     * @Serializer\Type("string")
-     *
      * @var string
      */
+    #[Assert\NotBlank(message: "Please enter the authors' name.")]
+    #[Assert\Length(min: 3)]
+    #[Serializer\Type('string')]
+    #[OA\Property(type: 'string', example: 'Benjamin Kott')]
     private $name;
 
     /**
-     * @Assert\NotBlank(message="Please enter the authors' email address.")
-     * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email.",
-     * )
-     * @OA\Property(type="string", example="contact@sitepackagebuilder.com")
-     * @Serializer\Type("string")
-     *
      * @var string
      */
+    #[Assert\NotBlank(message: "Please enter the authors' email address.")]
+    #[Assert\Email(message: "The email '{{ value }}' is not a valid email.")]
+    #[Serializer\Type('string')]
+    #[OA\Property(type: 'string', example: 'contact@sitepackagebuilder.com')]
     private $email;
 
     /**
-     * @Assert\NotBlank(message="Please enter the authors' company.")
-     * @Assert\Length(
-     *     min = 3
-     * )
-     * @Assert\Regex(
-     *     pattern = "/^[A-Za-z0-9\x7f-\xff .:&-]+$/",
-     *     message = "Only letters, numbers and spaces are allowed"
-     * )
-     * @OA\Property(type="string", example="BK2K")
-     * @Serializer\Type("string")
-     *
      * @var string
      */
+    #[Assert\NotBlank(message: "Please enter the authors' company.")]
+    #[Assert\Length(min: 3)]
+    #[Assert\Regex(pattern: '/^[A-Za-z0-9\x7f-\xff .:&-]+$/', message: 'Only letters, numbers and spaces are allowed')]
+    #[Serializer\Type('string')]
+    #[OA\Property(type: 'string', example: 'BK2K')]
     private $company;
 
     /**
-     * @Assert\NotBlank(message="Please enter the authors' homepage URL.")
-     * @Assert\Url()
-     * @OA\Property(type="string", example="https://www.sitepackagebuilder.com")
-     * @Serializer\Type("string")
-     *
      * @var string
      */
+    #[Assert\NotBlank(message: "Please enter the authors' homepage URL.")]
+    #[Assert\Url]
+    #[Serializer\Type('string')]
+    #[OA\Property(type: 'string', example: 'https://www.sitepackagebuilder.com')]
     private $homepage;
 
     /**

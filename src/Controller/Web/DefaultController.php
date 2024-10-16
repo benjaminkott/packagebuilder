@@ -2,6 +2,7 @@
 
 /*
  * This file is part of the package bk2k/packagebuilder.
+ *
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
@@ -18,24 +19,17 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
-/**
- * DefaultController.
- */
 class DefaultController extends AbstractController
 {
-    /**
-     * @Route("/", name="default_index")
-     */
+    #[Route(path: '/', name: 'default_index')]
     public function index(): Response
     {
         return $this->render('default/index.html.twig');
     }
 
-    /**
-     * @Route("/new/", name="default_new")
-     */
+    #[Route(path: '/new/', name: 'default_new')]
     public function new(Request $request)
     {
         $session = $request->getSession();
@@ -63,9 +57,7 @@ class DefaultController extends AbstractController
         );
     }
 
-    /**
-     * @Route("/edit/", name="default_edit")
-     */
+    #[Route(path: '/edit/', name: 'default_edit')]
     public function edit(Request $request)
     {
         $session = $request->getSession();
@@ -100,9 +92,7 @@ class DefaultController extends AbstractController
         );
     }
 
-    /**
-     * @Route("/success/", name="default_success")
-     */
+    #[Route(path: '/success/', name: 'default_success')]
     public function success(Request $request)
     {
         $session = $request->getSession();
@@ -124,9 +114,7 @@ class DefaultController extends AbstractController
         );
     }
 
-    /**
-     * @Route("/download/", name="default_download")
-     */
+    #[Route(path: '/download/', name: 'default_download')]
     public function download(Request $request, SitepackageGenerator $sitepackageGenerator)
     {
         $session = $request->getSession();
@@ -149,26 +137,19 @@ class DefaultController extends AbstractController
             ->deleteFileAfterSend(true);
     }
 
-    /**
-     * @Route("/imprint/", name="default_imprint")
-     */
+    #[Route(path: '/imprint/', name: 'default_imprint')]
     public function imprintAction(): Response
     {
         return $this->render('default/imprint.html.twig', []);
     }
 
-    /**
-     * @Route("/privacy/", name="default_privacy")
-     */
+    #[Route(path: '/privacy/', name: 'default_privacy')]
     public function privacyAction(): Response
     {
         return $this->render('default/privacy.html.twig', []);
     }
 
-    /**
-     * @return FormInterface
-     */
-    protected function createNewSitePackageForm(Package $sitepackage)
+    protected function createNewSitePackageForm(Package $sitepackage): FormInterface
     {
         return $this->createForm(
             PackageType::class,
@@ -185,10 +166,7 @@ class DefaultController extends AbstractController
         );
     }
 
-    /**
-     * @return FormInterface
-     */
-    protected function createEditSitePackageForm(Package $sitepackage)
+    protected function createEditSitePackageForm(Package $sitepackage): FormInterface
     {
         return $this->createForm(
             PackageType::class,

@@ -22,6 +22,7 @@ if (PHP_SAPI !== 'cli') {
 
 $header = <<<EOF
 This file is part of the package bk2k/packagebuilder.
+
 For the full copyright and license information, please read the
 LICENSE file that was distributed with this source code.
 EOF;
@@ -38,9 +39,8 @@ return (new PhpCsFixer\Config())
                 'author'
             ]
         ],
-        'declare_strict_types' => true,
         'no_leading_import_slash' => true,
-        'no_trailing_comma_in_singleline_array' => true,
+        'no_trailing_comma_in_singleline' => true,
         'no_singleline_whitespace_before_semicolons' => true,
         'no_unused_imports' => true,
         'concat_space' => ['spacing' => 'one'],
@@ -54,7 +54,7 @@ return (new PhpCsFixer\Config())
         'no_blank_lines_after_phpdoc' => true,
         'array_syntax' => ['syntax' => 'short'],
         'whitespace_after_comma_in_array' => true,
-        'function_typehint_space' => true,
+        'type_declaration_spaces' => true,
         'single_line_comment_style' => true,
         'no_alias_functions' => true,
         'lowercase_cast' => true,
@@ -62,10 +62,18 @@ return (new PhpCsFixer\Config())
         'native_function_casing' => true,
         'self_accessor' => true,
         'no_short_bool_cast' => true,
-        'no_unneeded_control_parentheses' => true
+        'no_unneeded_control_parentheses' => true,
+        'trailing_comma_in_multiline' => [
+            'elements' => [
+                'arrays',
+            ],
+        ],
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
-            ->in(__DIR__)
+            ->exclude('.build')
+            ->exclude('Build/node_modules')
+            ->exclude('Contrib')
             ->exclude('var')
+            ->in(__DIR__)
     );
