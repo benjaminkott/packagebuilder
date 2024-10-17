@@ -26,10 +26,10 @@ class Package implements \JsonSerializable
     private string $basePackage = 'bootstrap_package';
 
     #[Assert\NotBlank]
-    #[Assert\Choice([8.7, 9.5, 10.4, 11.5, 12.4])]
+    #[Assert\Choice([8.7, 9.5, 10.4, 11.5, 12.4, 13.4])]
     #[Serializer\Type('float')]
-    #[OA\Property(type: 'float', example: 12.4)]
-    private float $typo3Version = 12.4;
+    #[OA\Property(type: 'float', example: 13.4)]
+    private float $typo3Version = 13.4;
 
     private string $vendorName;
 
