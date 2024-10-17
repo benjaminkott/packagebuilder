@@ -30,75 +30,10 @@
             Learn more about the <strong>best practices</strong> recommended from the TYPO3 Core Team.
         </p>
         <p>
-            <a href="https://speakerdeck.com/benjaminkott/the-anatomy-of-typo3-sitepackages" class="btn btn-primary" target="_blank">
+            <a href="https://docs.typo3.org/permalink/t3sitepackage:start" class="btn btn-primary" target="_blank">
                 {{ contentget( 'images/book-open.svg' ) }}
                 <span class="btn-text">Learn about Sitepackages</span>
             </a>
-        </p>
-    {% endframe %}
-
-    {% frame with { options: ['center', 'ruler-before'] } %}
-        <h3>Pros and Cons</h3>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th class="text-center font-weight-normal">Site&shy;package</th>
-                        <th class="text-center font-weight-normal">Classic</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-start">Config files not accessible by editors </td>
-                        <td class="text-success">Yes</td>
-                        <td class="text-danger">No</td>
-                    </tr>
-                    <tr>
-                        <td class="text-start">Config files are protected <span class="text-muted">*</span></td>
-                        <td class="text-success">Yes</td>
-                        <td class="text-danger">No</td>
-                    </tr>
-                    <tr>
-                        <td class="text-start">Autoload PageTS</td>
-                        <td class="text-success">Yes</td>
-                        <td class="text-danger">No</td>
-                    </tr>
-                    <tr>
-                        <td class="text-start">Autoload TypoScript</td>
-                        <td class="text-success">Yes</td>
-                        <td class="text-danger">No</td>
-                    </tr>
-                    <tr>
-                        <td class="text-start">Static PageTS Template</td>
-                        <td class="text-success">Yes</td>
-                        <td class="text-danger">No</td>
-                    </tr>
-                    <tr>
-                        <td class="text-start">Static TypoScript Template</td>
-                        <td class="text-success">Yes</td>
-                        <td class="text-danger">No</td>
-                    </tr>
-                    <tr>
-                        <td class="text-start">Dependency Management</td>
-                        <td class="text-success">Yes</td>
-                        <td class="text-danger">No</td>
-                    </tr>
-                    <tr>
-                        <td class="text-start">Distribution through TER</td>
-                        <td class="text-success">Yes</td>
-                        <td class="text-danger">No</td>
-                    </tr>
-                    <tr>
-                        <td class="text-start">Clean Version Control possible</td>
-                        <td class="text-success">Yes</td>
-                        <td class="text-danger">No</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <p>
-            <small class="font-italic text-muted">* Possible but not common practice</small>
         </p>
     {% endframe %}
 
