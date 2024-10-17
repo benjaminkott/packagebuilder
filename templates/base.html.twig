@@ -81,10 +81,10 @@
                         <span class="btn-text">GitHub</span>
                     </a>
                 {% endif %}
-                {% if template.author.twitter %}
-                    <a href="https://www.twitter.com/{{ template.author.twitter }}" class="btn btn-outline-primary">
-                        {{ contentget( 'images/twitter.svg' ) }}
-                        <span class="btn-text">Twitter</span>
+                {% if template.author.x %}
+                    <a href="https://x.com/{{ template.author.x }}" class="btn btn-outline-primary">
+                        {{ contentget( 'images/x.svg' ) }}
+                        <span class="btn-text">@{{ template.author.x }}</span>
                     </a>
                 {% endif %}
             </p>
