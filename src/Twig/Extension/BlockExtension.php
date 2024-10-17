@@ -46,8 +46,6 @@ class BlockExtension extends AbstractExtension
         $attributes['options'] ??= [];
         $attributes['backgroundImage'] ??= null;
 
-        $identifier = $attributes['id'];
-
         $classes = [];
         $classes[] = 'frame';
         $classes[] = 'frame-' . $attributes['frameClass'];

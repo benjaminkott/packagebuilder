@@ -29,7 +29,7 @@ class FrameNode extends Node implements NodeOutputInterface
         parent::__construct($nodes, [], $lineno, $tag);
     }
 
-    public function compile(Compiler $compiler)
+    public function compile(Compiler $compiler): void
     {
         $compiler->addDebugInfo($this);
 

@@ -20,16 +20,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Package implements \JsonSerializable
 {
     #[Assert\NotBlank]
-    #[Assert\Choice([12004000, 11005000, 10004000, 9005000, 8007000])]
-    #[Serializer\Type('int')]
-    #[OA\Property(type: 'int', example: '12004000')]
-    private int $typo3Version = 12004000;
-
-    #[Assert\NotBlank]
     #[Assert\Choice(['bootstrap_package', 'fluid_styled_content'])]
     #[Serializer\Type('string')]
     #[OA\Property(type: 'string', example: 'bootstrap_package')]
     private string $basePackage = 'bootstrap_package';
+
+    #[Assert\NotBlank]
+    #[Assert\Choice([8.7, 9.5, 10.4, 11.5, 12.4])]
+    #[Serializer\Type('float')]
+    #[OA\Property(type: 'float', example: 12.4)]
+    private float $typo3Version = 12.4;
 
     private string $vendorName;
 
@@ -56,228 +56,136 @@ class Package implements \JsonSerializable
     #[OA\Property(type: 'string', example: 'https://github.com/benjaminkott/packagebuilder')]
     private string $repositoryUrl = '';
 
-    /**
-     *
-     * @var Author
-     */
     #[Assert\Valid]
     #[Serializer\Type(Author::class)]
-    private $author;
+    private Author $author;
 
-    /**
-     * @return int
-     */
-    public function getTypo3Version()
+    public function getTypo3Version(): float
     {
         return $this->typo3Version;
     }
 
-    /**
-     * @param int $typo3Version
-     *
-     * @return Package
-     */
-    public function setTypo3Version($typo3Version)
+    public function setTypo3Version(float $typo3Version): self
     {
         $this->typo3Version = $typo3Version;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getBasePackage()
+    public function getBasePackage(): string
     {
         return $this->basePackage;
     }
 
-    /**
-     * @param string $basePackage
-     *
-     * @return Package
-     */
-    public function setBasePackage($basePackage)
+    public function setBasePackage(string $basePackage): self
     {
         $this->basePackage = $basePackage;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getVendorName()
+    public function getVendorName(): string
     {
         return $this->vendorName;
     }
 
-    /**
-     * @param string $vendorName
-     *
-     * @return Package
-     */
-    public function setVendorName($vendorName)
+    public function setVendorName(string $vendorName): self
     {
         $this->vendorName = $vendorName;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getVendorNameAlternative()
+    public function getVendorNameAlternative(): string
     {
         return $this->vendorNameAlternative;
     }
 
-    /**
-     * @param string $vendorNameAlternative
-     *
-     * @return Package
-     */
-    public function setVendorNameAlternative($vendorNameAlternative)
+    public function setVendorNameAlternative(string $vendorNameAlternative): self
     {
         $this->vendorNameAlternative = $vendorNameAlternative;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * @param string $title
-     *
-     * @return Package
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     *
-     * @return Package
-     */
-    public function setDescription($description)
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getPackageName()
+    public function getPackageName(): string
     {
         return $this->packageName;
     }
 
-    /**
-     * @param string $packageName
-     *
-     * @return Package
-     */
-    public function setPackageName($packageName)
+    public function setPackageName(string $packageName): self
     {
         $this->packageName = $packageName;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getPackageNameAlternative()
+    public function getPackageNameAlternative(): string
     {
         return $this->packageNameAlternative;
     }
 
-    /**
-     * @param string $packageNameAlternative
-     *
-     * @return Package
-     */
-    public function setPackageNameAlternative($packageNameAlternative)
+    public function setPackageNameAlternative(string $packageNameAlternative): self
     {
         $this->packageNameAlternative = $packageNameAlternative;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getExtensionKey()
+    public function getExtensionKey(): string
     {
         return $this->extensionKey;
     }
 
-    /**
-     * @param string $extensionKey
-     *
-     * @return Package
-     */
-    public function setExtensionKey($extensionKey)
+    public function setExtensionKey(string $extensionKey): self
     {
         $this->extensionKey = $extensionKey;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getRepositoryUrl()
+    public function getRepositoryUrl(): string
     {
         return $this->repositoryUrl;
     }
 
-    /**
-     * @param string $repositoryUrl
-     *
-     * @return Package
-     */
-    public function setRepositoryUrl($repositoryUrl)
+    public function setRepositoryUrl(string $repositoryUrl): self
     {
         $this->repositoryUrl = $repositoryUrl;
 
         return $this;
     }
 
-    /**
-     * @return Author
-     */
-    public function getAuthor()
+    public function getAuthor(): Author
     {
         return $this->author;
     }
 
-    /**
-     * @param Author $author
-     *
-     * @return Package
-     */
-    public function setAuthor($author)
+    public function setAuthor(Author $author): self
     {
         $this->author = $author;
 

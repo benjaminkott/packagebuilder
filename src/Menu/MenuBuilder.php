@@ -10,17 +10,15 @@
 namespace App\Menu;
 
 use Knp\Menu\FactoryInterface;
+use Knp\Menu\ItemInterface;
 
-/**
- * MenuBuilder.
- */
 class MenuBuilder
 {
     public function __construct(private readonly FactoryInterface $factory)
     {
     }
 
-    public function main(array $options)
+    public function main(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
         $menu->addChild('Home', ['route' => 'default_index']);

@@ -11,29 +11,26 @@ namespace App\Service;
 
 use App\Entity\Package;
 use App\Utility\FileUtility;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 
-/**
- * SitepackageGenerator.
- */
 class SitepackageGenerator
 {
-    /**
-     * @var string
-     */
-    protected $zipPath;
+    protected KernelInterface $kernel;
+    protected string $zipPath;
+    protected string $filename;
 
-    /**
-     * @var string
-     */
-    protected $filename;
+    public function __construct(KernelInterface $kernel)
+    {
+        $this->kernel = $kernel;
+    }
 
-    public function create(Package $package)
+    public function create(Package $package): void
     {
         $extensionKey = $package->getExtensionKey();
         $this->filename = $extensionKey . '.zip';
-        $sourceDir = __DIR__ . '/../Resources/skeletons/BaseExtension/' . $package->getBasePackage() . '/';
+        $sourceDir = $this->kernel->getProjectDir() . '/resources/packages/' . $package->getBasePackage() . '/' . (string) $package->getTypo3Version() . '/src/';
         $this->zipPath = tempnam(sys_get_temp_dir(), $this->filename);
         $fileList = FileUtility::listDirectory($sourceDir);
 
@@ -58,28 +55,17 @@ class SitepackageGenerator
         }
     }
 
-    /**
-     * @return string
-     */
-    public function getZipPath()
+    public function getZipPath(): string
     {
         return $this->zipPath;
     }
 
-    /**
-     * @return string
-     */
-    public function getFilename()
+    public function getFilename(): string
     {
         return $this->filename;
     }
 
-    /**
-     * @param string $file
-     *
-     * @return string
-     */
-    private function getFileContent($file, Package $package)
+    private function getFileContent(string $file, Package $package): string
     {
         $content = file_get_contents($file);
         $fileUniqueId = uniqid('file');
@@ -95,35 +81,19 @@ class SitepackageGenerator
         return $rendered;
     }
 
-    /**
-     * @param string $file
-     *
-     * @return bool
-     */
-    private function isTwigFile($file)
+    private function isTwigFile(string $file): bool
     {
         $pathinfo = pathinfo($file);
 
         return 'twig' === $pathinfo['extension'];
     }
 
-    /**
-     * @param string $file
-     * @param string $sourceDir
-     *
-     * @return mixed
-     */
-    protected function createRelativeFilePath($file, $sourceDir)
+    protected function createRelativeFilePath(string $file, string $sourceDir): string
     {
         return substr($file, strlen($sourceDir));
     }
 
-    /**
-     * @param string $baseFileName
-     *
-     * @return mixed
-     */
-    protected function removeTwigExtension($baseFileName)
+    protected function removeTwigExtension(string $baseFileName): string
     {
         return substr($baseFileName, 0, -5);
     }

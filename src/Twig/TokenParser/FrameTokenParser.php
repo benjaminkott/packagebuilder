@@ -17,7 +17,7 @@ use Twig\TokenParser\AbstractTokenParser;
 
 final class FrameTokenParser extends AbstractTokenParser
 {
-    public function parse(Token $token)
+    public function parse(Token $token): FrameNode
     {
         $stream = $this->parser->getStream();
 
@@ -33,12 +33,12 @@ final class FrameTokenParser extends AbstractTokenParser
         return new FrameNode($token->getLine(), $body, $attributes, $this->getTag());
     }
 
-    public function decideFrameEnd(Token $token)
+    public function decideFrameEnd(Token $token): bool
     {
         return $token->test('endframe');
     }
 
-    public function getTag()
+    public function getTag(): string
     {
         return 'frame';
     }

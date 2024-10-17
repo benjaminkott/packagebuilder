@@ -18,117 +18,73 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Author implements \JsonSerializable
 {
-    /**
-     * @var string
-     */
     #[Assert\NotBlank(message: "Please enter the authors' name.")]
     #[Assert\Length(min: 3)]
     #[Serializer\Type('string')]
     #[OA\Property(type: 'string', example: 'Benjamin Kott')]
-    private $name;
+    private string $name;
 
-    /**
-     * @var string
-     */
     #[Assert\NotBlank(message: "Please enter the authors' email address.")]
     #[Assert\Email(message: "The email '{{ value }}' is not a valid email.")]
     #[Serializer\Type('string')]
     #[OA\Property(type: 'string', example: 'contact@sitepackagebuilder.com')]
-    private $email;
+    private string $email;
 
-    /**
-     * @var string
-     */
     #[Assert\NotBlank(message: "Please enter the authors' company.")]
     #[Assert\Length(min: 3)]
     #[Assert\Regex(pattern: '/^[A-Za-z0-9\x7f-\xff .:&-]+$/', message: 'Only letters, numbers and spaces are allowed')]
     #[Serializer\Type('string')]
     #[OA\Property(type: 'string', example: 'BK2K')]
-    private $company;
+    private string $company;
 
-    /**
-     * @var string
-     */
     #[Assert\NotBlank(message: "Please enter the authors' homepage URL.")]
     #[Assert\Url]
     #[Serializer\Type('string')]
     #[OA\Property(type: 'string', example: 'https://www.sitepackagebuilder.com')]
-    private $homepage;
+    private string $homepage;
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return Author
-     */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     *
-     * @return Author
-     */
-    public function setEmail($email)
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCompany()
+    public function getCompany(): string
     {
         return $this->company;
     }
 
-    /**
-     * @param string $company
-     *
-     * @return Author
-     */
-    public function setCompany($company)
+    public function setCompany(string $company): self
     {
         $this->company = $company;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getHomepage()
+    public function getHomepage(): string
     {
         return $this->homepage;
     }
 
-    /**
-     * @param string $homepage
-     *
-     * @return Author
-     */
-    public function setHomepage($homepage)
+    public function setHomepage(string $homepage): self
     {
         $this->homepage = $homepage;
 

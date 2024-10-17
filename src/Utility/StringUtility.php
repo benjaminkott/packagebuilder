@@ -9,9 +9,6 @@
 
 namespace App\Utility;
 
-/**
- * StringUtility.
- */
 class StringUtility
 {
     public static function clean(string $string): string

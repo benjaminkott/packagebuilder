@@ -9,18 +9,9 @@
 
 namespace App\Utility;
 
-/**
- * FileUtility.
- */
 class FileUtility
 {
-    /**
-     * @param string $dir
-     * @param bool   $filesOnly
-     *
-     * @return array
-     */
-    public static function listDirectory($dir, $filesOnly = false)
+    public static function listDirectory(string $dir, bool $filesOnly = false): array
     {
         $result = [];
         $root = scandir($dir);

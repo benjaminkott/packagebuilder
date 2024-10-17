@@ -11,9 +11,6 @@ namespace App\Form\Extension;
 
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
-/**
- * ButtonTypeIconExtension.
- */
 class ButtonTypeIconExtension extends AbstractIconExtension
 {
     public static function getExtendedTypes(): iterable

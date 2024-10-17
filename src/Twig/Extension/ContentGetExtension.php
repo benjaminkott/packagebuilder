@@ -14,14 +14,8 @@ namespace App\Twig\Extension;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-/**
- * ContentExtension.
- **/
 class ContentGetExtension extends AbstractExtension
 {
-    /**
-     * @return array
-     */
     public function getFunctions()
     {
         return [
@@ -29,18 +23,12 @@ class ContentGetExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @return string
-     */
-    public function fileGetContents($file)
+    public function fileGetContents($file): string
     {
         return file_get_contents($file);
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'contentget';
     }

@@ -58,10 +58,7 @@ class SitepackageController extends AbstractController
             ->deleteFileAfterSend(true);
     }
 
-    /**
-     * @param $object
-     */
-    protected function validateObject($object): void
+    protected function validateObject(mixed $object): void
     {
         $validator = Validation::createValidatorBuilder()
             ->enableAttributeMapping()

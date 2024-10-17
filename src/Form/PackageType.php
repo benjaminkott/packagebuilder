@@ -17,31 +17,28 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * PackageType.
- */
 class PackageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->setAction($options['action'])
-            ->add('typo3Version', ChoiceType::class, [
-                'label' => 'TYPO3 Version',
-                'choices' => [
-                    '12.4' => 12004000,
-                    '11.5' => 11005000,
-                    '10.4' => 10004000,
-                    '9.5' => 9005000,
-                    '8.7' => 8007000,
-                ],
-                'expanded' => true,
-            ])
             ->add('basePackage', ChoiceType::class, [
                 'label' => 'Base Package',
                 'choices' => [
                     'Bootstrap Package' => 'bootstrap_package',
                     'Fluid Styled Content' => 'fluid_styled_content',
+                ],
+                'expanded' => true,
+            ])
+            ->add('typo3Version', ChoiceType::class, [
+                'label' => 'TYPO3 Version',
+                'choices' => [
+                    '12.4' => 12.4,
+                    '11.5' => 11.5,
+                    '10.4' => 10.4,
+                    '9.5' => 9.5,
+                    '8.7' => 8.7,
                 ],
                 'expanded' => true,
             ])
